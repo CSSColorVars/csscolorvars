@@ -1,16 +1,19 @@
 <template>
   <div id="app">
-    <HelloWorld msg=""/>
-    <VueColor></VueColor>
+    <HelloWorld></HelloWorld>
+    <h1>CpInput</h1>
+    <cp-input></cp-input>
   </div>
 </template>
 
 <script>
 import HelloWorld from './components/HelloWorld.vue'
+import CpInput from './components/CpInput.vue'
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    HelloWorld,
+    CpInput
   }
 }
 </script>
