@@ -11,15 +11,21 @@
     "color": "^3.0.0",
     "rxjs": "^6.3.1",
     "vue": "^2.5.17",
-    "vue-rx": "^6.0.1"
+    "vue-rx": "^6.0.1",
+    "vuetify": "^1.2.1"
   },
   "devDependencies": {
+    "@babel/polyfill": "^7.0.0-beta.49",
     "@vue/cli-plugin-babel": "^3.0.1",
     "@vue/cli-plugin-eslint": "^3.0.1",
     "@vue/cli-service": "^3.0.1",
     "@vue/eslint-config-standard": "^3.0.1",
+    "babel-plugin-transform-imports": "^1.4.1",
     "node-sass": "^4.9.0",
     "sass-loader": "^7.0.1",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.1",
+    "vue-cli-plugin-vuetify": "^0.1.6",
     "vue-template-compiler": "^2.5.17"
   }
 }
