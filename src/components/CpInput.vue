@@ -21,21 +21,11 @@ export default {
   subscriptions: {
   },
   mounted: function () {
-    this.nv.numero = Color('#a14fb9').darken(.08).hex() //de 20 en 20 => darken($color,4) = darken(.08).hex()
+    this.nv.numero = Color('#a14fb9').darken(0.08).hex()
+    // de 20 en 20 => darken($color,4) = darken(.08).hex()
   }
 }
 </script>
 <style lang="scss">
-  $color: #a14fb9;
-  :root{
-    --color: #{$color};
-    --color-dark-10: #{darken($color,1)};
-    --color-dark-20: #{darken($color,2)};
-    --color-dark-30: #{darken($color,3)};
-    --color-dark-40: #{darken($color,4)};
-  } 
-  .mierda {
-    background: var(--color-dark-10);
-  }
-</style>
 
+</style>
