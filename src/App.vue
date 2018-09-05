@@ -30,9 +30,12 @@ export default {
 }
 </script>
 <style lang="scss">
+  @import 'src/plugins/mixins.scss';
   .sidebar{
     background: #3a3a3a;
-    height: 100vh;
+    height: 200px;
+    @include from(l){
+      height: 100vh;
+    }
   }
 </style>
-
