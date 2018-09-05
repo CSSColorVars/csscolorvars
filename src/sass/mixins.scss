@@ -1,8 +1,3 @@
-/**
-  EDgrid es una librería CSS para construir layouts con Responsive Web Design
-  Importe este archivo en su proyecto para empezar a usarlo
-**/
-
 //Funciones para convertir px a em y rem
 @import "node_modules/ed-grid/components/functions";
 
@@ -38,8 +33,8 @@
 // Importar componentes
 @import "node_modules/ed-grid/components/media-queries";   // mixins from(), to(), fromTo()
 @import "node_modules/ed-grid/components/helpers";         // utilidades
-// @import "src/plugins/core";                                // core de EDgrid (containers y items)
-@import "node_modules/ed-grid/components/grid";            // mixin grid()
+@import "src/sass/core";                                   // core de EDgrid (containers y items)
+// @import "node_modules/ed-grid/components/grid";            // mixin grid()
 @import "node_modules/ed-grid/components/visibility";      // mixins para visibilidad
 @import "node_modules/ed-grid/components/flexbox";         // utilidades con flexbox
 @import "node_modules/ed-grid/components/buttons";         // mixin button()

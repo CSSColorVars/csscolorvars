@@ -1,47 +1,23 @@
 <template>
-  <v-footer
-      height="auto" fixed dark
-    >
-      <v-layout
-        justify-center
-        row
-        wrap
-      >
-        <!-- <v-btn
-          v-for="link in links"
-          :key="link"
-          color="white"
-          flat
-          round
-        >
-          {{ link }}
-        </v-btn> -->
-        <v-flex
-          py-3
-          text-xs-center
-          white--text
-          xs12
-        >
-          &copy;{{year}} — <strong>Fernando Averanga Aruquipa</strong>
-        </v-flex>
-      </v-layout>
-    </v-footer>
+  <footer class="ed-container full main-center">
+    &copy;{{year}} — <strong> Fernando Averanga Aruquipa</strong>
+  </footer>
 </template>
 <script>
 let year = new Date().getFullYear()
 export default {
   data () {
     return {
-      year,
-      links: [
-        'Home',
-        'About Us',
-        'Team',
-        'Services',
-        'Blog',
-        'Contact Us'
-      ]
+      year
     }
   }
 }
 </script>
+<style lang="scss" scoped>
+  @import 'src/sass/mixins.scss';
+  footer{
+    position: fixed;
+    bottom: 0;
+    text-align: center;
+  }
+</style>
