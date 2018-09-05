@@ -1,6 +1,6 @@
 <template>
   <v-footer
-      height="auto" fixed
+      height="auto" fixed dark
     >
       <v-layout
         justify-center
@@ -45,4 +45,3 @@ export default {
   }
 }
 </script>
-
