@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <v-app id="inspire" dark>
+    <v-app id="inspire">
       <div class="ed-container full">
         <nds-sidebar></nds-sidebar>
         <nds-main></nds-main>

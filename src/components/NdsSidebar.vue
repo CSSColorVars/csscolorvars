@@ -1,11 +1,11 @@
 <template>
-  <aside class="ed-item l-30 cross-center sidebar">
+  <aside class="ed-item l-30 cross-center sidebar application theme--dark">
     <figure
       class="ed-item l-60 m-40 s-75 figure--color l-block to-center"
       :style="'background:' + hexColor + ';'"
     >
     </figure>
-    <v-text-field
+    <v-text-field dark
       label="HEX"
       outline
       color="#FFF"
@@ -15,7 +15,7 @@
     ></v-text-field>
     <div class="ed-item">
       <label for="">Hue <span v-text="hsl.hue + '°'"></span></label>
-      <v-slider
+      <v-slider dark
         v-model="hsl.hue"
         color="#FFF"
         :max="359"
@@ -25,7 +25,7 @@
     </div>
     <div class="ed-item">
       <label for="">Saturation <span v-text="hsl.saturation + '%'"></span></label>
-      <v-slider
+      <v-slider dark
         v-model="hsl.saturation"
         color="#FFF"
         :max="100"
@@ -35,7 +35,7 @@
     </div>
     <div class="ed-item">
       <label for="">Lightness <span v-text="hsl.lightness + '%'"></span></label>
-      <v-slider
+      <v-slider dark
         v-model="hsl.lightness"
         color="#FFF"
         :max="100"
@@ -79,7 +79,6 @@ export default {
 <style lang="scss">
   @import 'src/sass/mixins.scss';
   .sidebar{
-    background: #3a3a3a;
     height: auto;
     @include from(l){
       height: 100vh;
