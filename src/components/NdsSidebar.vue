@@ -10,8 +10,7 @@
       outline
       color="#FFF"
       class="ed-item l-block"
-      v-model="valueHex"
-      @input="hexColors"
+      v-model="hexColor"
     ></v-text-field>
     <div class="ed-item">
       <label for="">Hue <span v-text="hsl.hue + '°'"></span></label>
@@ -58,15 +57,25 @@ export default {
         saturation: 50,
         lightness: 50
       },
-      valueHex: ''
+      valueHex: '',
+      redd: ''
     }
   },
   created: function () {
     this.valueHex = Color('hsl(' + this.hsl.hue + ',' + this.hsl.saturation + '%, ' + this.hsl.lightness + '%)').hex()
   },
   computed: {
-    hexColor: function () {
-      return Color('hsl(' + this.hsl.hue + ',' + this.hsl.saturation + '%, ' + this.hsl.lightness + '%)').hex()
+    hexColor: {
+      // getter
+      get: function () {
+        let hex = Color('hsl(' + this.hsl.hue + ',' + this.hsl.saturation + '%, ' + this.hsl.lightness + '%)').hex() 
+        return hex
+      },
+      // setter
+      set: function (hex) {
+        let he = Color('red').hex()
+        return console.log(he)
+      }
     }
   },
   methods: {
