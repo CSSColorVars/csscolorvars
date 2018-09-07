@@ -1,9 +1,7 @@
 <template>
   <div id="app">
     <v-app id="inspire">
-      <div class="ed-container full">
-        <NdsLayout></NdsLayout>
-      </div>
+      <NdsLayout></NdsLayout>
       <nds-footer></nds-footer>
     </v-app>
   </div>

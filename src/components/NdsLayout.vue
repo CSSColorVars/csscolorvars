@@ -1,7 +1,6 @@
 <template>
-<div class="ed-container">
+<div class="ed-container full">
   <aside class="ed-container ed-item l-20 cross-center sidebar application theme--dark">
-    <h2>COSUSLKDJ</h2>
     <figure class="figure--color ed-item l-75 m-40 s-75 l-block to-center">
       <input type="color" v-model="colorHex"/>
     </figure>
