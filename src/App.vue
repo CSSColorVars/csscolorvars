@@ -1,24 +1,11 @@
 <template>
   <div id="app">
+    <div id="nav">
+      <router-link to="/">Home</router-link> |
+      <router-link to="/about">About</router-link>
+    </div>
     <v-app id="inspire">
-      <NdsLayout></NdsLayout>
-      <nds-footer></nds-footer>
+      <router-view/>
     </v-app>
   </div>
 </template>
-
-<script>
-import HelloWorld from './components/HelloWorld.vue'
-import CpInput from './components/CpInput.vue'
-import NdsLayout from './components/NdsLayout.vue'
-import NdsFooter from './components/NdsFooter.vue'
-export default {
-  name: 'app',
-  components: {
-    HelloWorld,
-    CpInput,
-    NdsLayout,
-    NdsFooter
-  }
-}
-</script>
