@@ -1,24 +1,27 @@
 <template>
-  <main class="ed-container ed-item l-70 application theme--light">
-    <h2>{{hex}} jajaj <br></h2>
-    <v-card class="ed-item" :color="hex">
-      <v-card-title primary-title>
-        SELECIONADO: {{hex}}
-      </v-card-title>
-    </v-card>
-    <v-card class="ed-item card--color" v-for = "item in lighten" :key="item.color" :color="item.color">
-      <v-card-title primary-title>
-        {{item.color}}
-      </v-card-title>
-    </v-card>
+  <main class="main-main ed-container ed-item l-80 application theme--light">
+    <div class="ed-item">
+      <v-card class="card--color" :color="hex">
+        <v-card-title primary-title>
+          SELECIONADO: {{hex}}
+        </v-card-title>
+      </v-card>
+    </div>
+    <div class="ed-item" v-for = "item in lighten" :key="item.color">
+      <v-card class="card--color" :color="item.color">
+        <v-card-title primary-title>
+          {{item.color}}
+         </v-card-title>
+      </v-card>
+    </div>
     <h3>{{darken}} sdasds</h3>
-    <v-card class="ed-item" v-for = "item in darken" :key="item.color" :color="item.color">
+    <v-card class="" v-for = "item in darken" :key="item.color" :color="item.color">
       <v-card-title primary-title>
         {{item.color}}
       </v-card-title>
     </v-card>
-    <v-checkbox class="ed-item" :label="`Checkbox 1: ${checkbox1.toString()}`" v-model="checkbox1"></v-checkbox>
-    <v-checkbox class="ed-item" :label="`Checkbox 2: ${checkbox2.toString()}`" v-model="checkbox2"></v-checkbox>
+    <v-checkbox class="" :label="`Checkbox 1: ${checkbox1.toString()}`" v-model="checkbox1"></v-checkbox>
+    <v-checkbox class="" :label="`Checkbox 2: ${checkbox2.toString()}`" v-model="checkbox2"></v-checkbox>
   </main>
 </template>
 <script>
@@ -77,6 +80,11 @@ export default {
 }
 </script>
 <style lang="scss">
+  .main-main{
+    padding-top: 1rem;
+    align-content: flex-start;
+    max-height: 100vh;
+  }
   .card--color{
     border: solid 1px;
     margin-bottom: .5rem;

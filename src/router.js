@@ -13,18 +13,12 @@ export default new Router({
       component: Home
     },
     {
-      path: '/:hex',
-      name: 'colors',
-      component: Home,
-      props: true
-    },
-    {
-      path: '/about',
-      name: 'about',
+      path: '/credits',
+      name: 'credits',
       // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
+      // this generates a separate chunk (credits.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
+      component: () => import(/* webpackChunkName: "credits" */ './views/Credits.vue')
     }
   ]
 })
