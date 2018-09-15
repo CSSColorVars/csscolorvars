@@ -20,23 +20,16 @@
         {{item.color}}
       </v-card-title>
     </v-card>
-    <v-checkbox class="" :label="`Checkbox 1: ${checkbox1.toString()}`" v-model="checkbox1"></v-checkbox>
-    <v-checkbox class="" :label="`Checkbox 2: ${checkbox2.toString()}`" v-model="checkbox2"></v-checkbox>
   </main>
 </template>
 <script>
 import Color from 'color'
 export default {
   name: 'NdsMain',
-  data () {
-    return {
-      checkbox1: true,
-      checkbox2: false,
-      exa: this.darken
-    }
-  },
-  props: ['hex'],
   computed: {
+    hex () {
+      return this.$store.state.value
+    },
     lighten: function () {
       let gradients = []
       let value = '#FF0FFF'
@@ -44,7 +37,7 @@ export default {
       // let aux = value
       console.log('COLORES HLS')
       for (let i = 1; i <= 5; i = i + 1) {
-        value = Color(this.hex).hsl()
+        value = Color(this.$store.state.value).hsl()
         valueOb = value.object() // Objeto para recuperar l de 30 en 30
         valueOb.l = valueOb.l + (6 * i)
         console.log(valueOb.l)
@@ -63,7 +56,7 @@ export default {
       let value = '#FF0FFF'
       // let aux = value
       for (let i = 0; i < 5; i = i + 1) {
-        value = Color(this.hex).hsl().lighten(0.3 * i)
+        value = Color(this.$store.state.value).hsl().lighten(0.3 * i)
         console.log(value.string())
         value = value.hex()
         if (value !== '#000000') {
