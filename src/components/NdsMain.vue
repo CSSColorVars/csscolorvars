@@ -1,25 +1,38 @@
 <template>
   <main class="main-main ed-container ed-item l-80 application theme--light">
-    <div class="ed-item">
-      <v-card class="card--color" :color="hex">
-        <v-card-title primary-title>
-          SELECIONADO: {{hex}}
-        </v-card-title>
-      </v-card>
-    </div>
-    <div class="ed-item" v-for = "item in lighten" :key="item.color">
-      <v-card class="card--color" :color="item.color">
-        <v-card-title primary-title>
-          {{item.color}}
-         </v-card-title>
-      </v-card>
-    </div>
-    <h3>{{darken}} sdasds</h3>
-    <v-card class="" v-for = "item in darken" :key="item.color" :color="item.color">
-      <v-card-title primary-title>
-        {{item.color}}
-      </v-card-title>
-    </v-card>
+    <!-- Light Colors -->
+    <section class="ed-container ed-item l-1-3 cross-start">
+      <div class="ed-item">
+
+      </div>
+      <div class="ed-item" v-for = "item in lighten" :key="item.color">
+        <v-card class="card--color" :color="item.color">
+          <v-card-title primary-title>
+            {{item.color}}
+          </v-card-title>
+        </v-card>
+      </div>
+    </section>
+    <!-- Dark Colors -->
+    <section class="ed-container ed-item l-1-3 cross-start">
+      <div class="ed-item" v-for = "item in darken" :key="item.color">
+        <v-card class="card--color" :color="item.color">
+          <v-card-title primary-title>
+            {{item.color}}
+          </v-card-title>
+        </v-card>
+      </div>
+    </section>
+    <!-- Light Colors -->
+    <section class="ed-container ed-item l-1-3 cross-start">
+      <div class="ed-item" v-for = "item in lighten" :key="item.color">
+        <v-card class="card--color" :color="item.color">
+          <v-card-title primary-title>
+            {{item.color}}
+          </v-card-title>
+        </v-card>
+      </div>
+    </section>
   </main>
 </template>
 <script>
@@ -34,40 +47,35 @@ export default {
       let gradients = []
       let value = '#FF0FFF'
       let valueOb = {}
-      // let aux = value
-      console.log('COLORES HLS')
-      for (let i = 1; i <= 5; i = i + 1) {
+      for (let i = 1; i <= 20; i = i + 1) {
         value = Color(this.$store.state.value).hsl()
         valueOb = value.object() // Objeto para recuperar l de 30 en 30
         valueOb.l = valueOb.l + (6 * i)
-        console.log(valueOb.l)
         value = Color({ h: valueOb.h, s: valueOb.s, l: valueOb.l }).hex()
         if (value !== '#FFFFFF') {
           gradients[i - 1] = {
             color: value
           }
         }
-        // aux = value
       }
       return gradients
     },
     darken: function () {
       let gradients = []
       let value = '#FF0FFF'
-      // let aux = value
-      for (let i = 0; i < 5; i = i + 1) {
-        value = Color(this.$store.state.value).hsl().lighten(0.3 * i)
-        console.log(value.string())
-        value = value.hex()
+      let valueOb = {}
+      for (let i = 1; i <= 20; i = i + 1) {
+        value = Color(this.$store.state.value).hsl()
+        valueOb = value.object() // Objeto para recuperar l de 30 en 30
+        valueOb.l = valueOb.l - (6 * i)
+        value = Color({ h: valueOb.h, s: valueOb.s, l: valueOb.l }).hex()
         if (value !== '#000000') {
-          gradients[i] = {
+          gradients[i - 1] = {
             color: value
           }
         }
-        // aux = value
-        // console.log(aux)
-        return gradients
       }
+      return gradients
     }
   }
 }
@@ -79,6 +87,7 @@ export default {
     max-height: 100vh;
   }
   .card--color{
+    height: 10srem;
     border: solid 1px;
     margin-bottom: .5rem;
   }
