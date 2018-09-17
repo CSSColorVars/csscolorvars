@@ -19,6 +19,7 @@
                 single-line
                 type="number"
                 :value="lightAmount"
+                @keyup="updateLightAmout"
                 @click="updateLightAmout"
                 :min="minAmount" max="100000"
               ></v-text-field>
