@@ -13,6 +13,7 @@ import {
   VTextField,
   VSlider,
   VCheckbox,
+  VSelect,
   VMenu,
   transitions
 } from 'vuetify'
@@ -32,6 +33,7 @@ Vue.use(Vuetify, {
     VTextField,
     VSlider,
     VCheckbox,
+    VSelect,
     VMenu,
     transitions
   },

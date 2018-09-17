@@ -2,7 +2,7 @@
   <div class="ed-container full">
     <nds-sidebar></nds-sidebar>
     <nds-main></nds-main>
-    <nds-colorsbar></nds-colorsbar>
+    <!-- <nds-colorsbar></nds-colorsbar> -->
   </div>
 </template>
 

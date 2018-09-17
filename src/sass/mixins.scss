@@ -29,6 +29,9 @@
 
 // Fracciones para calcular anchos de los items
   $fractions : 3 6 !default;
+// Colors & Tipography
+@import "src/sass/colors";
+@import "src/sass/tipography";
 
 // Importar componentes
 @import "node_modules/ed-grid/components/media-queries";   // mixins from(), to(), fromTo()
