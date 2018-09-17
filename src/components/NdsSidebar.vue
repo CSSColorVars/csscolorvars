@@ -16,31 +16,19 @@
       </v-text-field>
     </div>
     <div class="ed-item l-80 to-center">
-      <!-- <h2>Propiedad: --{{property}}-color</h2> -->
-      <h2>valor: {{value}}</h2>
+      <h4>--{{property}}-color: {{value}}</h4>
     </div>
   </aside>
 </template>
 <script>
+import { mapGetters, mapMutations } from 'vuex'
 export default {
-  // computed: {
-  //   colorHex () {
-  //     return this.$store.state.value
-  //   }
-  // }
-
-  // computed: mapState({
-  //   colorHex: (state) => state.value
-  // })
+  name: 'NdsSidebar',
   computed: {
-    value () {
-      return this.$store.state.value
-    }
+    ...mapGetters(['property', 'value'])
   },
   methods: {
-    updateValue (e) {
-      this.$store.commit('updateValue', e.target.value)
-    }
+    ...mapMutations(['updateValue'])
   }
 }
 </script>
