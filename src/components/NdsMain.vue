@@ -28,7 +28,7 @@
         </header>
       </div>
       <hr>
-      <main class="ed-container l-block">
+      <main class="main-gradients ed-container l-block">
         <div class="ed-item" v-for = "item in lighten" :key="item.color">
           <v-card class="card--color" :color="item.color">
             <v-card-title primary-title>
@@ -220,5 +220,10 @@ export default {
   .v-text-field{
     margin-top: 0;
     padding-top: 0;
+  }
+  /*MAIN GRADIENTS CONTENT*/
+  .main-gradients{
+    max-height: calc(100vh - 250px);
+    overflow: auto;
   }
 </style>
