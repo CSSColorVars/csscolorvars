@@ -21,7 +21,7 @@
                 :value="lightAmount"
                 @keyup="updateLightAmout"
                 @click="updateLightAmout"
-                :min="minAmount" max="100000"
+                :min="minAmount" :max="lightMax"
               ></v-text-field>
             </div>
           </div>
@@ -133,7 +133,8 @@ export default {
       'property', 'value',
       'lighten', 'darken',
       'lightAmount', 'lightJump',
-      'minAmount'
+      'minAmount',
+      'lightMax'
     ])
   },
   methods: {

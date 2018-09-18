@@ -80,6 +80,18 @@ export default new Vuex.Store({
       }
       return gradients
     },
+    lightMax: (state) => {
+      let value = '#FF0FFF'
+      let valueOb = {}
+      let i = 0
+      for (i = 0; value !== '#FFFFFF'; i = i + 1) {
+        value = Color(state.value).hsl()
+        valueOb = value.object() // Objeto para recuperar l
+        valueOb.l = valueOb.l + (state.lighten.jump * i)
+        value = Color({ h: valueOb.h, s: valueOb.s, l: valueOb.l }).hex()
+      }
+      return i - 2 // Shame callback, arreglar
+    },
     darken: (state) => {
       let gradients = []
       let value = '#FF0FFF'
