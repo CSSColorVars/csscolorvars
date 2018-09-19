@@ -118,7 +118,6 @@ export default new Vuex.Store({
       state.lighten.amount = amount.target.value
     },
     updateLightJump (state, jump) {
-      console.log(jump)
       state.lighten.jump = jump
     }
   },

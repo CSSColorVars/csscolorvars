@@ -2,40 +2,19 @@
   <main class="main-main ed-container ed-item l-80 application theme--light">
     <!-- Light Colors -->
     <color-container>
-      <header slot="header" class="ed-item">
-        <div class="gradients__header">
-          <div class="gradients__icon">
-            <div class="gradients__extended" :style="'background:'+ value + ';'">
-              <i class="material-icons">zoom_out_map</i>
-            </div>
-          </div>
-          <div class="gradients__item">
-            <h2 class="main-center">Light colors</h2>
-            <div class="gradients__amount">
-              <label>Amount: </label>
-              <v-text-field
-                class="mt-0"
-                hide-details
-                single-line
-                type="number"
-                :value="lightAmount"
-                @keyup="updateLightAmout"
-                @click="updateLightAmout"
-                :min="minAmount" :max="lightMax"
-              ></v-text-field>
-            </div>
-          </div>
-        </div>
-      </header>
-      <main class="main-gradients ed-container l-block">
-        <div class="ed-item" v-for = "item in lighten" :key="item.color">
-          <v-card class="card--color" :color="item.color">
-            <v-card-title primary-title>
-              {{item.color}}
-            </v-card-title>
-          </v-card>
-        </div>
-      </main>
+      <color-header
+        slot="header"
+        :value="value"
+        :amount="lightAmount"
+        :updateAmout="updateLightAmout"
+        :minAmount="minAmount"
+        :maxAmount="lightMax"
+      >Light colors</color-header>
+      <color-main>
+        <color-card v-for = "item in lighten" :key="item.color" :color="item.color">
+          {{item.color}}
+        </color-card>
+      </color-main>
       <footer slot="footer" class="ed-item main-end">
         <div class="jump">
           <label class="label" for="">Jump: </label>
@@ -117,6 +96,9 @@
 </template>
 <script>
 import ColorContainer from '@/ui-components/ColorContainer.vue'
+import ColorHeader from '@/ui-components/ColorHeader.vue'
+import ColorMain from '@/ui-components/ColorMain.vue'
+import ColorCard from '@/ui-components/ColorCard.vue'
 import { mapGetters, mapMutations } from 'vuex'
 export default {
   name: 'NdsMain',
@@ -128,7 +110,10 @@ export default {
     }
   },
   components: {
-    ColorContainer
+    ColorContainer,
+    ColorHeader,
+    ColorMain,
+    ColorCard
   },
   computed: {
     ...mapGetters([
@@ -146,65 +131,7 @@ export default {
 </script>
 <style lang="scss">
   @import 'src/sass/mixins.scss';
-  .main-main{
-    padding-top: 1rem;
-    align-content: flex-start;
-    max-height: 100vh;
-  }
-  .card--color{
-    height: 10srem;
-    border: solid 1px;
-    margin-bottom: .5rem;
-  }
-  .gradients{
-    &__header{
-      display: flex;
-      align-items: center;
-      @include edItem(50,30,80,70);
-      margin-left: auto;
-      margin-right: auto;
-      padding-bottom: .8rem;
-    }
-    &__item{
-      flex: 3;
-      padding-left: 1rem;
-    }
-    &__icon{
-      flex: 1;
-      @include mainCenter;
-      div{
-        width: 60px;
-        height: 55px;
-        border-radius: 10px;
-        border: solid 1px #333333;
-        i{
-          font-size: 3rem;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          align-content: center;
-          height: 100%;
-        }
-      }
-    }
-    &__amount{
-      display: flex;
-      label{
-        flex: 1;
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        padding-right: 1rem;
-      }
-      .v-text-field{
-        flex: 1;
-      }
-    }
-    &__extended{
-      cursor: pointer;
-    }
-  }
-  .jump{
+  .jump-fotter{
     display: flex;
     width: 130px;
     .v-text-field__prefix{
@@ -222,10 +149,5 @@ export default {
   .v-text-field{
     margin-top: 0;
     padding-top: 0;
-  }
-  /*MAIN GRADIENTS CONTENT*/
-  .main-gradients{
-    max-height: calc(100vh - 250px);
-    overflow: auto;
   }
 </style>
