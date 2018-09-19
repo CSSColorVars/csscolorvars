@@ -1,9 +1,9 @@
 <template>
   <main class="main-main ed-container ed-item l-80 application theme--light">
     <!-- Light Colors -->
-    <section class="ed-container ed-item l-1-3 cross-start">
-      <div class="ed-item gradients">
-        <header class="gradients__header">
+    <color-container>
+      <header slot="header" class="ed-item">
+        <div class="gradients__header">
           <div class="gradients__icon">
             <div class="gradients__extended" :style="'background:'+ value + ';'">
               <i class="material-icons">zoom_out_map</i>
@@ -25,9 +25,8 @@
               ></v-text-field>
             </div>
           </div>
-        </header>
-      </div>
-      <hr>
+        </div>
+      </header>
       <main class="main-gradients ed-container l-block">
         <div class="ed-item" v-for = "item in lighten" :key="item.color">
           <v-card class="card--color" :color="item.color">
@@ -37,8 +36,7 @@
           </v-card>
         </div>
       </main>
-      <hr>
-      <footer class="ed-item main-end">
+      <footer slot="footer" class="ed-item main-end">
         <div class="jump">
           <label class="label" for="">Jump: </label>
           <v-select
@@ -50,7 +48,7 @@
           ></v-select>
         </div>
       </footer>
-    </section>
+    </color-container>
     <!-- Dark Colors -->
     <section class="ed-container ed-item l-1-3 cross-start">
       <div class="ed-item gradients">
@@ -118,6 +116,7 @@
   </main>
 </template>
 <script>
+import ColorContainer from '@/ui-components/ColorContainer.vue'
 import { mapGetters, mapMutations } from 'vuex'
 export default {
   name: 'NdsMain',
@@ -127,6 +126,9 @@ export default {
         5, 10, 15, 20
       ]
     }
+  },
+  components: {
+    ColorContainer
   },
   computed: {
     ...mapGetters([
