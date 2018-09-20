@@ -9,9 +9,11 @@ export default new Vuex.Store({
     property: 'primary',
     value: '#1671b9',
     minAmount: 0,
+    minJump: 1,
+    maxJump: 50,
     lighten: {
       amount: 10,
-      jump: 5
+      jump: 10
     },
     darken: {
       amount: 10,
@@ -53,6 +55,12 @@ export default new Vuex.Store({
     },
     minAmount: (state) => {
       return state.minAmount
+    },
+    minJump: (state) => {
+      return state.minJump
+    },
+    maxJump: (state) => {
+      return state.maxJump
     },
     lightAmount: (state) => {
       return state.lighten.amount
@@ -114,11 +122,11 @@ export default new Vuex.Store({
     updateValue (state, hex) {
       state.value = hex.target.value
     },
-    updateLightAmout (state, amount) {
+    updateLightAmount (state, amount) {
       state.lighten.amount = amount.target.value
     },
     updateLightJump (state, jump) {
-      state.lighten.jump = jump
+      state.lighten.jump = jump.target.value
     }
   },
   actions: {

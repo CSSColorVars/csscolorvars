@@ -17,7 +17,7 @@ export default {
   }
 }
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
   @import 'src/sass/mixins.scss';
  .card--color{
     height: 10srem;

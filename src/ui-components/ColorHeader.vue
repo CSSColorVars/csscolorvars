@@ -18,8 +18,8 @@
             single-line
             type="number"
             :value="amount"
-            @keyup="updateAmout"
-            @click="updateAmout"
+            @keyup="updateAmount"
+            @click="updateAmount"
             :min="minAmount" :max="maxAmount"
           ></v-text-field>
         </div>
@@ -36,10 +36,9 @@ export default {
       required: true
     },
     amount: {
-      type: Number,
       required: true
     },
-    updateAmout: {
+    updateAmount: {
       type: Function,
       required: true
     },
@@ -54,7 +53,7 @@ export default {
   }
 }
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
   @import 'src/sass/mixins.scss';
   .gradients{
     &__header{
