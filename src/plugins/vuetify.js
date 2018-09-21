@@ -15,6 +15,7 @@ import {
   VCheckbox,
   VSelect,
   VMenu,
+  VSubheader,
   transitions
 } from 'vuetify'
 import 'vuetify/src/stylus/app.styl'
@@ -35,6 +36,7 @@ Vue.use(Vuetify, {
     VCheckbox,
     VSelect,
     VMenu,
+    VSubheader,
     transitions
   },
   theme: {

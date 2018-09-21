@@ -9,7 +9,8 @@
         :updateAmount="updateLightAmount"
         :minAmount="minAmount"
         :maxAmount="lightMax"
-      >Light colors</color-header>
+      >Light colors
+      </color-header>
       <color-main>
         <color-card v-for = "item in lighten" :key="item.color" :color="item.color">
           {{item.color}}

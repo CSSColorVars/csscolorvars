@@ -10,7 +10,6 @@ export default new Vuex.Store({
     value: '#1671b9',
     minAmount: 0,
     minJump: 1,
-    maxJump: 50,
     lighten: {
       amount: 10,
       jump: 10
@@ -83,6 +82,7 @@ export default new Vuex.Store({
         if (value !== '#FFFFFF') {
           gradients[i - 1] = { color: value }
         } else {
+          state.lighten.maxJump = i
           return gradients
         }
       }
@@ -126,7 +126,7 @@ export default new Vuex.Store({
       state.lighten.amount = amount.target.value
     },
     updateLightJump (state, jump) {
-      state.lighten.jump = jump.target.value
+      state.lighten.jump = jump
     }
   },
   actions: {
