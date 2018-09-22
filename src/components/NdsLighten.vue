@@ -11,10 +11,11 @@
     >Light colors
     </color-header>
     <color-jump
+      label="Lighten"
       slot="jump"
       :jump=lightJump
       :updateJump="updateLightJump"
-      :minJump="minJump" :maxJump="maxJump"
+      :minJump="minJump" :maxJump="lightMax"
     ></color-jump>
     <color-main>
       <color-card v-for = "item in lighten" :key="item.color" :color="item.color">
@@ -45,7 +46,7 @@ export default {
       'lighten',
       'lightAmount', 'lightJump',
       'minAmount',
-      'minJump', 'maxJump',
+      'minJump',
       'lightMax'
     ])
   },

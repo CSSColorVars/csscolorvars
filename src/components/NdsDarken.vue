@@ -11,10 +11,11 @@
     >Dark colors
     </color-header>
     <color-jump
+      label="Darken"
       slot="jump"
       :jump=darkJump
       :updateJump="updateDarkJump"
-      :minJump="minJump" :maxJump="maxJump"
+      :minJump="minJump" :maxJump="darkMax"
     ></color-jump>
     <color-main>
       <color-card v-for = "item in darken" :key="item.color" :color="item.color">
@@ -31,7 +32,7 @@ import ColorCard from '@/ui-components/ColorCard.vue'
 import ColorJump from '@/ui-components/ColorJump.vue'
 import { mapGetters, mapMutations } from 'vuex'
 export default {
-  name: 'NdsDark',
+  name: 'NdsDarken',
   components: {
     ColorContainer,
     ColorHeader,
@@ -45,7 +46,7 @@ export default {
       'darken',
       'darkAmount', 'darkJump',
       'minAmount',
-      'minJump', 'maxJump',
+      'minJump',
       'darkMax'
     ])
   },

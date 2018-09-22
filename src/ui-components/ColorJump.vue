@@ -4,18 +4,21 @@
         :value="jump"
         :min="minJump"
         @input="updateJump"
-        :thumb-color="lightMax < 1 ? 'red' : 'green'"
+        :thumb-color="maxJump < 1 ? 'red' : 'green'"
         thumb-label="always"
-        label="Lighten"
+        :label="label"
         always-dirty
     ></v-slider>
   </div>
 </template>
 <script>
-import { mapGetters } from 'vuex'
 export default {
   name: 'ColorJump',
   props: {
+    label: {
+      type: String,
+      required: true
+    },
     jump: {
       require: true
     },
@@ -26,10 +29,10 @@ export default {
     minJump: {
       type: Number,
       required: true
+    },
+    maxJump: {
+      required: true
     }
-  },
-  computed: {
-    ...mapGetters(['lightMax'])
   }
 }
 </script>

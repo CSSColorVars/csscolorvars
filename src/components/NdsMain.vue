@@ -3,14 +3,17 @@
     <!-- Light Colors -->
     <nds-lighten></nds-lighten>
     <!-- Dark Colors -->
+    <nds-darken></nds-darken>
   </main>
 </template>
 <script>
 import NdsLighten from '@/components/NdsLighten'
+import NdsDarken from '@/components/NdsDarken'
 export default {
   name: 'NdsMain',
   components: {
-    NdsLighten
+    NdsLighten,
+    NdsDarken
   }
 }
 </script>

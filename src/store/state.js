@@ -9,10 +9,10 @@ export const state = {
   },
   darken: {
     amount: 10,
-    jump: 10
+    jump: 5
   },
   rgba: {
     amount: 10,
-    jump: 10
+    jump: 5
   }
 }
