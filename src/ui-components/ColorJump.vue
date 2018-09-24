@@ -3,6 +3,7 @@
     <v-slider
         :value="jump"
         :min="minJump"
+        :max="maxJumpForce"
         @input="updateJump"
         :thumb-color="maxJump < 1 ? 'red' : 'green'"
         thumb-label="always"
@@ -32,6 +33,9 @@ export default {
     },
     maxJump: {
       required: true
+    },
+    maxJumpForce: {
+      type: String
     }
   }
 }

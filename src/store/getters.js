@@ -12,7 +12,6 @@ export const getters = {
     let value
     let valueOb
     let gradients = []
-    if (state.lighten.amount <= 0) { state.lighten.amount = 0 }
     for (let i = 1; i <= state.lighten.amount; i++) {
       value = Color(state.value).hsl()
       valueOb = value.object()
@@ -45,7 +44,6 @@ export const getters = {
     let value
     let valueOb
     let gradients = []
-    if (state.darken.amount <= 0) { state.darken.amount = 0 }
     for (let i = 1; i <= state.darken.amount; i++) {
       value = Color(state.value).hsl()
       valueOb = value.object()
@@ -57,6 +55,7 @@ export const getters = {
         return gradients
       }
     }
+    console.log(gradients)
     return gradients
   },
   darkMax: (state) => {
@@ -72,12 +71,23 @@ export const getters = {
     return i - 2
   },
 
+  rgbaminAmount: (state) => { return state.rgba.minAmount },
+  rgbaminJump: (state) => { return state.rgba.minJump },
   rgbaAmount: (state) => { return state.rgba.amount },
   rgbaJump: (state) => { return state.rgba.jump },
   rgba: (state) => {
-
+    let value
+    let gradients = []
+    let decrement = 1.00
+    for (let i = 1; decrement > 0.05 * state.rgba.jump; i++) {
+      decrement = (decrement - (0.05 * state.rgba.jump)).toFixed(2) // Punto de amount
+      value = Color(state.value).alpha(decrement).string()
+      gradients[i - 1] = { color: value }
+      console.log(decrement)
+    }
+    return gradients
   },
   rgbaMax: (state) => {
-
+    return 99
   }
 }

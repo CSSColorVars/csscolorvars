@@ -1,6 +1,7 @@
 <template>
   <!-- Rgba Colors -->
   <color-container>
+    <!-- {{rgba}} -->
     <color-header
       slot="header"
       :value="value"
@@ -11,10 +12,11 @@
     >Rgba colors
     </color-header>
     <color-jump
+      label="Rgba"
       slot="jump"
       :jump=rgbaJump
       :updateJump="updateRgbaJump"
-      :minJump="minJump" :maxJump="rgbaMax"
+      :minJump="minJump" :maxJump="rgbaMax" maxJumpForce="9"
     ></color-jump>
     <color-main>
       <color-card v-for = "item in rgba" :key="item.color" :color="item.color">
