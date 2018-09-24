@@ -21,6 +21,7 @@
             @keyup="updateAmount"
             @click="updateAmount"
             :min="minAmount" :max="maxAmount"
+            :step="step"
           ></v-text-field>
         </div>
       </div>
@@ -49,6 +50,9 @@ export default {
     maxAmount: {
       type: Number,
       required: true
+    },
+    step: {
+      default: 1
     }
   }
 }

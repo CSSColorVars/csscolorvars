@@ -7,8 +7,9 @@
       :value="value"
       :amount=rgbaAmount
       :updateAmount="updateRgbaAmount"
-      :minAmount="minAmount"
-      :maxAmount="rgbaMax"
+      minAmount="0.01"
+      maxAmount="0.1"
+      step=0.01
     >Rgba colors
     </color-header>
     <color-jump
@@ -16,7 +17,7 @@
       slot="jump"
       :jump=rgbaJump
       :updateJump="updateRgbaJump"
-      :minJump="minJump" :maxJump="rgbaMax" maxJumpForce="9"
+      :minJump="minJump" :maxJump="rgbaMax"
     ></color-jump>
     <color-main>
       <color-card v-for = "item in rgba" :key="item.color" :color="item.color">
