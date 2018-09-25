@@ -6,8 +6,6 @@ export const getters = {
   minAmount: (state) => { return state.minAmount },
   minJump: (state) => { return state.minJump },
 
-  lightAmount: (state) => { return state.lighten.amount },
-  lightJump: (state) => { return state.lighten.jump },
   lighten: (state) => {
     let value
     let valueOb
@@ -38,8 +36,6 @@ export const getters = {
     return i - 2
   },
 
-  darkAmount: (state) => { return state.darken.amount },
-  darkJump: (state) => { return state.darken.jump },
   darken: (state) => {
     let value
     let valueOb
@@ -55,7 +51,6 @@ export const getters = {
         return gradients
       }
     }
-    console.log(gradients)
     return gradients
   },
   darkMax: (state) => {
@@ -70,11 +65,6 @@ export const getters = {
     }
     return i - 2
   },
-
-  rgbaminAmount: (state) => { return state.rgba.minAmount },
-  rgbaminJump: (state) => { return state.rgba.minJump },
-  rgbaAmount: (state) => { return state.rgba.amount },
-  rgbaJump: (state) => { return state.rgba.jump },
   rgba: (state) => {
     let value
     let gradients = []

@@ -30,7 +30,7 @@ import ColorHeader from '@/ui-components/ColorHeader.vue'
 import ColorMain from '@/ui-components/ColorMain.vue'
 import ColorCard from '@/ui-components/ColorCard.vue'
 import ColorJump from '@/ui-components/ColorJump.vue'
-import { mapGetters, mapMutations } from 'vuex'
+import { mapState, mapGetters, mapMutations } from 'vuex'
 export default {
   name: 'NdsLighten',
   components: {
@@ -41,14 +41,12 @@ export default {
     ColorJump
   },
   computed: {
-    ...mapGetters([
-      'property', 'value',
-      'lighten',
-      'lightAmount', 'lightJump',
-      'minAmount',
-      'minJump',
-      'lightMax'
-    ])
+    ...mapState(['value', 'minAmount', 'minJump']),
+    ...mapState({
+      lightAmount: (state) => state.lighten.amount,
+      lightJump: (state) => state.lighten.jump
+    }),
+    ...mapGetters(['property', 'lighten', 'lightMax'])
   },
   methods: {
     ...mapMutations(['updateLightAmount', 'updateLightJump'])

@@ -12,7 +12,9 @@ export const state = {
     jump: 5
   },
   rgba: {
-    amount: 10,
+    minAmount: 0.01,
+    amount: 0.1,
+    minJump: 1,
     jump: 5
   }
 }

@@ -7,8 +7,8 @@
       :value="value"
       :amount=rgbaAmount
       :updateAmount="updateRgbaAmount"
-      minAmount="0.01"
-      maxAmount="0.1"
+      minAmount=0.01
+      maxAmount=0.1
       step=0.01
     >Rgba colors
     </color-header>
@@ -32,7 +32,7 @@ import ColorHeader from '@/ui-components/ColorHeader.vue'
 import ColorMain from '@/ui-components/ColorMain.vue'
 import ColorCard from '@/ui-components/ColorCard.vue'
 import ColorJump from '@/ui-components/ColorJump.vue'
-import { mapGetters, mapMutations } from 'vuex'
+import { mapState, mapGetters, mapMutations } from 'vuex'
 export default {
   name: 'NdsRgba',
   components: {
@@ -43,14 +43,14 @@ export default {
     ColorJump
   },
   computed: {
-    ...mapGetters([
-      'property', 'value',
-      'rgba',
-      'rgbaAmount', 'rgbaJump',
-      'minAmount',
-      'minJump',
-      'rgbaMax'
-    ])
+    ...mapState(['value', 'minJump']),
+    ...mapState({
+      rgbaminAmount: (state) => { return state.rgba.minAmount },
+      rgbaminJump: (state) => { return state.rgba.minJump },
+      rgbaAmount: (state) => { return state.rgba.amount },
+      rgbaJump: (state) => { return state.rgba.jump }
+    }),
+    ...mapGetters(['rgba', 'rgbaMax'])
   },
   methods: {
     ...mapMutations(['updateRgbaAmount', 'updateRgbaJump'])
