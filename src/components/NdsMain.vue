@@ -4,7 +4,7 @@
     <nds-lighten></nds-lighten>
     <!-- Dark Colors -->
     <nds-darken></nds-darken>
-    <nds-rgba></nds-rgba>
+    <!-- <nds-rgba></nds-rgba> -->
   </main>
 </template>
 <script>
