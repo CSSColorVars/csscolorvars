@@ -41,11 +41,13 @@ export default {
   aside{
     display: block;
   }
-  .sidebar{
+  .ed-item.sidebar{
     height: auto;
+    padding-right: 80px;
     @include from(l){
       height: 100vh;
       overflow: auto;
+      padding-right: 0;
     }
   }
   .figure--color{

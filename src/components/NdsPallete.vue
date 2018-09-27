@@ -1,13 +1,13 @@
 <template>
-  <aside>
-    <v-navigation-drawer
+  <v-navigation-drawer
     :mini-variant.sync="mini"
     v-model="drawer"
     hide-overlay
     stateless
     dark
     right
-    absolute
+    touchless
+    fixed
   >
     <v-toolbar flat class="transparent">
       <v-list class="pa-0">
@@ -50,7 +50,6 @@
       </v-list-tile>
     </v-list>
   </v-navigation-drawer>
-  </aside>
 </template>
 <script>
 export default {

@@ -63,7 +63,7 @@ export default {
     &__header{
       display: flex;
       align-items: center;
-      @include edItem(50,30,80,70);
+      @include edItem(100,90,80);
       margin-left: auto;
       margin-right: auto;
       padding-bottom: .8rem;
