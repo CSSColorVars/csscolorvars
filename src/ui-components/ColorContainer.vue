@@ -1,5 +1,5 @@
 <template>
-  <section class="ed-container ed-item l-1-3 cross-start">
+  <section class="color-container ed-container ed-item l-1-3 cross-start">
     <slot name="header"></slot>
     <slot name="jump"></slot>
     <hr>
@@ -7,3 +7,7 @@
     <hr>
   </section>
 </template>
+<style lang="scss">
+  section.color-container{ margin-top: 1rem; }
+</style>
+

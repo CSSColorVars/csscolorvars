@@ -1,19 +1,19 @@
 <template>
-  <main class="main-main ed-container ed-item l-80 application theme--light">
-      <v-tabs
-        class="ed-item"
-        slot="extension"
-        v-model="tab"
-        dark
-        grow
-        fixed-tabs
-      >
-        <v-tabs-slider></v-tabs-slider>
-        <v-tab
-          v-for="item in items"
-          :key="item"
-        >{{ item }}</v-tab>
-      </v-tabs>
+  <main v-if="mainTab" class="main-main ed-container ed-item l-80 application theme--light">
+    <v-tabs
+      class="ed-item"
+      slot="extension"
+      v-model="tab"
+      dark
+      grow
+      fixed-tabs
+    >
+      <v-tabs-slider></v-tabs-slider>
+      <v-tab
+        v-for="item in items"
+        :key="item"
+      >{{ item }}</v-tab>
+    </v-tabs>
     <v-tabs-items v-model="tab">
       <v-tab-item>
         <nds-lighten></nds-lighten>
@@ -25,6 +25,8 @@
        RGBA
       </v-tab-item>
     </v-tabs-items>
+  </main>
+  <main v-else class="main-main ed-container ed-item l-80 application theme--light">
     <!-- Light Colors -->
     <nds-lighten></nds-lighten>
     <!-- Dark Colors -->
@@ -43,26 +45,40 @@ export default {
       tab: null,
       items: [
         'Lighten', 'Darken', 'Rgba'
-      ]
+      ],
+      mainTab: null
     }
   },
   components: {
     NdsLighten,
     NdsDarken,
     NdsRgba
+  },
+  created () {
+    const largeBp = matchMedia('(min-width: 1024px)')
+    const mediaQuery = mql => {
+      mql.matches
+        ? this.mainTab = false
+        : this.mainTab = true
+    }
+    largeBp.addListener(mediaQuery)
+    mediaQuery(largeBp)
   }
 }
 </script>
 <style lang="scss">
   @import 'src/sass/mixins.scss';
   .ed-item.main-main{
-    padding-top: 1rem;
     padding-right: 80px;
     align-content: flex-start;
     // min-width: 600px;
     @include from (l) {
       max-height: 100vh;
     }
+  }
+  .v-tabs.ed-item{
+    padding-left: 0;
+    padding-right: 0;
   }
   .v-text-field{
     margin-top: 0;
