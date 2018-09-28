@@ -10,4 +10,3 @@
 <style lang="scss">
   section.color-container{ margin-top: 1rem; }
 </style>
-
