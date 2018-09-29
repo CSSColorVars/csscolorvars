@@ -1,20 +1,22 @@
 <template>
   <header class="ed-container ed-item l-20 header-sidebar application theme--dark">
-    <div class="ed-item l-80 to-center">
-      <div class="ed-item l-80 s-80 to-center">
+    <div class="header--logo ed-item l-100 m-50 s-30">
+
+    </div>
+    <form class="ed-container ed-item l-100 m-50 s-70">
+      <div class="header--property ed-item">
         <v-text-field dark
           label="Property:"
           color="#FFF"
-          maxlength="7"
           placeholder="#000000"
           :value="property"
           @keyup=""
+          box
+          suffix="-color"
         >
         </v-text-field>
       </div>
-    </div>
-    <div class="header-sidebar--value to-center ed-container ed-item l-80 s-80">
-      <div class="ed-item l-80 s-80 to-center">
+      <div class="header--value ed-item">
         <v-text-field dark
           label="Value"
           color="#FFF"
@@ -22,13 +24,14 @@
           placeholder="#000000"
           :value="value"
           @keyup="updateValue"
+          box
         >
         </v-text-field>
+        <figure class="figure--color ed-item l-100 m-20 s-20 l-block">
+          <input type="color" :value="value" @input="updateValue" />
+        </figure>
       </div>
-      <figure class="figure--color ed-item l-100 m-20 s-20 l-block">
-        <input type="color" :value="value" @input="updateValue" />
-      </figure>
-    </div>
+    </form>
   </header>
 </template>
 <script>
@@ -84,5 +87,14 @@ export default {
         outline: none;
       }
     }
+  }
+
+  // SCOPED
+  .v-text-field__suffix {
+    padding-left: 4px;
+    white-space: nowrap;
+    padding-top: 14px;
+    font-weight: 300;
+    font-size: 1.3rem;
   }
 </style>
