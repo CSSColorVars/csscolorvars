@@ -27,9 +27,12 @@
           box
         >
         </v-text-field>
-        <figure class="figure--color l-block">
+        <figure class="figure--color">
           <input type="color" :value="value" @input="updateValue" />
         </figure>
+      </div>
+      <div class="header--color ed-item">
+        <input type="color" :value="value" @input="updateValue" />
       </div>
     </form>
   </header>
@@ -64,21 +67,43 @@ export default {
   }
   .header--value{
     position:relative;
-  }
-  .figure--color {
-    position: absolute;
-    top: .5rem;
-    right: .5rem;
-    padding: 0 1rem;
-    input{
+    input[type="color"]{
+      position: absolute;
+      top: .5rem;
+      right: 1.5rem;
       width: 3rem;
       height: 3rem;
       border: solid 1px #C2C2C2;
       border-radius: .3rem;
       cursor: pointer;
-      &:hover, &:active, :focus, :active{
-        border: solid #FFF;
+      &:hover, &:active, &:focus, &:active{
+        border: solid 1px #FFF;
         outline: none;
+      }
+    }
+  }
+  .header--color{
+
+    input[type="color"]{
+      display: none;
+      @include from(l){
+        --maxwh-color: 300px;
+        --wh-color: calc(20vw - 4rem);
+        display: block;
+        width: var(--wh-color);
+        height: var(--wh-color);
+        max-width: var(--maxwh-color);
+        max-height: var(--maxwh-color);
+        margin-left: auto;
+        margin-right: auto;
+        padding: 0 1.5px;
+        border: solid 1px #C2C2C2;
+        border-radius: .3rem;
+        cursor: pointer;
+        &:hover, &:active, &:focus, &:active{
+          border: solid 1.5px #FFF;
+          outline: none;
+        }
       }
     }
   }
