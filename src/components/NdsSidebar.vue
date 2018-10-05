@@ -3,7 +3,7 @@
     <div class="header--logo ed-item l-100 m-50 s-30">
 
     </div>
-    <form class="ed-container ed-item l-100 m-50 s-70">
+    <form class="header--form ed-container ed-item l-100 m-50 s-70">
       <div class="header--property ed-item">
         <v-text-field dark
           label="Property:"
@@ -21,13 +21,13 @@
           label="Value"
           color="#FFF"
           maxlength="7"
-          placeholder="#000000"
+          placeholder=""
           :value="value"
           @keyup="updateValue"
           box
         >
         </v-text-field>
-        <figure class="figure--color ed-item l-100 m-20 s-20 l-block">
+        <figure class="figure--color l-block">
           <input type="color" :value="value" @input="updateValue" />
         </figure>
       </div>
@@ -62,24 +62,18 @@ export default {
       @include crossCenter
     }
   }
-  .header-sidebar--value{
-
-  }
-  .figure--color{
-    input{
-      border: solid #C2C2C2;
-      border-radius: .3rem;
-      cursor: pointer;
-      &:hover, &:active, :focus, :active{
-        border: solid #FFF;
-        outline: none;
-      }
-    }
+  .header--value{
+    position:relative;
   }
   .figure--color {
+    position: absolute;
+    top: .5rem;
+    right: .5rem;
+    padding: 0 1rem;
     input{
-      width: 100%;
-      border: solid #C2C2C2;
+      width: 3rem;
+      height: 3rem;
+      border: solid 1px #C2C2C2;
       border-radius: .3rem;
       cursor: pointer;
       &:hover, &:active, :focus, :active{
@@ -96,5 +90,8 @@ export default {
     padding-top: 14px;
     font-weight: 300;
     font-size: 1.3rem;
+  }
+  .header--form{
+    margin-top: 1rem;
   }
 </style>
