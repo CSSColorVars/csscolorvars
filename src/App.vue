@@ -21,6 +21,7 @@
   * config/_typography.scss
   */
   :root {
+    overflow  : auto;
     --title1  : #{fontSize(title1)};
     --title2  : #{fontSize(title2)};
     --title3  : #{fontSize(title3)};

@@ -9,7 +9,7 @@
           <v-text-field dark
             label="Property:"
             color="#FFF"
-            placeholder="#000000"
+            placeholder="primary"
             :value="property"
             @keyup=""
             box
@@ -22,7 +22,7 @@
             label="Value"
             color="#FFF"
             maxlength="7"
-            placeholder=""
+            placeholder="#000000"
             :value="value"
             @keyup="updateValue"
             box
@@ -85,16 +85,15 @@ export default {
       @include mainCenter;
       @include crossCenter;
       input[type="color"]{
-        width: 110px;
-        height: 110px;
-        @include from(l){
-          --maxwh-color: 300px;
-          --wh-color: calc(20vw - 6rem);
-          width: var(--wh-color);
-          height: var(--wh-color);
-          max-width: var(--maxwh-color);
-          max-height: var(--maxwh-color);
-        }
+        --minwh-color: 75px;
+        --maxwh-color: 140px;
+        --wh-color: 25vw;
+        width: var(--wh-color);
+        height: var(--wh-color);
+        min-width: var(--minwh-color);
+        min-height: var(--minwh-color);
+        max-width: var(--maxwh-color);
+        max-height: var(--maxwh-color);
         padding: 0 1.5px;
         border: solid 1px #C2C2C2;
         border-radius: .3rem;
@@ -102,6 +101,13 @@ export default {
         &:hover, &:active, &:focus, &:active{
           border: solid 1.5px #FFF;
           outline: none;
+        }
+        @include from(m){
+          --wh-color: 140px;
+        }
+        @include from(l){
+          --maxwh-color: 300px;
+          --wh-color: calc(20vw - 6rem);
         }
       }
     }
