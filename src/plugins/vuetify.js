@@ -16,6 +16,7 @@ import {
   VSelect,
   VMenu,
   VTabs,
+  VSnackbar,
   transitions
 } from 'vuetify'
 import 'vuetify/src/stylus/app.styl'
@@ -37,6 +38,7 @@ Vue.use(Vuetify, {
     VSelect,
     VMenu,
     VTabs,
+    VSnackbar,
     transitions
   },
   theme: {

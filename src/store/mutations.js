@@ -1,4 +1,11 @@
 export const mutations = {
+  updateProperty (state, prop) {
+    if (prop !== '') {
+      state.property = prop
+    } else {
+      state.property = 'default'
+    }
+  },
   updateValue (state, hex) {
     state.value = hex.target.value
   },

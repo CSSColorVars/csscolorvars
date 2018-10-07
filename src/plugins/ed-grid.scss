@@ -3,8 +3,8 @@
 
 // Variables globales (puede sobreescribirlas antes de importar ED grid)
 // No las sobreescriba aquí, sino desde su proyecto.
-  $cssCore    : false !default; //Compila todo el css (no recomendado si se trabaja con sass).
-  $cssHelpers : false  !default; //Ayudas extras para el layout (para alinear elementos, limpiar los floats, controlar el padding, etc...) Se recomienda activarlo.
+  $cssCore    : false  !default; //Compila todo el css (no recomendado si se trabaja con sass).
+  $cssHelpers : true  !default; //Ayudas extras para el layout (para alinear elementos, limpiar los floats, controlar el padding, etc...) Se recomienda activarlo.
   $buttons    : false  !default;
   $devMode    : false !default; //Ayuda visual que nos permite ver en el navegador breakpoints, el tamaño de los elementos, el area disponible etc...
 
@@ -29,15 +29,21 @@
 
 // Fracciones para calcular anchos de los items
   $fractions : 3 6 !default;
-// Colors & Tipography
-@import "src/sass/colors";
-@import "src/sass/tipography";
 
 // Importar componentes
+@import "node_modules/ed-grid/components/base";            // estilos base
 @import "node_modules/ed-grid/components/media-queries";   // mixins from(), to(), fromTo()
 @import "node_modules/ed-grid/components/helpers";         // utilidades
-@import "src/sass/core";                                   // core de EDgrid (containers y items)
+// @import "node_modules/ed-grid/components/dev";             // modo dev
+@import "node_modules/ed-grid/components/core";            // core de EDgrid (containers y items)
 // @import "node_modules/ed-grid/components/grid";            // mixin grid()
 @import "node_modules/ed-grid/components/visibility";      // mixins para visibilidad
+@import "node_modules/ed-grid/components/video";           // video RWD
+// @import "node_modules/ed-grid/components/ed-menu";         // estilos para menus
 @import "node_modules/ed-grid/components/flexbox";         // utilidades con flexbox
-@import "node_modules/ed-grid/components/buttons";         // mixin button()
+// @import "node_modules/ed-grid/components/offset";          // offsets
+// @import "node_modules/ed-grid/components/buttons";         // mixin button()
+// @import "node_modules/ed-grid/components/css-core";        // componentes que se compilaran por default a css
+@import "node_modules/ed-grid/components/css-helpers";     // ayudas en css (por medio de clases)
+// @import "node_modules/ed-grid/components/grid-v3";         // ayudas en css (por medio de clases)
+@import "node_modules/ed-grid/components/layout";          // l-block y l-section

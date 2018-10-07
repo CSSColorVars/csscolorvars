@@ -1,5 +1,5 @@
 <template>
-  <div class="ed-container full">
+  <div class="nds-container full">
     <nds-sidebar></nds-sidebar>
     <nds-main></nds-main>
     <nds-pallete></nds-pallete>

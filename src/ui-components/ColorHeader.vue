@@ -1,5 +1,5 @@
 <template>
-  <header class="ed-item">
+  <header class="nds-item">
     <div class="gradients__header">
       <div class="gradients__icon">
         <div class="gradients__extended" :style="'background:'+ value + ';'">

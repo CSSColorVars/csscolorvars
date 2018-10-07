@@ -1,5 +1,5 @@
 <template>
-  <main class="main-gradients ed-container l-block">
+  <main class="main-gradients nds-container l-block">
     <slot></slot>
   </main>
 </template>

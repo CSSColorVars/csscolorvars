@@ -1,5 +1,5 @@
 <template>
-  <section class="color-container ed-container ed-item l-1-3 cross-start">
+  <section class="color-container nds-container nds-item l-1-3 cross-start">
     <slot name="header"></slot>
     <slot name="jump"></slot>
     <hr>

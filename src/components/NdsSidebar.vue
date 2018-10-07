@@ -1,23 +1,35 @@
 <template>
-  <header class="ed-container ed-item l-20 header-sidebar application theme--dark">
-    <div class="header ed-container ed-item">
-      <div class="header--color ed-item l-100 m-50 s-35">
+  <header class="nds-container nds-item l-20 header-sidebar application theme--dark">
+    <div class="header nds-container nds-item">
+      <div class="header--color nds-item l-100 m-50 s-35">
         <input type="color" :value="value" @input="updateValue" />
       </div>
-      <form class="header--form ed-container ed-item l-100 m-50 s-65">
-        <div class="header--property ed-item">
+      <form class="header--form nds-container nds-item l-100 m-50 s-65">
+        <div class="header--property nds-item">
           <v-text-field dark
+            v-if="property !== 'default'"
             label="Property:"
             color="#FFF"
-            placeholder="primary"
+            placeholder="default"
             :value="property"
-            @keyup=""
+            @input="updateProperty"
+            box
+            suffix="-color"
+          >
+          </v-text-field>
+          <v-text-field dark
+            v-else
+            label="Property:"
+            color="#FFF"
+            placeholder="default"
+            value=""
+            @input="updateProperty"
             box
             suffix="-color"
           >
           </v-text-field>
         </div>
-        <div class="header--value ed-item">
+        <div class="header--value nds-item">
           <v-text-field dark
             label="Value"
             color="#FFF"
@@ -37,21 +49,21 @@
   </header>
 </template>
 <script>
-import { mapGetters, mapMutations } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 export default {
   name: 'NdsSidebar',
   computed: {
-    ...mapGetters(['property', 'value'])
+    ...mapState(['property', 'value'])
   },
   methods: {
-    ...mapMutations(['updateValue'])
+    ...mapMutations(['updateProperty', 'updateValue'])
   }
 }
 </script>
 
 <style lang="scss">
   @import 'src/sass/mixins.scss';
-  .ed-item.header-sidebar{
+  .nds-item.header-sidebar{
     padding-right: 80px;
     @include mainCenter;
     @include from(l){

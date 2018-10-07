@@ -1,12 +1,12 @@
 <template>
-  <main v-if="mainTab" class="main-main ed-container ed-item l-80 application theme--light">
+  <main v-if="mainTab" class="main-main nds-container nds-item l-80 application theme--light">
     <v-tabs
-      class="ed-item"
+      class="nds-item"
       slot="extension"
       v-model="tab"
       dark
       grow
-      fixed-tabs
+      fixnds-tabs
     >
       <v-tabs-slider></v-tabs-slider>
       <v-tab
@@ -26,7 +26,7 @@
       </v-tab-item>
     </v-tabs-items>
   </main>
-  <main v-else class="main-main ed-container ed-item l-80 application theme--light">
+  <main v-else class="main-main nds-container nds-item l-80 application theme--light">
     <!-- Light Colors -->
     <nds-lighten></nds-lighten>
     <!-- Dark Colors -->
@@ -68,7 +68,7 @@ export default {
 </script>
 <style lang="scss">
   @import 'src/sass/mixins.scss';
-  .ed-item.main-main{
+  .nds-item.main-main{
     padding-right: 80px;
     align-content: flex-start;
     // min-width: 600px;
@@ -76,7 +76,7 @@ export default {
       max-height: 100vh;
     }
   }
-  .v-tabs.ed-item{
+  .v-tabs.nds-item{
     padding-left: 0;
     padding-right: 0;
   }

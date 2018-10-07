@@ -1,5 +1,5 @@
 <template>
-  <div class="ed-item main-end">
+  <div class="nds-item main-end">
     <v-slider
         :value="jump"
         :min="minJump"

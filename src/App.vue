@@ -9,6 +9,17 @@
     </div>
   </div>
 </template>
+<script>
+export default {
+  data () {
+    return {
+      snackbar: true,
+      timeout: 6000
+    }
+  }
+}
+</script>
+
 <style lang="scss">
   @import 'src/sass/mixins.scss';
   .credits{
