@@ -6,7 +6,7 @@
       v-model="tab"
       dark
       grow
-      fixnds-tabs
+      fixed-tabs
     >
       <v-tabs-slider></v-tabs-slider>
       <v-tab

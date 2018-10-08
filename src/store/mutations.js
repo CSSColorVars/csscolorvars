@@ -3,7 +3,7 @@ export const mutations = {
     if (prop !== '') {
       state.property = prop
     } else {
-      state.property = 'default'
+      state.property = 'unnamed'
     }
   },
   updateValue (state, hex) {

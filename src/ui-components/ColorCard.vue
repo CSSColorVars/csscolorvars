@@ -25,6 +25,12 @@ export default {
     margin-bottom: .5rem;
   }
   .v-card__title{
-    padding: 0.5rem 1rem;
+    padding: .5rem .8rem;
+  }
+  .v-list__tile__content {
+    flex: 1 1 0;
+  }
+  .v-list__tile__action {
+    min-width: 30px;
   }
 </style>

@@ -7,10 +7,10 @@
       <form class="header--form nds-container nds-item l-100 m-50 s-65">
         <div class="header--property nds-item">
           <v-text-field dark
-            v-if="property !== 'default'"
+            v-if="property !== 'unnamed'"
             label="Property:"
             color="#FFF"
-            placeholder="default"
+            placeholder="unnamed"
             :value="property"
             @input="updateProperty"
             box
@@ -21,7 +21,7 @@
             v-else
             label="Property:"
             color="#FFF"
-            placeholder="default"
+            placeholder="unnamed"
             value=""
             @input="updateProperty"
             box
