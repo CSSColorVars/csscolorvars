@@ -18,8 +18,16 @@
       :minJump="minJump" :maxJump="darkMax"
     ></color-jump>
     <color-main>
-      <color-card v-for = "item in darken" :key="item.color" :color="item.color">
-        {{item.color}}
+      <color-card v-for = "(item, index) in darken" :key="item.color" :color="item.color">
+        <v-list-tile-content>
+          <v-list-tile-title class="t4" :style="'color: ' + item.invert + ';opacity:.9;'">var(--{{property}}-dark-{{index + 1}})</v-list-tile-title>
+          <v-list-tile-sub-title :style="'color: ' + item.invert + ';opacity:.9;'">{{item.color}}</v-list-tile-sub-title>
+        </v-list-tile-content>
+        <v-list-tile-action>
+          <v-btn icon ripple>
+            <v-icon :color="item.invert">file_copy</v-icon>
+          </v-btn>
+        </v-list-tile-action>
       </color-card>
     </color-main>
   </color-container>
@@ -41,7 +49,7 @@ export default {
     ColorJump
   },
   computed: {
-    ...mapState(['value', 'minAmount', 'minJump']),
+    ...mapState(['property', 'value', 'minAmount', 'minJump']),
     ...mapState({
       darkAmount: (state) => state.darken.amount,
       darkJump: (state) => state.darken.jump

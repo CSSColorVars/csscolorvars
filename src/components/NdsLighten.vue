@@ -20,12 +20,12 @@
     <color-main>
       <color-card v-for = "(item, index) in lighten" :key="item.color" :color="item.color">
         <v-list-tile-content>
-          <v-list-tile-title class="t4">var(--{{property}}-ligh-{{index + 1}})</v-list-tile-title>
-          <v-list-tile-sub-title style="color: #403f3f;">{{item.color}}</v-list-tile-sub-title>
+          <v-list-tile-title class="t4" :style="'color: ' + item.invert + ';'">var(--{{property}}-ligh-{{index + 1}})</v-list-tile-title>
+          <v-list-tile-sub-title :style="'color: ' + item.invert + ';'">{{item.color}}</v-list-tile-sub-title>
         </v-list-tile-content>
         <v-list-tile-action>
-          <v-btn icon ripple :color="item.color">
-            <v-icon color="black">file_copy</v-icon>
+          <v-btn icon ripple>
+            <v-icon :color="item.invert">file_copy</v-icon>
           </v-btn>
         </v-list-tile-action>
       </color-card>

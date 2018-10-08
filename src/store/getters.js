@@ -8,15 +8,27 @@ export const getters = {
 
   lighten: (state) => {
     let value
+    let invertVal
     let valueOb
+    let invertValOb
     let gradients = []
     for (let i = 1; i <= state.lighten.amount; i++) {
       value = Color(state.value).hsl()
       valueOb = value.object()
       valueOb.l = valueOb.l + (state.lighten.jump * i)
-      value = Color({ h: valueOb.h, s: valueOb.s, l: valueOb.l }).hex()
+      value = Color({ h: valueOb.h, s: valueOb.s, l: valueOb.l })
+      invertValOb = value.grayscale().negate().hsl().object()
+      value = value.hex()
+      if (invertValOb.l > 50) {
+        invertVal = '#f1f1f1'
+      } else {
+        invertVal = '#1d1d1d'
+      }
       if (value !== '#FFFFFF') {
-        gradients[i - 1] = { color: value }
+        gradients[i - 1] = {
+          color: value,
+          invert: invertVal
+        }
       } else {
         return gradients
       }
@@ -38,15 +50,27 @@ export const getters = {
 
   darken: (state) => {
     let value
+    let invertVal
     let valueOb
+    let invertValOb
     let gradients = []
     for (let i = 1; i <= state.darken.amount; i++) {
       value = Color(state.value).hsl()
       valueOb = value.object()
       valueOb.l = valueOb.l - (state.darken.jump * i)
-      value = Color({ h: valueOb.h, s: valueOb.s, l: valueOb.l }).hex()
+      value = Color({ h: valueOb.h, s: valueOb.s, l: valueOb.l })
+      invertValOb = value.grayscale().negate().hsl().object()
+      value = value.hex()
+      if (invertValOb.l > 50) {
+        invertVal = '#f1f1f1'
+      } else {
+        invertVal = '#1d1d1d'
+      }
       if (value !== '#000000') {
-        gradients[i - 1] = { color: value }
+        gradients[i - 1] = {
+          color: value,
+          invert: invertVal
+        }
       } else {
         return gradients
       }
