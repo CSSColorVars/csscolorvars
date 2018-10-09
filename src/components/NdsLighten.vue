@@ -60,7 +60,7 @@ export default {
   data () {
     return {
       snackbar: false,
-      timeout: 3200,
+      timeout: 1500,
       text: 'Sin texto'
     }
   },
@@ -76,7 +76,12 @@ export default {
     ...mapMutations(['updateLightAmount', 'updateLightJump']),
     onCopy: function (e) {
       this.text = 'You just copied: ' + e.text
-      this.snackbar = true
+      if (this.snackbar === true) {
+        this.snackbar = false
+        setTimeout(this.sTrue, 500)
+      } else {
+        this.snackbar = true
+      }
     },
     onError: function (e) {
       this.text = 'Failed to copy texts'
