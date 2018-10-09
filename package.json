@@ -13,6 +13,7 @@
     "ed-grid": "^2.5.10",
     "rxjs": "^6.3.3",
     "vue": "^2.5.17",
+    "vue-clipboard2": "^0.2.1",
     "vue-router": "^3.0.1",
     "vue-rx": "^6.0.1",
     "vuetify": "^1.2.5",

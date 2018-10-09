@@ -24,12 +24,21 @@
           <v-list-tile-sub-title :style="'color: ' + item.invert + ';'">{{item.color}}</v-list-tile-sub-title>
         </v-list-tile-content>
         <v-list-tile-action>
-          <v-btn icon ripple>
+          <v-btn
+            icon ripple
+            v-clipboard:copy="`var(--${property}-ligh-${index + 1})`"
+            v-clipboard:success="onCopy"
+            v-clipboard:error="onError"
+          >
             <v-icon :color="item.invert">file_copy</v-icon>
           </v-btn>
         </v-list-tile-action>
       </color-card>
     </color-main>
+    <v-snackbar v-model="snackbar" bottom="bottom" left="left" multi-line="multi-line" :timeout= "timeout">
+      {{text}}
+      <v-btn color="pink" flat @click="snackbar = false">CLOSE</v-btn>
+    </v-snackbar>
   </color-container>
 </template>
 <script>
@@ -48,6 +57,13 @@ export default {
     ColorCard,
     ColorJump
   },
+  data () {
+    return {
+      snackbar: false,
+      timeout: 3200,
+      text: 'Sin texto'
+    }
+  },
   computed: {
     ...mapState(['property', 'value', 'minAmount', 'minJump']),
     ...mapState({
@@ -57,7 +73,15 @@ export default {
     ...mapGetters(['lighten', 'lightMax'])
   },
   methods: {
-    ...mapMutations(['updateLightAmount', 'updateLightJump'])
+    ...mapMutations(['updateLightAmount', 'updateLightJump']),
+    onCopy: function (e) {
+      this.text = 'You just copied: ' + e.text
+      this.snackbar = true
+    },
+    onError: function (e) {
+      this.text = 'Failed to copy texts'
+      this.snackbar = true
+    }
   }
 }
 </script>
