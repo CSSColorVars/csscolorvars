@@ -35,10 +35,10 @@
         </v-list-tile-action>
       </color-card>
     </color-main>
-    <v-snackbar v-model="snackbar" bottom="bottom" left="left" multi-line="multi-line" :timeout= "timeout">
-      {{text}}
-      <v-btn color="pink" flat @click="snackbar = false">CLOSE</v-btn>
-    </v-snackbar>
+        <v-snackbar :value="notify" bottom="bottom" left="left" multi-line="multi-line" :timeout= "timeout">
+          {{text}}
+          <v-btn color="pink" flat @click="closeNotification()">CLOSE</v-btn>
+        </v-snackbar>
   </color-container>
 </template>
 <script>
@@ -59,13 +59,11 @@ export default {
   },
   data () {
     return {
-      snackbar: false,
-      timeout: 1500,
       text: 'Sin texto'
     }
   },
   computed: {
-    ...mapState(['property', 'value', 'minAmount', 'minJump']),
+    ...mapState(['property', 'value', 'minAmount', 'minJump', 'notify', 'timeout']),
     ...mapState({
       lightAmount: (state) => state.lighten.amount,
       lightJump: (state) => state.lighten.jump
@@ -73,19 +71,13 @@ export default {
     ...mapGetters(['lighten', 'lightMax'])
   },
   methods: {
-    ...mapMutations(['updateLightAmount', 'updateLightJump']),
+    ...mapMutations(['updateLightAmount', 'updateLightJump', 'closeNotification']),
     onCopy: function (e) {
       this.text = 'You just copied: ' + e.text
-      if (this.snackbar === true) {
-        this.snackbar = false
-        setTimeout(this.sTrue, 500)
-      } else {
-        this.snackbar = true
-      }
+      this.$store.commit('updateNotification')
     },
     onError: function (e) {
       this.text = 'Failed to copy texts'
-      this.snackbar = true
     }
   }
 }

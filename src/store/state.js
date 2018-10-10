@@ -16,5 +16,7 @@ export const state = {
     amount: 0.1,
     minJump: 1,
     jump: 5
-  }
+  },
+  notify: false, // notification copy
+  timeout: 1500
 }

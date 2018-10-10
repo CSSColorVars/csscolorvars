@@ -97,7 +97,6 @@ export const getters = {
       decrement = (decrement - (0.01 * state.rgba.jump)).toFixed(2) // Punto de amount {0.01 , 0.1}
       value = Color(state.value).alpha(decrement).string()
       gradients[i - 1] = { color: value }
-      console.log(decrement)
     }
     return gradients
   },
