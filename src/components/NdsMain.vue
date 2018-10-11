@@ -14,15 +14,21 @@
         :key="item"
       >{{ item }}</v-tab>
     </v-tabs>
-    <v-tabs-items v-model="tab">
+    <v-tabs-items v-model="tab" class="nds-container">
       <v-tab-item>
-        <nds-lighten></nds-lighten>
+        <div class="nds-item m-70 to-center">
+          <nds-lighten></nds-lighten>
+        </div>
       </v-tab-item>
       <v-tab-item>
-        <nds-darken></nds-darken>
+        <div class="nds-item m-70 to-center">
+          <nds-darken></nds-darken>
+        </div>
       </v-tab-item>
       <v-tab-item>
-       RGBA
+        <div class="nds-item m-70 to-center">
+         RGBA
+        </div>
       </v-tab-item>
     </v-tabs-items>
   </main>

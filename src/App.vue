@@ -3,10 +3,6 @@
     <v-app id="inspire">
       <router-view/>
     </v-app>
-    <div class="credits">
-      <router-link to="/">Restart</router-link> |
-      <router-link to="/credits">credits</router-link>
-    </div>
   </div>
 </template>
 <script>
@@ -75,7 +71,7 @@ export default {
   h6, .smaller    { font-size : var(--smaller); }
   // l-block
   .l-block{
-    margin-bottom: .8rem;
+    margin-bottom: .5rem;
   }
   //spacer
   hr{
@@ -83,6 +79,6 @@ export default {
     border: solid 1px $borderColor;
     margin-left: 1rem;
     margin-right: 1rem;
-    margin-bottom: 1rem;
+    margin-bottom: .5rem;
   }
 </style>

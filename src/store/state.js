@@ -18,5 +18,5 @@ export const state = {
     jump: 5
   },
   notify: false, // notification copy
-  timeout: 1500
+  timeout: 3000
 }
