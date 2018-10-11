@@ -63,10 +63,11 @@ export default {
     }
   },
   computed: {
-    ...mapState(['property', 'value', 'minAmount', 'minJump', 'notify', 'timeout']),
+    ...mapState(['property', 'value', 'minAmount', 'minJump', 'timeout']),
     ...mapState({
       lightAmount: (state) => state.lighten.amount,
-      lightJump: (state) => state.lighten.jump
+      lightJump: (state) => state.lighten.jump,
+      notify: state => state.notifyCopy.notify
     }),
     ...mapGetters(['lighten', 'lightMax'])
   },

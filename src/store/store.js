@@ -3,10 +3,14 @@ import Vuex from 'vuex'
 import { state } from './state'
 import { mutations } from './mutations'
 import { getters } from './getters'
+import { notifyCopy } from './modules/notifyCopy'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state,
   getters,
-  mutations
+  mutations,
+  modules: {
+    notifyCopy
+  }
 })

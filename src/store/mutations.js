@@ -26,20 +26,5 @@ export const mutations = {
   },
   updateRgbaJump (state, jump) {
     state.rgba.jump = jump
-  },
-  updateNotification (state) {
-    if (state.timeout === 0) {
-      state.notify = false
-    } else {
-      if (state.notify === true) {
-        state.notify = false
-        setTimeout(function () { state.notify = true }, 300)
-      } else {
-        state.notify = true
-      }
-    }
-  },
-  closeNotification (state) {
-    state.notify = false
   }
 }
