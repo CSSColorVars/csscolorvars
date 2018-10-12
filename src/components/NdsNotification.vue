@@ -1,30 +1,22 @@
 <template>
   <v-snackbar :value="notify" bottom="bottom" left="left" multi-line="multi-line" :timeout= "timeout">
-    {{text}}
+    {{message}}
     <v-btn color="pink" flat @click="closeNotification()">CLOSE</v-btn>
   </v-snackbar>
 </template>
 <script>
-import { mapState, mapGetters, mapMutations } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 export default {
-  name: 'NdsCopy',
-  data () {
-    return {
-      text: 'Sin texto'
-    }
-  },
+  name: 'NdsNotification',
   computed: {
-    ...mapState(['notify', 'timeout'])
+    ...mapState({
+      notify: (state) => state.notifyCopy.notify,
+      message: (state) => state.notifyCopy.message,
+      timeout: (state) => state.notifyCopy.timeout
+    })
   },
   methods: {
-    ...mapMutations(['closeNotification']),
-    onCopy: function (e) {
-      this.text = 'You just copied: ' + e.text
-      this.$store.commit('updateNotification')
-    },
-    onError: function (e) {
-      this.text = 'Failed to copy texts'
-    }
+    ...mapMutations(['closeNotification'])
   }
 }
 </script>

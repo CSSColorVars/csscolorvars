@@ -27,18 +27,14 @@
           <v-btn
             icon ripple
             v-clipboard:copy="`var(--${property}-ligh-${index + 1})`"
-            v-clipboard:success="onCopy"
-            v-clipboard:error="onError"
+            v-clipboard:success="updateNotification"
+            v-clipboard:error="updateError"
           >
             <v-icon :color="item.invert">file_copy</v-icon>
           </v-btn>
         </v-list-tile-action>
       </color-card>
     </color-main>
-        <v-snackbar :value="notify" bottom="bottom" left="left" multi-line="multi-line" :timeout= "timeout">
-          {{text}}
-          <v-btn color="pink" flat @click="closeNotification()">CLOSE</v-btn>
-        </v-snackbar>
   </color-container>
 </template>
 <script>
@@ -57,29 +53,16 @@ export default {
     ColorCard,
     ColorJump
   },
-  data () {
-    return {
-      text: 'Sin texto'
-    }
-  },
   computed: {
-    ...mapState(['property', 'value', 'minAmount', 'minJump', 'timeout']),
+    ...mapState(['property', 'value', 'minAmount', 'minJump']),
     ...mapState({
       lightAmount: (state) => state.lighten.amount,
-      lightJump: (state) => state.lighten.jump,
-      notify: state => state.notifyCopy.notify
+      lightJump: (state) => state.lighten.jump
     }),
     ...mapGetters(['lighten', 'lightMax'])
   },
   methods: {
-    ...mapMutations(['updateLightAmount', 'updateLightJump', 'closeNotification']),
-    onCopy: function (e) {
-      this.text = 'You just copied: ' + e.text
-      this.$store.commit('updateNotification')
-    },
-    onError: function (e) {
-      this.text = 'Failed to copy texts'
-    }
+    ...mapMutations(['updateLightAmount', 'updateLightJump', 'updateNotification', 'updateError'])
   }
 }
 </script>

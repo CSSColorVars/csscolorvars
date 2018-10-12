@@ -27,18 +27,14 @@
           <v-btn
             icon ripple
             v-clipboard:copy="`var(--${property}-dark-${index + 1})`"
-            v-clipboard:success="onCopy"
-            v-clipboard:error="onError"
+            v-clipboard:success="updateNotification"
+            v-clipboard:error="updateError"
           >
             <v-icon :color="item.invert">file_copy</v-icon>
           </v-btn>
         </v-list-tile-action>
       </color-card>
     </color-main>
-    <v-snackbar v-model="snackbar" bottom="bottom" left="left" multi-line="multi-line" :timeout= "timeout">
-      {{text}}
-      <v-btn color="pink" flat @click="snackbar = false">CLOSE</v-btn>
-    </v-snackbar>
   </color-container>
 </template>
 <script>
@@ -57,13 +53,6 @@ export default {
     ColorCard,
     ColorJump
   },
-  data () {
-    return {
-      snackbar: false,
-      timeout: 1500,
-      text: 'Sin texto'
-    }
-  },
   computed: {
     ...mapState(['property', 'value', 'minAmount', 'minJump']),
     ...mapState({
@@ -73,20 +62,7 @@ export default {
     ...mapGetters(['darken', 'darkMax'])
   },
   methods: {
-    ...mapMutations(['updateDarkAmount', 'updateDarkJump']),
-    onCopy: function (e) {
-      this.text = 'You just copied: ' + e.text
-      if (this.snackbar === true) {
-        this.snackbar = false
-        setTimeout(this.sTrue, 500)
-      } else {
-        this.snackbar = true
-      }
-    },
-    onError: function (e) {
-      this.text = 'Failed to copy texts'
-      this.snackbar = true
-    }
+    ...mapMutations(['updateDarkAmount', 'updateDarkJump', 'closeNotification', 'updateNotification', 'updateError'])
   }
 }
 </script>

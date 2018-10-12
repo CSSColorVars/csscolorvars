@@ -3,6 +3,7 @@
     <nds-sidebar></nds-sidebar>
     <nds-main></nds-main>
     <nds-pallete></nds-pallete>
+    <nds-notification></nds-notification>
   </div>
 </template>
 
@@ -10,12 +11,14 @@
 import NdsMain from '@/components/NdsMain.vue'
 import NdsSidebar from '@/components/NdsSidebar.vue'
 import NdsPallete from '@/components/NdsPallete.vue'
+import NdsNotification from '@/components/NdsNotification.vue'
 export default {
   name: 'home',
   components: {
     NdsSidebar,
     NdsMain,
-    NdsPallete
+    NdsPallete,
+    NdsNotification
   }
 }
 </script>
