@@ -1,6 +1,6 @@
 <template>
   <header class="nds-item">
-    <div class="gradients__header">
+    <div class="gradients__header nds-container main-center">
       <div class="gradients__icon">
         <div class="gradients__extended" :style="'background:'+ value + ';'">
           <i class="material-icons">zoom_out_map</i>
@@ -13,6 +13,7 @@
         <div class="gradients__amount">
           <label>Amount: </label>
           <v-text-field
+            color="green"
             class="mt-0"
             hide-details
             single-line
@@ -60,21 +61,14 @@ export default {
 <style lang="scss">
   @import 'src/sass/mixins.scss';
   .gradients{
-    &__header{
-      display: flex;
-      align-items: center;
-      @include edItem(100,90,80);
-      margin-left: auto;
-      margin-right: auto;
-      padding-bottom: .8rem;
-    }
     &__item{
-      flex: 3;
-      padding-left: 1rem;
+      width: 115px;
+      @include from(l){
+        width: 123px;
+      }
     }
     &__icon{
-      flex: 1;
-      @include mainCenter;
+      width: 90px;
       div{
         width: 60px;
         height: 55px;
@@ -101,6 +95,11 @@ export default {
       }
       .v-text-field{
         flex: 1;
+        input{
+          @include from(l){
+            padding-left: .5rem;
+          }
+        }
       }
     }
     &__extended{
