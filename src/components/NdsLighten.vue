@@ -8,6 +8,7 @@
       :updateAmount="updateLightAmount"
       :minAmount="minAmount"
       :maxAmount="lightMax"
+      :invertvalue="invertvalue"
     >Light colors
     </color-header>
     <color-jump
@@ -59,7 +60,7 @@ export default {
       lightAmount: (state) => state.lighten.amount,
       lightJump: (state) => state.lighten.jump
     }),
-    ...mapGetters(['lighten', 'lightMax'])
+    ...mapGetters(['lighten', 'lightMax', 'invertvalue'])
   },
   methods: {
     ...mapMutations(['updateLightAmount', 'updateLightJump', 'updateNotification', 'updateError'])

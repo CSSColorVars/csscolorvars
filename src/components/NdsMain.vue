@@ -27,7 +27,7 @@
       </v-tab-item>
       <v-tab-item>
         <div class="nds-item m-70 to-center">
-         RGBA
+          <nds-rgba></nds-rgba>
         </div>
       </v-tab-item>
     </v-tabs-items>
@@ -37,7 +37,7 @@
     <nds-lighten></nds-lighten>
     <!-- Dark Colors -->
     <nds-darken></nds-darken>
-    <!-- <nds-rgba></nds-rgba> -->
+    <nds-rgba></nds-rgba>
   </main>
 </template>
 <script>

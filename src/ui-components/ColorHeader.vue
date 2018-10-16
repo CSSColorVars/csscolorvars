@@ -2,7 +2,7 @@
   <header class="nds-item">
     <div class="gradients__header nds-container main-center">
       <div class="gradients__icon">
-        <div class="gradients__extended" :style="'background:'+ value + ';'">
+        <div class="gradients__extended" :style="'background:'+ value + '; color:' + invertvalue + ';'">
           <i class="material-icons">zoom_out_map</i>
         </div>
       </div>
@@ -35,6 +35,10 @@ export default {
   name: 'ColorHeader',
   props: {
     value: {
+      type: String,
+      required: true
+    },
+    invertvalue: {
       type: String,
       required: true
     },

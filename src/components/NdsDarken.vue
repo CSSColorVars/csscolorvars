@@ -8,6 +8,7 @@
       :updateAmount="updateDarkAmount"
       :minAmount="minAmount"
       :maxAmount="darkMax"
+      :invertvalue="invertvalue"
     >Dark colors
     </color-header>
     <color-jump
@@ -59,7 +60,7 @@ export default {
       darkAmount: (state) => state.darken.amount,
       darkJump: (state) => state.darken.jump
     }),
-    ...mapGetters(['darken', 'darkMax'])
+    ...mapGetters(['darken', 'darkMax', 'invertvalue'])
   },
   methods: {
     ...mapMutations(['updateDarkAmount', 'updateDarkJump', 'closeNotification', 'updateNotification', 'updateError'])

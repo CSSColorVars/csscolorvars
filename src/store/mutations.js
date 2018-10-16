@@ -21,10 +21,10 @@ export const mutations = {
   updateDarkJump (state, jump) {
     state.darken.jump = jump
   },
-  updateRgbaAmount (state, amount) {
-    state.rgba.amount = amount.target.value
+  updateAlphat (state, alpha) {
+    state.rgba.alpha = alpha.target.value
   },
-  updateRgbaJump (state, jump) {
-    state.rgba.jump = jump
+  updateAlpha (state, alpha) {
+    state.rgba.alpha = alpha
   }
 }

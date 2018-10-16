@@ -3,6 +3,20 @@ import Color from 'color'
 export const getters = {
   property: (state) => { return state.property },
   value: (state) => { return state.value },
+  invertvalue: (state) => {
+    let value
+    let invertVal
+    let invertValOb
+    value = Color(state.value).hsl()
+    invertValOb = value.grayscale().negate().hsl().object()
+    value = value.hex()
+    if (invertValOb.l > 50) {
+      invertVal = '#f1f1f1'
+    } else {
+      invertVal = '#1d1d1d'
+    }
+    return invertVal
+  },
   minAmount: (state) => { return state.minAmount },
   minJump: (state) => { return state.minJump },
 
@@ -89,16 +103,28 @@ export const getters = {
     }
     return i - 2
   },
-  rgba: (state) => {
+  rgbValues: (state) => {
+    let values
+    values = Color(state.value).object()
+    return values
+  },
+  rgbInvertValue: (state) => {
     let value
-    let gradients = []
-    let decrement = 1.00
-    for (let i = 1; decrement > 0.01 * state.rgba.jump; i++) {
-      decrement = (decrement - (0.01 * state.rgba.jump)).toFixed(2) // Punto de amount {0.01 , 0.1}
-      value = Color(state.value).alpha(decrement).string()
-      gradients[i - 1] = { color: value }
+    let invertVal
+    let invertValOb
+    value = Color(state.value).hsl()
+    invertValOb = value.grayscale().negate().hsl().object()
+    value = value.hex()
+    if (state.rgba.alpha > 0.5) {
+      if (invertValOb.l > 50) {
+        invertVal = '#f1f1f1'
+      } else {
+        invertVal = '#1d1d1d'
+      }
+    } else {
+      invertVal = '#1d1d1d'
     }
-    return gradients
+    return invertVal
   },
   rgbaMax: (state) => {
     return 99
