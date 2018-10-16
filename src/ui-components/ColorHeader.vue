@@ -11,12 +11,13 @@
           <slot></slot>
         </h2>
         <div class="gradients__amount">
-          <label>Amount: </label>
+          <label v-text="label"></label>
           <v-text-field
             color="green"
             class="mt-0"
             hide-details
             single-line
+            box
             type="number"
             :value="amount"
             @keyup="updateAmount"
@@ -54,6 +55,10 @@ export default {
     },
     step: {
       default: 1
+    },
+    label: {
+      type: String,
+      default: 'Amount:'
     }
   }
 }
@@ -62,15 +67,15 @@ export default {
   @import 'src/sass/mixins.scss';
   .gradients{
     &__item{
-      width: 115px;
+      width: 165px;
       @include from(l){
-        width: 123px;
+        width: 140px;
       }
     }
     &__icon{
-      width: 90px;
+      width: 55px;
+      margin-right: 1rem;
       div{
-        width: 60px;
         height: 55px;
         border-radius: 10px;
         border: solid 1px #333333;
@@ -91,19 +96,27 @@ export default {
         display: flex;
         justify-content: flex-end;
         align-items: center;
-        padding-right: 1rem;
+        padding-right: .5rem;
       }
       .v-text-field{
         flex: 1;
+        .v-input__slot{
+          padding: 0;
+          min-height: 0;
+          height: 2rem;
+        }
         input{
-          @include from(l){
-            padding-left: .5rem;
-          }
+          margin-top: 0;
+          text-align: center;
         }
       }
     }
     &__extended{
       cursor: pointer;
     }
+  }
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    opacity: 1;
   }
 </style>
