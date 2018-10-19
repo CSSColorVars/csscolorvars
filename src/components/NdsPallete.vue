@@ -13,7 +13,7 @@
       <v-list class="pa-0">
         <v-list-tile avatar>
           <v-list-tile-avatar>
-            O
+            <v-icon>palette</v-icon>
           </v-list-tile-avatar>
 
           <v-list-tile-content>
@@ -38,11 +38,12 @@
       <v-list-tile
         v-for="item in items"
         :key="item.title"
+        avatar
         @click=""
       >
-        <v-list-tile-action>
-          <v-icon>{{ item.icon }}</v-icon>
-        </v-list-tile-action>
+        <v-list-tile-avatar>
+          <v-icon class="blue white--text">{{ item.icon }}</v-icon>
+        </v-list-tile-avatar>
 
         <v-list-tile-content>
           <v-list-tile-title>{{ item.title }}</v-list-tile-title>
@@ -58,8 +59,8 @@ export default {
     return {
       drawer: true,
       items: [
-        { title: 'Home', icon: 'dashboard' },
-        { title: 'About', icon: 'question_answer' }
+        { title: 'Home', icon: 'brush' },
+        { title: 'About', icon: 'brush' }
       ],
       mini: true,
       right: null

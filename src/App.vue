@@ -81,4 +81,9 @@ export default {
     margin-right: 1rem;
     margin-bottom: .5rem;
   }
+  a{
+    &:hover{
+      text-decoration: none;
+    }
+  }
 </style>
