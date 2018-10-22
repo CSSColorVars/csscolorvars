@@ -19,7 +19,10 @@
             single-line
             box
             type="number"
-            :value="amount"
+            oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+            :value="amount < maxAmount ? amount : maxAmount"
+            :maxLength = maxLength
+            @keypress="keypressNumber"
             @keyup="updateAmount"
             @click="updateAmount"
             :min="minAmount" :max="maxAmount"
@@ -57,12 +60,22 @@ export default {
       type: Number,
       required: true
     },
+    maxLength: {
+      require: true
+    },
     step: {
       default: 1
     },
     label: {
       type: String,
       default: 'Amount:'
+    }
+  },
+  methods: {
+    keypressNumber: function (evt) {
+      if (evt.which !== 8 && evt.which !== 0 && evt.which < 48 && evt.which > 57) {
+        evt.preventDefault()
+      }
     }
   }
 }

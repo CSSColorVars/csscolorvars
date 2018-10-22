@@ -8,6 +8,7 @@
       :updateAmount="updateLightAmount"
       :minAmount="minAmount"
       :maxAmount="lightMax"
+      :maxLength= lightMax.toString().length
       :invertvalue="invertvalue"
     >Light colors
     </color-header>

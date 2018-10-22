@@ -8,6 +8,7 @@
       :updateAmount="updateAlphat"
       :minAmount="minAmount"
       :maxAmount="max"
+      maxLength= "4"
       label="Alpha:"
       :step="step"
       :invertvalue="invertvalue"

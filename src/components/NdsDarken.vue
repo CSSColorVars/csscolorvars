@@ -8,6 +8,7 @@
       :updateAmount="updateDarkAmount"
       :minAmount="minAmount"
       :maxAmount="darkMax"
+      :maxLength= darkMax.toString().length
       :invertvalue="invertvalue"
     >Dark colors
     </color-header>
