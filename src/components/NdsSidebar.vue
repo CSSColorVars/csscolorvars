@@ -4,51 +4,17 @@
       <div class="header--color nds-item l-100 m-50 s-35">
         <input type="color" :value="standardValue" @input="updateValue" />
       </div>
-      <form class="header--form nds-container nds-item l-100 m-50 s-65">
-        <div class="header--property nds-item">
-          <v-text-field dark
-            v-if="property !== 'unnamed'"
-            label="Property:"
-            color="#FFF"
-            :value="property"
-            @input="updateProperty"
-            @keypress="keypressProperty"
-            :error-messages="!propertyState ? 'Enter a letter in the first character' : ''"
-            box
-            suffix="-color"
-          >
-          </v-text-field>
-          <v-text-field dark
-            v-else
-            label="Property:"
-            color="#FFF"
-            placeholder="unnamed"
-            value=""
-            @input="updateProperty"
-            @keypress="keypressProperty"
-            :error-messages="!propertyState ? 'Enter a letter in the first character' : ''"
-            box
-            suffix="-color"
-          >
-          </v-text-field>
-        </div>
-        <div class="header--value nds-item">
-          <v-text-field dark
-            label="Value"
-            color="#FFF"
-            maxlength="7"
-            :placeholder="value"
-            :value="value"
-            @keyup="updateValue"
-            @keypress="keypressValue"
-            :error-messages="!valueState ? 'Enter a hexadecimal color' : ''"
-            box
-          >
-          </v-text-field>
-          <figure class="figure--color">
-            <input type="color" :value="standardValue" @input="updateValue" />
-          </figure>
-        </div>
+      <form class="header--form nds-container">
+        <color-property
+          :property="property"
+          :update="updateProperty"
+          :state="propertyState"
+        ></color-property>
+        <color-value
+          :value="value"
+          :update="updateValue"
+          :state="valueState"
+        ></color-value>
       </form>
     </div>
   </header>
@@ -56,8 +22,14 @@
 <script>
 import { mapState, mapMutations } from 'vuex'
 import Color from 'color'
+import ColorProperty from '@/ui-components/ColorProperty.vue'
+import ColorValue from '@/ui-components/ColorValue.vue'
 export default {
   name: 'NdsSidebar',
+  components: {
+    ColorProperty,
+    ColorValue
+  },
   computed: {
     ...mapState(['property', 'value', 'valueState', 'propertyState']),
     standardValue: function () {
@@ -65,17 +37,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(['updateProperty', 'updateValue']),
-    keypressProperty: function (e) {
-      if (e.which !== 95 && e.which !== 45 && e.which !== 241 && e.which !== 16 && e.which !== 8 && e.which !== 0 && (e.which < 48 || e.which > 90) && (e.which < 97 || e.which > 121)) {
-        e.preventDefault()
-      }
-    },
-    keypressValue: function (e) {
-      if (e.which !== 35 && e.which !== 16 && e.which !== 8 && e.which !== 0 && (e.which < 48 || e.which > 70) && (e.which < 97 || e.which > 102)) {
-        e.preventDefault()
-      }
-    }
+    ...mapMutations(['updateProperty', 'updateValue'])
   }
 }
 </script>
@@ -95,23 +57,6 @@ export default {
   .header{
     max-width: 450px;
     @include mainCenter;
-    &--value{
-      position:relative;
-      input[type="color"]{
-        position: absolute;
-        top: .5rem;
-        right: 1.5rem;
-        width: 3rem;
-        height: 3rem;
-        border: solid 1px #C2C2C2;
-        border-radius: .3rem;
-        cursor: pointer;
-        &:hover, &:active, &:focus, &:active{
-          border: solid 1px #FFF;
-          outline: none;
-        }
-      }
-    }
     &--color{
       @include mainCenter;
       @include crossCenter;
@@ -147,8 +92,6 @@ export default {
       max-width: 180px;
     }
   }
-
-  // SCOPED
   .v-text-field__suffix {
     padding-left: 4px;
     white-space: nowrap;

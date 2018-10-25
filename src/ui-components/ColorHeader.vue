@@ -127,6 +127,7 @@ export default {
         input{
           margin-top: 0;
           text-align: center;
+          padding: 5px 0 5px;
         }
       }
     }
