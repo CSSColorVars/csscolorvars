@@ -8,7 +8,7 @@
       :updateAmount="updateAlphat"
       :minAmount="minAmount"
       :maxAmount="max"
-      maxLength= "4"
+      :maxLength= "alpha < 1 ? '4' : '1' "
       label="Alpha:"
       :step="step"
       :invertvalue="invertvalue"

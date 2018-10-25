@@ -2,7 +2,7 @@
   <header class="nds-container nds-item l-20 header-sidebar application theme--dark">
     <div class="header nds-container nds-item">
       <div class="header--color nds-item l-100 m-50 s-35">
-        <input type="color" :value="value" @input="updateValue" />
+        <input type="color" :value="standardValue" @input="updateValue" />
       </div>
       <form class="header--form nds-container nds-item l-100 m-50 s-65">
         <div class="header--property nds-item">
@@ -10,9 +10,10 @@
             v-if="property !== 'unnamed'"
             label="Property:"
             color="#FFF"
-            placeholder="unnamed"
             :value="property"
             @input="updateProperty"
+            @keypress="keypressProperty"
+            :error-messages="!propertyState ? 'Enter a letter in the first character' : ''"
             box
             suffix="-color"
           >
@@ -24,6 +25,8 @@
             placeholder="unnamed"
             value=""
             @input="updateProperty"
+            @keypress="keypressProperty"
+            :error-messages="!propertyState ? 'Enter a letter in the first character' : ''"
             box
             suffix="-color"
           >
@@ -34,14 +37,16 @@
             label="Value"
             color="#FFF"
             maxlength="7"
-            placeholder="#000000"
+            :placeholder="value"
             :value="value"
             @keyup="updateValue"
+            @keypress="keypressValue"
+            :error-messages="!valueState ? 'Enter a hexadecimal color' : ''"
             box
           >
           </v-text-field>
           <figure class="figure--color">
-            <input type="color" :value="value" @input="updateValue" />
+            <input type="color" :value="standardValue" @input="updateValue" />
           </figure>
         </div>
       </form>
@@ -50,13 +55,27 @@
 </template>
 <script>
 import { mapState, mapMutations } from 'vuex'
+import Color from 'color'
 export default {
   name: 'NdsSidebar',
   computed: {
-    ...mapState(['property', 'value'])
+    ...mapState(['property', 'value', 'valueState', 'propertyState']),
+    standardValue: function () {
+      return Color(this.value).hex()
+    }
   },
   methods: {
-    ...mapMutations(['updateProperty', 'updateValue'])
+    ...mapMutations(['updateProperty', 'updateValue']),
+    keypressProperty: function (e) {
+      if (e.which !== 95 && e.which !== 45 && e.which !== 241 && e.which !== 16 && e.which !== 8 && e.which !== 0 && (e.which < 48 || e.which > 90) && (e.which < 97 || e.which > 121)) {
+        e.preventDefault()
+      }
+    },
+    keypressValue: function (e) {
+      if (e.which !== 35 && e.which !== 16 && e.which !== 8 && e.which !== 0 && (e.which < 48 || e.which > 70) && (e.which < 97 || e.which > 102)) {
+        e.preventDefault()
+      }
+    }
   }
 }
 </script>

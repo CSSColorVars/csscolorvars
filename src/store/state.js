@@ -1,6 +1,8 @@
 export const state = {
   property: 'primary',
+  propertyState: true,
   value: '#1671b9',
+  valueState: true,
   minAmount: 0,
   minJump: 1,
   lighten: {

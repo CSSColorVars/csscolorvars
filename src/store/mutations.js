@@ -2,14 +2,26 @@ import Color from 'color'
 
 export const mutations = {
   updateProperty (state, prop) {
-    if (prop !== '') {
+    const propValidate = /^[a-zA-ZñÑ]|^[a-zA-ZñÑ][a-zA-ZñÑ_-]+$/
+    if (propValidate.test(prop)) {
       state.property = prop
+      state.propertyState = true
     } else {
       state.property = 'unnamed'
+      state.propertyState = false
     }
   },
   updateValue (state, hex) {
-    state.value = hex.target.value
+    const hexValidate = /^#+([0-9A-Fa-f]{6}|[0-9A-Fa-f]{3})$/
+    if (hexValidate.test(hex.target.value)) {
+      state.value = hex.target.value
+      state.valueState = true
+    } else {
+      state.valueState = false
+    }
+    if (hex.target.value === '') {
+      state.valueState = true
+    }
   },
   updateLightAmount (state, amount) {
     let value
