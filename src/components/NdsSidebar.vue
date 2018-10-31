@@ -6,11 +6,13 @@
       </div>
       <form class="header--form nds-container">
         <color-property
+          dark
           :property="property"
           :update="updateProperty"
           :state="propertyState"
         ></color-property>
         <color-value
+          dark
           :value="value"
           :update="updateValue"
           :state="valueState"

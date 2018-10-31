@@ -1,26 +1,26 @@
 <template>
 <div class="header--property nds-item">
-  <v-text-field dark
+  <v-text-field :dark="dark"
     v-if="property !== 'unnamed'"
     label="Property:"
-    color="#FFF"
+    :color="!state ? '#ffc107' : (dark ? '#FFF' : '#393939')"
     :value="property"
     @input="update"
     @keypress="keypressProperty"
-    :error-messages="!state ? 'Enter a letter in the first character' : ''"
+    :messages="!state ? 'Enter a letter in the first character' : ''"
     box
     suffix="-color"
   >
   </v-text-field>
-  <v-text-field dark
+  <v-text-field :dark="dark"
     v-else
     label="Property:"
-    color="#FFF"
+    :color="!state ? '#ffc107' : (dark ? '#FFF' : '#393939')"
     placeholder="unnamed"
     value=""
     @input="update"
     @keypress="keypressProperty"
-    :error-messages="!state ? 'Enter a letter in the first character' : ''"
+    :messages="!state ? 'Enter a letter in the first character' : ''"
     box
     suffix="-color"
   >
@@ -40,6 +40,10 @@ export default {
     },
     state: {
       required: true
+    },
+    dark: {
+      default: false,
+      type: Boolean
     }
   },
   methods: {

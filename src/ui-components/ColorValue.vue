@@ -1,8 +1,8 @@
 <template>
   <div class="header--value nds-item">
-    <v-text-field dark
+    <v-text-field :dark="dark"
       label="Value"
-      color="#FFF"
+      :color="dark ? '#FFF' : '#393939'"
       maxlength="7"
       :placeholder="value"
       :value="value"
@@ -13,7 +13,7 @@
     >
     </v-text-field>
     <figure class="figure--color">
-      <input type="color" :value="standardValue" @input="update" />
+      <input :class="dark ? 'dark-input' : ''" type="color" :value="standardValue" @input="update" />
     </figure>
   </div>
 </template>
@@ -31,6 +31,10 @@ export default {
     },
     state: {
       required: true
+    },
+    dark: {
+      default: false,
+      type: Boolean
     }
   },
   computed: {
@@ -57,12 +61,18 @@ export default {
       right: 1.5rem;
       width: 3rem;
       height: 3rem;
-      border: solid 1px #C2C2C2;
+      border: solid 1px rgba(0, 0, 0, 0.39);
       border-radius: .3rem;
       cursor: pointer;
       &:hover, &:active, &:focus, &:active{
-        border: solid 1px #FFF;
+        border: solid 1px #444444;
         outline: none;
+      }
+      &.dark-input{
+        border: solid 1px #C2C2C2;
+        &:hover, &:active, &:focus, &:active{
+          border: solid 1px #FFF;
+        }
       }
     }
   }
