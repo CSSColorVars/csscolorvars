@@ -7,22 +7,22 @@
       <form class="header--form nds-container">
         <color-property
           dark
-          :property="property"
+          :property="colorActive.property"
           :update="updateProperty"
-          :state="propertyState"
+          :state="colorActive.propertyState"
         ></color-property>
         <color-value
           dark
-          :value="value"
+          :value="colorActive.value"
           :update="updateValue"
-          :state="valueState"
+          :state="colorActive.valueState"
         ></color-value>
       </form>
     </div>
   </header>
 </template>
 <script>
-import { mapState, mapMutations } from 'vuex'
+import { mapMutations, mapGetters } from 'vuex'
 import Color from 'color'
 import ColorProperty from '@/ui-components/ColorProperty.vue'
 import ColorValue from '@/ui-components/ColorValue.vue'
@@ -33,9 +33,9 @@ export default {
     ColorValue
   },
   computed: {
-    ...mapState(['property', 'value', 'valueState', 'propertyState']),
+    ...mapGetters(['colorActive']),
     standardValue: function () {
-      return Color(this.value).hex()
+      return Color(this.colorActive.value).hex()
     }
   },
   methods: {

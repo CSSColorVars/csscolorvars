@@ -3,20 +3,20 @@
   <color-container>
     <color-header
       slot="header"
-      :value="value"
-      :amount="alpha"
+      :value="colorActive.value"
+      :amount="colorActive.rgba.alpha"
       :updateAmount="updateAlphat"
-      :minAmount="minAmount"
-      :maxAmount="max"
-      :maxLength= "alpha < 1 ? '4' : '1' "
+      :minAmount="colorActive.minAmount"
+      :maxAmount="colorActive.rgba.max"
+      :maxLength= "colorActive.rgba.alpha < 1 ? '4' : '1' "
       label="Alpha:"
-      :step="step"
+      :step="colorActive.rgba.step"
       :invertvalue="invertvalue"
     >Rgba colors
     </color-header>
     <div class="nds-item" slot="jump">
       <v-slider class="opacity--slider"
-        :value="alpha"
+        :value="colorActive.rgba.alpha"
         @input="updateAlpha"
         max=1
         min=0
@@ -24,26 +24,26 @@
         color="transparent"
         label="Rbga"
         thumb-color="#dadada"
-        :track-color="value"
+        :track-color="colorActive.value"
         always-dirty
       ></v-slider>
     </div>
     <color-main>
-      --rgb-{{property}}
+      --rgb-{{colorActive.property}}
       <color-card>
         {{rgbValues.r}}, {{rgbValues.g}}, {{rgbValues.b}}
       </color-card>
       <color-card class="card--rgba"
-        :color="'rgba(' + rgbValues.r + ',' + rgbValues.g + ',' + rgbValues.b + ',' + alpha + ')'"
+        :color="'rgba(' + rgbValues.r + ',' + rgbValues.g + ',' + rgbValues.b + ',' + colorActive.rgba.alpha + ')'"
       >
-        <div :style="'background: rgba(' + rgbValues.r + ',' + rgbValues.g + ',' + rgbValues.b + ',' + alpha + ')'">
+        <div :style="'background: rgba(' + rgbValues.r + ',' + rgbValues.g + ',' + rgbValues.b + ',' + colorActive.rgba.alpha + ')'">
           <v-list-tile-content>
-            <v-list-tile-title class="t4" :style="'color:' + rgbInvertValue + ';'">rgba(var(--rgb-{{property}}), {{alpha}})</v-list-tile-title>
-            <v-list-tile-sub-title :style="'color:' + rgbInvertValue + ';'">rgba({{rgbValues.r}}, {{rgbValues.g}}, {{rgbValues.b}}, {{alpha}})</v-list-tile-sub-title>
+            <v-list-tile-title class="t4" :style="'color:' + rgbInvertValue + ';'">rgba(var(--rgb-{{colorActive.property}}), {{colorActive.rgba.alpha}})</v-list-tile-title>
+            <v-list-tile-sub-title :style="'color:' + rgbInvertValue + ';'">rgba({{rgbValues.r}}, {{rgbValues.g}}, {{rgbValues.b}}, {{colorActive.rgba.alpha}})</v-list-tile-sub-title>
           </v-list-tile-content>
           <v-btn
             icon ripple
-            v-clipboard:copy="`rgba(var(--rgb-${property}), ${alpha})`"
+            v-clipboard:copy="`rgba(var(--rgb-${colorActive.property}), ${colorActive.rgba.alpha})`"
             v-clipboard:success="updateNotification"
             v-clipboard:error="updateError"
           >
@@ -60,7 +60,7 @@ import ColorHeader from '@/ui-components/ColorHeader.vue'
 import ColorMain from '@/ui-components/ColorMain.vue'
 import ColorCard from '@/ui-components/ColorCard.vue'
 import ColorJump from '@/ui-components/ColorJump.vue'
-import { mapState, mapGetters, mapMutations } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 export default {
   name: 'NdsRgba',
   components: {
@@ -71,13 +71,7 @@ export default {
     ColorJump
   },
   computed: {
-    ...mapState(['property', 'value', 'minAmount']),
-    ...mapState({
-      alpha: (state) => { return state.rgba.alpha },
-      max: (state) => { return state.rgba.max },
-      step: (state) => { return state.rgba.step }
-    }),
-    ...mapGetters(['rgbValues', 'rgbaMax', 'invertvalue', 'rgbInvertValue'])
+    ...mapGetters(['colorActive', 'rgbValues', 'rgbaMax', 'invertvalue', 'rgbInvertValue'])
   },
   methods: {
     ...mapMutations(['updateAlpha', 'updateAlphat', 'closeNotification', 'updateNotification', 'updateError'])
