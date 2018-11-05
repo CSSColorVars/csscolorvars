@@ -1,4 +1,5 @@
 import Color from 'color'
+import { gradientColors } from './util/functions'
 
 export const getters = {
   invertvalue: (state) => {
@@ -19,39 +20,11 @@ export const getters = {
       }
     }
   },
-  minAmount: (state) => { return state.minAmount },
-  minJump: (state) => { return state.minJump },
-
-  lighten: (state) => {
+  lighten: (state, mutations) => {
     for (let s = 0; s < state.palleteColors.length; s++) {
-      if (state.palleteColors[s].edit === true) {
-        let value
-        let invertVal
-        let valueOb
-        let invertValOb
-        let gradients = []
-        for (let i = 1; i <= state.palleteColors[s].lighten.amount; i++) {
-          value = Color(state.palleteColors[s].value).hsl()
-          valueOb = value.object()
-          valueOb.l = valueOb.l + (state.palleteColors[s].lighten.jump * i)
-          value = Color({ h: valueOb.h, s: valueOb.s, l: valueOb.l })
-          invertValOb = value.grayscale().negate().hsl().object()
-          value = value.hex()
-          if (invertValOb.l > 50) {
-            invertVal = '#f1f1f1'
-          } else {
-            invertVal = '#1d1d1d'
-          }
-          if (value !== '#FFFFFF') {
-            gradients[i - 1] = {
-              color: value,
-              invert: invertVal
-            }
-          } else {
-            return gradients
-          }
-        }
-        return gradients
+      let p = state.palleteColors[s]
+      if (p.edit === true) {
+        return gradientColors(p)
       }
     }
   },
@@ -74,34 +47,9 @@ export const getters = {
 
   darken: (state) => {
     for (let s = 0; s < state.palleteColors.length; s++) {
-      if (state.palleteColors[s].edit === true) {
-        let value
-        let invertVal
-        let valueOb
-        let invertValOb
-        let gradients = []
-        for (let i = 1; i <= state.palleteColors[s].darken.amount; i++) {
-          value = Color(state.palleteColors[s].value).hsl()
-          valueOb = value.object()
-          valueOb.l = valueOb.l - (state.palleteColors[s].darken.jump * i)
-          value = Color({ h: valueOb.h, s: valueOb.s, l: valueOb.l })
-          invertValOb = value.grayscale().negate().hsl().object()
-          value = value.hex()
-          if (invertValOb.l > 50) {
-            invertVal = '#f1f1f1'
-          } else {
-            invertVal = '#1d1d1d'
-          }
-          if (value !== '#000000') {
-            gradients[i - 1] = {
-              color: value,
-              invert: invertVal
-            }
-          } else {
-            return gradients
-          }
-        }
-        return gradients
+      let p = state.palleteColors[s]
+      if (p.edit === true) {
+        return gradientColors(p, 'darken')
       }
     }
   },
