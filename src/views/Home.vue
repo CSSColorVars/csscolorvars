@@ -4,6 +4,7 @@
     <nds-main></nds-main>
     <nds-pallete></nds-pallete>
     <nds-notification></nds-notification>
+    <nds-getcode></nds-getcode>
   </div>
 </template>
 
@@ -11,6 +12,7 @@
 import NdsMain from '@/components/NdsMain.vue'
 import NdsSidebar from '@/components/NdsSidebar.vue'
 import NdsPallete from '@/components/NdsPallete.vue'
+import NdsGetcode from '@/components/NdsGetcode.vue'
 import NdsNotification from '@/components/NdsNotification.vue'
 export default {
   name: 'home',
@@ -18,6 +20,7 @@ export default {
     NdsSidebar,
     NdsMain,
     NdsPallete,
+    NdsGetcode,
     NdsNotification
   }
 }

@@ -52,7 +52,7 @@ export default {
         property: '',
         propertyState: false,
         value: '#1671b9',
-        valueState: false,
+        valueState: true,
         minAmount: 0,
         minJump: 1,
         lighten: {

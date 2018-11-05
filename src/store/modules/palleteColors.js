@@ -55,12 +55,8 @@ const mutations = {
     state[payload].edit = true
   },
   DELETE_COLOR (state, payload) {
-    for (let i = 0; i < state.length; i++) {
-      if (state[i].edit !== true) {
-        if (state.length > 1) {
-          state.splice(payload, 1)
-        }
-      }
+    if (state.length > 1) {
+      state.splice(payload, 1)
     }
   }
 }

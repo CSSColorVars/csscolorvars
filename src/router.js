@@ -4,14 +4,9 @@ import Home from './views/Home.vue'
 
 Vue.use(Router)
 
-export default new Router({
+export const router = new Router({
   mode: 'history',
   routes: [
-    {
-      path: '/',
-      name: 'home',
-      component: Home
-    },
     {
       path: '/credits',
       name: 'credits',
@@ -19,6 +14,11 @@ export default new Router({
       // this generates a separate chunk (credits.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import(/* webpackChunkName: "credits" */ './views/Credits.vue')
+    },
+    {
+      path: '/:value*',
+      name: 'home',
+      component: Home
     }
   ]
 })

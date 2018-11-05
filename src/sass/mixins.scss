@@ -29,6 +29,14 @@
 
 // Fracciones para calcular anchos de los items
   $fractions : 3 6 !default;
+
+// z-index
+$z-back    : -10;
+$z-normal  : 1;
+$z-tooltip : 10;
+$z-fixed   : 100;
+$z-modal   : 1000;
+
 // Colors & Tipography
 @import "src/sass/colors";
 @import "src/sass/tipography";
