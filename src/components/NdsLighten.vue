@@ -4,7 +4,7 @@
     <color-header
       slot="header"
       :value="colorActive.value"
-      :amount=colorActive.lighten.lightAmount
+      :amount="colorActive.lighten.amount"
       :updateAmount="updateLightAmount"
       :minAmount="colorActive.minAmount"
       :maxAmount="lightMax"
@@ -15,7 +15,7 @@
     <color-jump
       label="Lighten"
       slot="jump"
-      :jump=colorActive.lighten.lightJump
+      :jump="colorActive.lighten.jump"
       :updateJump="updateLightJump"
       :minJump="colorActive.minJump" :maxJump="lightMax"
     ></color-jump>

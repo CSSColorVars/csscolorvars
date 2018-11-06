@@ -4,7 +4,7 @@
     <color-header
       slot="header"
       :value="colorActive.value"
-      :amount=colorActive.darken.darkAmount
+      :amount="colorActive.darken.amount"
       :updateAmount="updateDarkAmount"
       :minAmount="colorActive.minAmount"
       :maxAmount="darkMax"
@@ -15,7 +15,7 @@
     <color-jump
       label="Darken"
       slot="jump"
-      :jump=colorActive.darken.darkJump
+      :jump="colorActive.darken.jump"
       :updateJump="updateDarkJump"
       :minJump="colorActive.minJump" :maxJump="darkMax"
     ></color-jump>
