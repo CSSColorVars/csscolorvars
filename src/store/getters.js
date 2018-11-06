@@ -4,11 +4,12 @@ import { gradientColors } from './util/functions'
 export const getters = {
   invertvalue: (state) => {
     for (let s = 0; s < state.palleteColors.length; s++) {
-      if (state.palleteColors[s].edit === true) {
+      let p = state.palleteColors[s]
+      if (p.edit === true) {
         let value
         let invertVal
         let invertValOb
-        value = Color(state.palleteColors[s].value).hsl()
+        value = Color(p.value).hsl()
         invertValOb = value.grayscale().negate().hsl().object()
         value = value.hex()
         if (invertValOb.l > 50) {
@@ -28,23 +29,6 @@ export const getters = {
       }
     }
   },
-  lightMax: (state) => {
-    for (let s = 0; s < state.palleteColors.length; s++) {
-      if (state.palleteColors[s].edit === true) {
-        let value
-        let valueOb
-        let i
-        for (i = 1; value !== '#FFFFFF'; i++) {
-          value = Color(state.palleteColors[s].value).hsl()
-          valueOb = value.object() // Objeto para recuperar l
-          valueOb.l = valueOb.l + (state.palleteColors[s].lighten.jump * i)
-          value = Color({ h: valueOb.h, s: valueOb.s, l: valueOb.l }).hex()
-        }
-        return i - 2
-      }
-    }
-  },
-
   darken: (state) => {
     for (let s = 0; s < state.palleteColors.length; s++) {
       let p = state.palleteColors[s]
@@ -53,16 +37,34 @@ export const getters = {
       }
     }
   },
+  lightMax: (state) => {
+    for (let s = 0; s < state.palleteColors.length; s++) {
+      let p = state.palleteColors[s]
+      if (p.edit === true) {
+        let value
+        let valueOb
+        let i
+        for (i = 1; value !== '#FFFFFF'; i++) {
+          value = Color(p.value).hsl()
+          valueOb = value.object() // Objeto para recuperar l
+          valueOb.l = valueOb.l + (p.lighten.jump * i)
+          value = Color({ h: valueOb.h, s: valueOb.s, l: valueOb.l }).hex()
+        }
+        return i - 2
+      }
+    }
+  },
   darkMax: (state) => {
     for (let s = 0; s < state.palleteColors.length; s++) {
-      if (state.palleteColors[s].edit === true) {
+      let p = state.palleteColors[s]
+      if (p.edit === true) {
         let value
         let valueOb
         let i
         for (i = 1; value !== '#000000'; i++) {
-          value = Color(state.palleteColors[s].value).hsl()
+          value = Color(p.value).hsl()
           valueOb = value.object() // Objeto para recuperar l
-          valueOb.l = valueOb.l - (state.palleteColors[s].darken.jump * i)
+          valueOb.l = valueOb.l - (p.darken.jump * i)
           value = Color({ h: valueOb.h, s: valueOb.s, l: valueOb.l }).hex()
         }
         return i - 2
@@ -71,23 +73,25 @@ export const getters = {
   },
   rgbValues: (state) => {
     for (let s = 0; s < state.palleteColors.length; s++) {
-      if (state.palleteColors[s].edit === true) {
+      let p = state.palleteColors[s]
+      if (p.edit === true) {
         let values
-        values = Color(state.palleteColors[s].value).object()
+        values = Color(p.value).object()
         return values
       }
     }
   },
   rgbInvertValue: (state) => {
     for (let s = 0; s < state.palleteColors.length; s++) {
-      if (state.palleteColors[s].edit === true) {
+      let p = state.palleteColors[s]
+      if (p.edit === true) {
         let value
         let invertVal
         let invertValOb
-        value = Color(state.palleteColors[s].value).hsl()
+        value = Color(p.value).hsl()
         invertValOb = value.grayscale().negate().hsl().object()
         value = value.hex()
-        if (state.palleteColors[s].rgba.alpha > 0.5) {
+        if (p.rgba.alpha > 0.5) {
           if (invertValOb.l > 50) {
             invertVal = '#f1f1f1'
           } else {

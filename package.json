@@ -27,7 +27,7 @@
     "@vue/eslint-config-standard": "^3.0.5",
     "babel-plugin-transform-imports": "^1.5.1",
     "node-sass": "^4.10.0",
-    "postcss-custom-properties": "^8.0.8",
+    "postcss-custom-properties": "^8.0.9",
     "sass-loader": "^7.0.1",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1",
