@@ -1,1 +1,0 @@
-// import Color from 'color'

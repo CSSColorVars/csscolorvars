@@ -1,4 +1,4 @@
-import Color from 'color'
+import { setAmount } from './util/functions'
 
 export const mutations = {
   updateProperty (state, prop) {
@@ -37,24 +37,7 @@ export const mutations = {
     for (let i = 0; i < state.palleteColors.length; i++) {
       let p = state.palleteColors[i]
       if (p.edit === true) {
-        let value
-        let valueOb
-        let j
-        for (j = 1; value !== '#FFFFFF'; j++) {
-          value = Color(p.value).hsl()
-          valueOb = value.object()
-          valueOb.l = valueOb.l + (p.lighten.jump * j)
-          value = Color({ h: valueOb.h, s: valueOb.s, l: valueOb.l }).hex()
-        }
-        if (amount.target.value >= 0) {
-          if (amount.target.value < j - 2) {
-            p.lighten.amount = amount.target.value
-          } else {
-            p.lighten.amount = j - 2
-          }
-        } else {
-          p.lighten.amount = p.minAmount
-        }
+        setAmount(p, amount)
       }
     }
   },
@@ -70,25 +53,7 @@ export const mutations = {
     for (let s = 0; s < state.palleteColors.length; s++) {
       let p = state.palleteColors[s]
       if (p.edit === true) {
-        let value
-        let valueOb
-        let i
-        for (i = 1; value !== '#000000'; i++) {
-          value = Color(p.value).hsl()
-          valueOb = value.object() // Objeto para recuperar l
-          valueOb.l = valueOb.l - (p.darken.jump * i)
-          value = Color({ h: valueOb.h, s: valueOb.s, l: valueOb.l }).hex()
-        }
-        if (amount.target.value >= 0) {
-          if (amount.target.value < i - 2) {
-            p.darken.amount = amount.target.value
-          } else {
-            amount.target.value = i - 2
-            p.darken.amount = i - 2
-          }
-        } else {
-          p.darken.amount = p.minAmount
-        }
+        setAmount(p, amount, 'darken')
       }
     }
   },

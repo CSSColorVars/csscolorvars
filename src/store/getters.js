@@ -1,4 +1,4 @@
-import { gradientColors, gradientMax, invertVal, rgbaInvertVal, rbgObject } from './util/functionsGet'
+import { gradientColors, gradientMax, invertVal, rgbaInvertVal, rbgObject } from './util/functions'
 
 export const getters = {
   invertvalue: (state) => {
