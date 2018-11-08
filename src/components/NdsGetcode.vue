@@ -63,6 +63,7 @@
 import { mapState } from 'vuex'
 import Prism from 'prismjs'
 import 'prismjs/components/prism-scss'
+import { gradientColors } from '@/store/util/functions'
 export default {
   name: 'NdsGetcode',
   data () {
@@ -77,6 +78,44 @@ export default {
   },
   computed: {
     ...mapState(['palleteColors']),
+    lightenCSS: function () {
+      let string = ''
+      for (let i = 0; i < this.palleteColors.length; i++) {
+        const p = this.palleteColors[i]
+        for (let j = 0; j < gradientColors(p).length; j++) {
+          let lighten = gradientColors(p)[j]
+          if (gradientColors(p).length - 1 !== j || this.palleteColors.length - 1 !== i) {
+            string = `${string}--${p.property}-light-${j + 1}: ${lighten.color};
+  `
+          } else {
+            string = `${string}--${p.property}-light-${j + 1}: ${lighten.color};`
+          }
+        }
+      }
+      string = `:root {
+  ${string}
+}`
+      return `${string}`
+    },
+    darkenCSS: function () {
+      let string = ''
+      for (let i = 0; i < this.palleteColors.length; i++) {
+        const p = this.palleteColors[i]
+        for (let j = 0; j < gradientColors(p, 'darken').length; j++) {
+          let darken = gradientColors(p, 'darken')[j]
+          if (gradientColors(p, 'darken').length - 1 !== j || this.palleteColors.length - 1 !== i) {
+            string = `${string}--${p.property}-dark-${j + 1}: ${darken.color};
+  `
+          } else {
+            string = `${string}--${p.property}-dark-${j + 1}: ${darken.color};`
+          }
+        }
+      }
+      string = `:root {
+  ${string}
+}`
+      return `${string}`
+    },
     codeCSS: function () {
       let string = ''
       for (let i = 0; i < this.palleteColors.length; i++) {
@@ -88,9 +127,12 @@ export default {
           string = `${string}--${p.property}-color: ${p.value};`
         }
       }
+      string = `${string}`
       string = `:root {
   ${string}
-}`
+}
+${this.lightenCSS}
+${this.darkenCSS}`
       string = Prism.highlight(string, Prism.languages.css, 'css')
       return `${string}`
     }
@@ -121,6 +163,7 @@ export default {
 pre[class*="language-"] {
   padding: 0;
   width: 100%;
+  max-height: 420px !important;
 }
 code {
   display: block;
