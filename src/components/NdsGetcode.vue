@@ -42,7 +42,6 @@
               </v-tab-item>
             </v-tabs>
           </v-card-text>
-          <v-divider></v-divider>
           <v-card-actions>
             <v-btn color="primary" flat @click.native="dialog2=false">Close</v-btn>
           </v-card-actions>
@@ -71,13 +70,37 @@ export default {
       fab: true,
       bottom: true,
       right: true,
-      dialog2: true,
+      dialog2: false,
       active: null,
       code: ``
     }
   },
   computed: {
     ...mapState(['palleteColors']),
+    colorCSS: function () {
+      let string = ''
+      for (let i = 0; i < this.palleteColors.length; i++) {
+        const p = this.palleteColors[i]
+        for (let j = 0; j < gradientColors(p).length; j++) {
+          let lighten = gradientColors(p)[gradientColors(p).length - j - 1]
+          string = `${string}--${p.property}-light-${gradientColors(p).length - j}: ${lighten.color};
+  `
+        }
+        for (let j = 0; j < gradientColors(p, 'darken').length; j++) {
+          let darken = gradientColors(p, 'darken')[j]
+          if (gradientColors(p, 'darken').length - 1 !== j || this.palleteColors.length - 1 !== i) {
+            string = `${string}--${p.property}-dark-${j + 1}: ${darken.color};
+  `
+          } else {
+            string = `${string}--${p.property}-dark-${j + 1}: ${darken.color};`
+          }
+        }
+      }
+      string = `:root {
+  ${string}
+}`
+      return `${string}`
+    },
     lightenCSS: function () {
       let string = ''
       for (let i = 0; i < this.palleteColors.length; i++) {
@@ -131,8 +154,7 @@ export default {
       string = `:root {
   ${string}
 }
-${this.lightenCSS}
-${this.darkenCSS}`
+${this.colorCSS}`
       string = Prism.highlight(string, Prism.languages.css, 'css')
       return `${string}`
     }
@@ -163,14 +185,14 @@ ${this.darkenCSS}`
 pre[class*="language-"] {
   padding: 0;
   width: 100%;
-  max-height: 420px !important;
+  max-height: 58.6vh !important;
+  min-height: 1vh !important;
 }
 code {
   display: block;
   padding: 0 1rem;
   box-shadow: none;
   width: 100% !important;
-  min-height: 350px !important;
 }
 code:after, kbd:after, code:before, kbd:before {
   content: "";
