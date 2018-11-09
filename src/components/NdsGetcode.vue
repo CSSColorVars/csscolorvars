@@ -1,51 +1,57 @@
 <template>
   <div class="float--getcode nds-item">
       <v-dialog dark v-model="dialog2" max-width="600px">
-        <v-card style="max-width=600px;">
-          <v-card-text style="height: 500px;max-width=600px;">
-            <v-tabs v-model="active" slider-color="yellow">
-              <v-tab ripple>CSS</v-tab>
-              <v-tab ripple>SCSS</v-tab>
-              <v-tab ripple>JSON</v-tab>
-              <v-tab ripple>SNIPPETS</v-tab>
-              <v-tab-item>
-                <v-card flat>
-                    <pre class="language-css code-toolbar">
-                    <code class=" language-css" v-html="codeCSS">
-                    </code>
-                    </pre>
-                </v-card>
-              </v-tab-item>
-              <v-tab-item>
-                <v-card flat>
-                  <pre class="language-scss code-toolbar">
-                    <code class=" language-scss" v-html="code">
-                    </code>
-                    </pre>
-                </v-card>
-              </v-tab-item>
-              <v-tab-item>
-                <v-card flat>
-                  <pre class="language-scss code-toolbar">
-                    <code class=" language-scss" v-html="code">
-                    </code>
-                    </pre>
-                </v-card>
-              </v-tab-item>
-              <v-tab-item>
-                <v-card flat>
-                  <pre class="language-scss code-toolbar">
-                    <code class=" language-scss" v-html="palleteColors">
-                    </code>
-                    </pre>
-                </v-card>
-              </v-tab-item>
-            </v-tabs>
-          </v-card-text>
-          <v-card-actions>
+        <v-tabs v-model="active" slider-color="yellow" style="width:100%;max-width:600px;">
+          <div class="v-card__actions">
+            <v-tab ripple>CSS</v-tab>
+            <v-tab ripple>SCSS</v-tab>
+            <v-tab ripple>JSON</v-tab>
+            <v-tab ripple>SNIPPETS</v-tab>
+          </div>
+          <v-tab-item>
+            <v-card flat>
+                <pre class="language-css code-toolbar">
+                <code class=" language-css" v-html="codeCSS">
+                </code>
+                </pre>
+            </v-card>
+          </v-tab-item>
+          <v-tab-item>
+            <v-card flat>
+              <pre class="language-scss code-toolbar">
+                <code class=" language-scss" v-html="code">
+                </code>
+                </pre>
+            </v-card>
+          </v-tab-item>
+          <v-tab-item>
+            <v-card flat>
+              <pre class="language-scss code-toolbar">
+                <code class=" language-scss" v-html="code">
+                </code>
+                </pre>
+            </v-card>
+          </v-tab-item>
+          <v-tab-item>
+            <v-card flat>
+              <pre class="language-scss code-toolbar">
+                <code class=" language-scss" v-html="palleteColors">
+                </code>
+                </pre>
+            </v-card>
+          </v-tab-item>
+          <v-tab-item>
+              <v-card flat>
+                <pre class="language-scss code-toolbar">
+                  <code class=" language-scss" v-html="code">
+                  </code>
+                  </pre>
+              </v-card>
+            </v-tab-item>
+          </v-tabs>
+          <div class="v-tabs__bar theme--dark" style="width:100%;max-width:600px;">
             <v-btn color="primary" flat @click.native="dialog2=false">Close</v-btn>
-          </v-card-actions>
-        </v-card>
+          </div>
       </v-dialog>
     <v-btn
       block
@@ -184,6 +190,7 @@ ${this.colorCSS}`
 :not(pre) > code[class*="language-"],
 pre[class*="language-"] {
   padding: 0;
+  margin: 0;
   width: 100%;
   max-height: 58.6vh !important;
   min-height: 1vh !important;
@@ -196,5 +203,19 @@ code {
 }
 code:after, kbd:after, code:before, kbd:before {
   content: "";
+}
+.v-dialog--scrollable .v-card__text {
+    overflow-y: auto;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+.v-dialog--scrollable .v-card__actions {
+    flex: 1 0 auto;
+}
+
+.v-card__actions {
+    align-items: center;
+    display: flex;
+    padding: 8px;
 }
 </style>
