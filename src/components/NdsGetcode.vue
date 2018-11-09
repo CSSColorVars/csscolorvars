@@ -1,5 +1,5 @@
 <template>
-  <div class="float--getcode nds-item">
+  <div class="float--getcode cross-center nds-item">
       <v-dialog dark v-model="dialog2" max-width="600px">
         <v-tabs v-model="active" slider-color="yellow" style="width:100%;max-width:600px;">
           <div class="v-card__actions">
@@ -49,8 +49,9 @@
               </v-card>
             </v-tab-item>
           </v-tabs>
-          <div class="v-tabs__bar theme--dark" style="width:100%;max-width:600px;">
-            <v-btn color="primary" flat @click.native="dialog2=false">Close</v-btn>
+          <div class="getcode--footer v-tabs__bar theme--dark main-center" style="width:100%;max-width:600px;">
+            <v-btn light>Copy code <v-icon right>file_copy</v-icon></v-btn>
+            <v-btn light @click.native="dialog2=false">Close <v-icon right>close</v-icon></v-btn>
           </div>
       </v-dialog>
     <v-btn
@@ -185,7 +186,7 @@ ${this.colorCSS}`
   bottom: 0;
   right: 0;
   z-index: $z-modal;
-  @include crossCenter;
+  @incltopude crossCenter;
 }
 :not(pre) > code[class*="language-"],
 pre[class*="language-"] {
@@ -217,5 +218,9 @@ code:after, kbd:after, code:before, kbd:before {
     align-items: center;
     display: flex;
     padding: 8px;
+}
+.getcode--footer.v-tabs__bar{
+  padding-bottom: .5rem;
+  padding-top: .5rem;
 }
 </style>
