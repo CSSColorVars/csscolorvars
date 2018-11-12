@@ -186,7 +186,7 @@ ${this.colorCSS}`
   bottom: 0;
   right: 0;
   z-index: $z-modal;
-  @incltopude crossCenter;
+  @include crossCenter;
 }
 :not(pre) > code[class*="language-"],
 pre[class*="language-"] {
@@ -201,6 +201,7 @@ code {
   padding: 0 1rem;
   box-shadow: none;
   width: 100% !important;
+  margin-top: -1rem;
 }
 code:after, kbd:after, code:before, kbd:before {
   content: "";
