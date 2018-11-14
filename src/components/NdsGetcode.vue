@@ -11,16 +11,15 @@
         <v-tabs-items v-model="active">
           <v-tab-item value="css">
             <v-card flat>
-                <pre class="language-css code-toolbar">
-                <code class=" language-css" v-html="codeCSS">
-                </code>
-                </pre>
+              <pre class="language-css code-toolbar">
+                <code class="language-css" v-html="cssPrism"></code>
+              </pre>
             </v-card>
           </v-tab-item>
           <v-tab-item value="scss">
             <v-card flat>
               <pre class="language-scss code-toolbar">
-                <code class=" language-scss" v-html="code">
+                <code class="language-scss" v-html="code">
                 </code>
                 </pre>
             </v-card>
@@ -28,7 +27,7 @@
           <v-tab-item value="json">
             <v-card flat>
               <pre class="language-scss code-toolbar">
-                <code class=" language-scss" v-html="palleteColors">
+                <code class="language-scss" v-html="palleteColors">
                 </code>
                 </pre>
             </v-card>
@@ -36,14 +35,17 @@
           <v-tab-item value="snippets">
               <v-card flat>
                 <pre class="language-scss code-toolbar">
-                  <code class=" language-scss" v-html="code">
+                  <code class="language-scss" v-html="code">
                   </code>
                   </pre>
               </v-card>
             </v-tab-item>
         </v-tabs-items>
           <div class="getcode--footer v-tabs__bar theme--dark main-center" style="width:100%;max-width:600px;">
-            <v-btn @click="copyCode(active)" light>Copy code <v-icon right>file_copy</v-icon></v-btn>
+            <v-btn v-clipboard:copy="copyCode"
+              v-clipboard:success="onCopy"
+              v-clipboard:error="onError"
+              light>Copy code <v-icon right>file_copy</v-icon></v-btn>
             <v-btn light @click.native="dialog2=false">Close <v-icon right>close</v-icon></v-btn>
           </div>
       </v-dialog>
@@ -72,7 +74,7 @@ export default {
       right: true,
       dialog2: false,
       active: 'css',
-      code: ``
+      code: `jeje`
     }
   },
   computed: {
@@ -86,44 +88,6 @@ export default {
           string = `${string}--${p.property}-light-${gradientColors(p).length - j}: ${lighten.color};
   `
         }
-        for (let j = 0; j < gradientColors(p, 'darken').length; j++) {
-          let darken = gradientColors(p, 'darken')[j]
-          if (gradientColors(p, 'darken').length - 1 !== j || this.palleteColors.length - 1 !== i) {
-            string = `${string}--${p.property}-dark-${j + 1}: ${darken.color};
-  `
-          } else {
-            string = `${string}--${p.property}-dark-${j + 1}: ${darken.color};`
-          }
-        }
-      }
-      string = `:root {
-  ${string}
-}`
-      return `${string}`
-    },
-    lightenCSS: function () {
-      let string = ''
-      for (let i = 0; i < this.palleteColors.length; i++) {
-        const p = this.palleteColors[i]
-        for (let j = 0; j < gradientColors(p).length; j++) {
-          let lighten = gradientColors(p)[j]
-          if (gradientColors(p).length - 1 !== j || this.palleteColors.length - 1 !== i) {
-            string = `${string}--${p.property}-light-${j + 1}: ${lighten.color};
-  `
-          } else {
-            string = `${string}--${p.property}-light-${j + 1}: ${lighten.color};`
-          }
-        }
-      }
-      string = `:root {
-  ${string}
-}`
-      return `${string}`
-    },
-    darkenCSS: function () {
-      let string = ''
-      for (let i = 0; i < this.palleteColors.length; i++) {
-        const p = this.palleteColors[i]
         for (let j = 0; j < gradientColors(p, 'darken').length; j++) {
           let darken = gradientColors(p, 'darken')[j]
           if (gradientColors(p, 'darken').length - 1 !== j || this.palleteColors.length - 1 !== i) {
@@ -155,9 +119,26 @@ export default {
   ${string}
 }
 ${this.colorCSS}`
-      string = Prism.highlight(string, Prism.languages.css, 'css')
+      // string = Prism.highlight(string, Prism.languages.css, 'css')
       return `${string}`
-    }
+    },
+    cssPrism: function() {
+      return Prism.highlight(this.codeCSS, Prism.languages.css, 'css')
+    },
+    copyCode: function () {
+      if (this.active === 'css') {
+        return this.codeCSS
+      }
+      if (this.active === 'scss') {
+        return 'copy SCSS'
+      }
+      if (this.active === 'json') {
+        return 'copy JSON'
+      }
+      if (this.active === 'snippets') {
+        return 'copy SNIPPETS'
+      }      
+    },
   },
   methods: {
     activeTab: function () {
@@ -166,6 +147,12 @@ ${this.colorCSS}`
       if (style === 'left: 0px; width: 0px;') {
         slideColor.style.width = '50px'
       }
+    },
+    onCopy: function (e) {
+      alert('You just copied: ' + e.text)
+    },
+    onError: function (e) {
+      alert('Failed to copy code')
     }
   }
 }

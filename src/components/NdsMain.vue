@@ -31,6 +31,7 @@
         </div>
       </v-tab-item>
     </v-tabs-items>
+    <a href="https://twitter.com/2062nandes?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @2062nandes</a>
   </main>
   <main v-else class="main-main nds-container nds-item l-80 application theme--light">
     <!-- Light Colors -->
@@ -38,6 +39,9 @@
     <!-- Dark Colors -->
     <nds-darken></nds-darken>
     <nds-rgba></nds-rgba>
+    <div class="cross-center">
+      <a href="https://twitter.com/2062nandes?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @2062nandes</a>
+    </div>
   </main>
 </template>
 <script>
