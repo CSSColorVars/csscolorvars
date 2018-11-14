@@ -1,14 +1,15 @@
 <template>
   <div class="float--getcode cross-center nds-item">
       <v-dialog dark v-model="dialog2" max-width="600px">
-        <v-tabs v-model="active" slider-color="yellow" style="width:100%;max-width:600px;">
-          <div class="v-card__actions">
-            <v-tab ripple>CSS</v-tab>
-            <v-tab ripple>SCSS</v-tab>
-            <v-tab ripple>JSON</v-tab>
-            <v-tab ripple>SNIPPETS</v-tab>
-          </div>
-          <v-tab-item>
+        <v-tabs v-model="active">
+          <v-tabs-slider color="yellow" :style="dialog2 ? activeTab() : '' "></v-tabs-slider>
+          <v-tab ripple href="#css">CSS</v-tab>
+          <v-tab ripple href="#scss">SCSS</v-tab>
+          <v-tab ripple href="#json">JSON</v-tab>
+          <v-tab ripple href="#snippets">SNIPPETS</v-tab>
+        </v-tabs>
+        <v-tabs-items v-model="active">
+          <v-tab-item value="css">
             <v-card flat>
                 <pre class="language-css code-toolbar">
                 <code class=" language-css" v-html="codeCSS">
@@ -16,7 +17,7 @@
                 </pre>
             </v-card>
           </v-tab-item>
-          <v-tab-item>
+          <v-tab-item value="scss">
             <v-card flat>
               <pre class="language-scss code-toolbar">
                 <code class=" language-scss" v-html="code">
@@ -24,15 +25,7 @@
                 </pre>
             </v-card>
           </v-tab-item>
-          <v-tab-item>
-            <v-card flat>
-              <pre class="language-scss code-toolbar">
-                <code class=" language-scss" v-html="code">
-                </code>
-                </pre>
-            </v-card>
-          </v-tab-item>
-          <v-tab-item>
+          <v-tab-item value="json">
             <v-card flat>
               <pre class="language-scss code-toolbar">
                 <code class=" language-scss" v-html="palleteColors">
@@ -40,7 +33,7 @@
                 </pre>
             </v-card>
           </v-tab-item>
-          <v-tab-item>
+          <v-tab-item value="snippets">
               <v-card flat>
                 <pre class="language-scss code-toolbar">
                   <code class=" language-scss" v-html="code">
@@ -48,9 +41,9 @@
                   </pre>
               </v-card>
             </v-tab-item>
-          </v-tabs>
+        </v-tabs-items>
           <div class="getcode--footer v-tabs__bar theme--dark main-center" style="width:100%;max-width:600px;">
-            <v-btn light>Copy code <v-icon right>file_copy</v-icon></v-btn>
+            <v-btn @click="copyCode(active)" light>Copy code <v-icon right>file_copy</v-icon></v-btn>
             <v-btn light @click.native="dialog2=false">Close <v-icon right>close</v-icon></v-btn>
           </div>
       </v-dialog>
@@ -78,7 +71,7 @@ export default {
       bottom: true,
       right: true,
       dialog2: false,
-      active: null,
+      active: 'css',
       code: ``
     }
   },
@@ -165,6 +158,15 @@ ${this.colorCSS}`
       string = Prism.highlight(string, Prism.languages.css, 'css')
       return `${string}`
     }
+  },
+  methods: {
+    activeTab: function () {
+      let slideColor = document.querySelector('.v-tabs__slider-wrapper')
+      const style = slideColor.getAttribute('style')
+      if (style === 'left: 0px; width: 0px;') {
+        slideColor.style.width = '50px'
+      }
+    }
   }
 }
 </script>
@@ -205,20 +207,6 @@ code {
 }
 code:after, kbd:after, code:before, kbd:before {
   content: "";
-}
-.v-dialog--scrollable .v-card__text {
-    overflow-y: auto;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-}
-.v-dialog--scrollable .v-card__actions {
-    flex: 1 0 auto;
-}
-
-.v-card__actions {
-    align-items: center;
-    display: flex;
-    padding: 8px;
 }
 .getcode--footer.v-tabs__bar{
   padding-bottom: .5rem;
