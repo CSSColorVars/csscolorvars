@@ -42,13 +42,13 @@
           :key="item.property"
           avatar
           @dblclick.stop="mini = !mini"
-          @click="TOGGLE_COLOR(id)"
+          @click=""
         >
-          <v-list-tile-avatar>
+          <v-list-tile-avatar @click="TOGGLE_COLOR(id)">
             <v-icon :style="'color:' + invertvalue + ';background-color:'+ item.value +';'" v-text="item.edit ? 'brush' : ''"></v-icon>
           </v-list-tile-avatar>
 
-          <v-list-tile-content>
+          <v-list-tile-content @click="TOGGLE_COLOR(id)">
             <v-list-tile-title>--{{ item.property }}-color</v-list-tile-title>
           </v-list-tile-content>
           <v-list-tile-action @click="DELETE_COLOR(id)">
