@@ -49,14 +49,17 @@
             <v-btn light @click.native="dialog2=false">Close <v-icon right>close</v-icon></v-btn>
           </div>
       </v-dialog>
-    <v-btn
+    <v-btn v-if="!btnCode"
       block
       large
-      class="btn--getcode"
+      class="btn--getcode active"
       @click="dialog2 = true"
     >
       GET CODE
       <v-icon right>code</v-icon>
+    </v-btn>
+    <v-btn v-else fab @click="dialog2 = true" class="button--getcode">
+      <v-icon>code</v-icon>
     </v-btn>
     </div>
 </template>
@@ -74,8 +77,19 @@ export default {
       right: true,
       dialog2: false,
       active: 'css',
-      code: `jeje`
+      code: `jeje`,
+      btnCode: true
     }
+  },
+  created () {
+    const largeBp = matchMedia('(min-width: 1024px)')
+    const mediaQuery = mql => {
+      mql.matches
+        ? this.btnCode = false
+        : this.btnCode = true
+    }
+    largeBp.addListener(mediaQuery)
+    mediaQuery(largeBp)
   },
   computed: {
     ...mapState(['palleteColors']),
@@ -122,7 +136,7 @@ ${this.colorCSS}`
       // string = Prism.highlight(string, Prism.languages.css, 'css')
       return `${string}`
     },
-    cssPrism: function() {
+    cssPrism: function () {
       return Prism.highlight(this.codeCSS, Prism.languages.css, 'css')
     },
     copyCode: function () {
@@ -137,8 +151,8 @@ ${this.colorCSS}`
       }
       if (this.active === 'snippets') {
         return 'copy SNIPPETS'
-      }      
-    },
+      }
+    }
   },
   methods: {
     activeTab: function () {
@@ -164,13 +178,24 @@ ${this.colorCSS}`
   background-clip: padding-box !important;
   border: double 3px #d6d6d6;
   border-radius: 10px;
+  &.active{
+    display: block;
+  }
+}
+.button--getcode{
+  background: linear-gradient(#d6d6d6,#fff,#d6d6d6) !important;
+  margin: 0;
+  border: double 3px #363636;
 }
 .float--getcode {
-  @include showFrom(l);
+  // @include showFrom(l);
   background: #424242;
   border-radius: 10px 0 0 10px;
-  width: 300px;
   height: 70px;
+  width: 80px;
+  @include from(l) {
+    width: 300px;
+  }
   position: fixed;
   bottom: 0;
   right: 0;
