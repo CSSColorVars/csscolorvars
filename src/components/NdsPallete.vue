@@ -52,7 +52,7 @@
             <v-list-tile-title>--{{ item.property }}-color</v-list-tile-title>
           </v-list-tile-content>
           <v-list-tile-action @click="DELETE_COLOR(id)">
-            <v-btn icon ripple>
+            <v-btn v-if="!item.edit" icon ripple>
               <v-icon color="grey lighten-1">delete</v-icon>
             </v-btn>
           </v-list-tile-action>
