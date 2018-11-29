@@ -31,11 +31,12 @@ export default {
 <style lang="scss">
   @import 'src/sass/mixins.scss';
   .nds-footer {
-    bottom: .5rem;;
+    bottom: 1rem;;
     @include from(l){
+      width: 20%;
       position: fixed;
-      left: 20%;
-      padding-left: 1rem;
+      left: 0;
+      text-align: center;
     }
   }
 </style>
