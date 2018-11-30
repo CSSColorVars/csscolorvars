@@ -1,6 +1,9 @@
 <template>
   <header class="nds-container nds-item l-20 header-sidebar application theme--dark">
-    <div class="header nds-container nds-item">
+    <div class="nds-item l-85 m-30 s-60 cross-center">
+      <img :src="require('../assets/cssColorVars.png')" alt="">
+    </div>
+    <div class="header nds-container nds-item l-100 m-70 s-100">
       <div class="header--color nds-item l-100 m-50 s-35">
         <input type="color" :value="standardValue" @input="updateValue" />
       </div>
