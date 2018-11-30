@@ -65,7 +65,7 @@
         </v-toolbar>
       </v-list>
     </div>
-    <div class="toolbar--end l-block">
+    <!-- <div class="toolbar--end l-block">
         <v-divider></v-divider>
       <v-list class="pt-0" dense>
         <v-list-tile
@@ -82,7 +82,7 @@
           </v-list-tile-content>
         </v-list-tile>
       </v-list>
-    </div>
+    </div> -->
   </v-navigation-drawer>
 </template>
 <script>

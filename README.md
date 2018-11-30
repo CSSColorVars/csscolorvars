@@ -1,4 +1,4 @@
-# custom-properties-generated
+# css-colorvars
 
 ## Project setup
 ```
