@@ -1,6 +1,6 @@
 module.exports = {
   base: '/guide/',
-  title: '',
+  title: 'CSS ColorVars',
   locales: {
     '/': {
       lang: 'en-US',
@@ -12,7 +12,7 @@ module.exports = {
     }
   },
   themeConfig: {
-    logo: 'https://raw.githubusercontent.com/CSSColorVars/csscolorvars/master/src/assets/cssColorVars-dark.png',
+    logo: 'https://csscolorvars.github.io/img/cssColorVars.0411e0f0.png',
     locales: {
       '/': {
         sidebar: [
@@ -29,7 +29,9 @@ module.exports = {
             collapsable: false,
             children: [
               '/es/',
-              '/es/tecnologias-utilizadas'          
+              '/es/tecnologias-utilizadas',
+              '/es/demos/',
+              '/es/colaboracion'        
             ]
           }
         ]
