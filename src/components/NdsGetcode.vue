@@ -65,8 +65,8 @@
 </template>
 <script>
 import { mapState } from 'vuex'
-import Prism from 'prismjs'
-import 'prismjs/components/prism-scss'
+// import Prism from 'prismjs'
+// import 'prismjs/components/prism-scss'
 import { gradientColors } from '@/store/util/functions'
 export default {
   name: 'NdsGetcode',
@@ -99,16 +99,28 @@ export default {
         const p = this.palleteColors[i]
         for (let j = 0; j < gradientColors(p).length; j++) {
           let lighten = gradientColors(p)[gradientColors(p).length - j - 1]
-          string = `${string}--${p.property}-light-${gradientColors(p).length - j}: ${lighten.color};
+          if (gradientColors(p).length - 1 !== j || this.palleteColors.length - 1 !== i) {
+            string = `${string}<span class="code-property">--${p.property}-light-${gradientColors(p).length - j}</span>: <span class="code-value" style="--value-color: ${lighten.color};">${lighten.color}</span>;
   `
+          } else {
+            string = `${string}<span class="code-property">--${p.property}-light-${gradientColors(p).length - j}</span>: <span class="code-value" style="--value-color: ${lighten.color};">${lighten.color}</span>;`
+          }
+        }
+        if (i === this.palleteColors.length - 1) {
+          string = `${string}
+  `
+        }
+        if (gradientColors(p).length < 0) {
+          string = `${string}
+  `       
         }
         for (let j = 0; j < gradientColors(p, 'darken').length; j++) {
           let darken = gradientColors(p, 'darken')[j]
           if (gradientColors(p, 'darken').length - 1 !== j || this.palleteColors.length - 1 !== i) {
-            string = `${string}--${p.property}-dark-${j + 1}: ${darken.color};
+            string = `${string}<span class="code-property">--${p.property}-dark-${j + 1}</span>: <span class="code-value" style="--value-color: ${darken.color};">${darken.color}</span>;
   `
           } else {
-            string = `${string}--${p.property}-dark-${j + 1}: ${darken.color};`
+            string = `${string}<span class="code-property">--${p.property}-dark-${j + 1}</span>: <span class="code-value" style="--value-color: ${darken.color};">${darken.color}</span>;`
           }
         }
       }
@@ -129,7 +141,7 @@ export default {
         }
       }
       string = `${string}`
-      string = `:root {
+      string = `<span class="code-selector">:root</span> {
   ${string}
 }
 ${this.colorCSS}`
@@ -137,7 +149,7 @@ ${this.colorCSS}`
       return `${string}`
     },
     cssPrism: function () {
-      return Prism.highlight(this.codeCSS, Prism.languages.css, 'css')
+      return this.codeCSS
     },
     copyCode: function () {
       if (this.active === 'css') {
@@ -216,6 +228,10 @@ code {
   box-shadow: none;
   width: 100% !important;
   margin-top: -1rem;
+  --value-color: transparent;
+}
+code[class*="language-"], pre[class*="language-"] {
+  color: #fff;
 }
 code:after, kbd:after, code:before, kbd:before {
   content: "";
@@ -223,5 +239,24 @@ code:after, kbd:after, code:before, kbd:before {
 .getcode--footer.v-tabs__bar{
   padding-bottom: .5rem;
   padding-top: .5rem;
+}
+
+.code-selector{
+  color: #e6db74;
+}
+.code-property{
+  color: #66d9ef;
+}
+.code-value{
+  color: #fd971f;
+  &::before{
+    content: '';
+    display: inline-block;
+    background: var(--value-color);
+    width: 12px;
+    height: 12px;
+    margin-right: .2rem;
+    border: solid 1px white;
+  }
 }
 </style>
