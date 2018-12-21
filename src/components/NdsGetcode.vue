@@ -12,7 +12,7 @@
           <v-tab-item value="css">
             <v-card flat>
               <pre class="language-css code-toolbar">
-                <code class="language-css" v-html="cssPrism"></code>
+                <code class="language-css" v-html="codeCSS"></code>
               </pre>
             </v-card>
           </v-tab-item>
@@ -65,8 +65,6 @@
 </template>
 <script>
 import { mapState } from 'vuex'
-// import Prism from 'prismjs'
-// import 'prismjs/components/prism-scss'
 import { gradientColors } from '@/store/util/functions'
 export default {
   name: 'NdsGetcode',
@@ -124,7 +122,7 @@ export default {
           }
         }
       }
-      string = `:root {
+      string = `<span class="code-selector">:root</span> {
   ${string}
 }`
       return `${string}`
@@ -134,10 +132,10 @@ export default {
       for (let i = 0; i < this.palleteColors.length; i++) {
         const p = this.palleteColors[i]
         if (this.palleteColors.length - 1 !== i) {
-          string = `${string}--${p.property}-color: ${p.value};
+          string = `${string}<span class="code-property">--${p.property}-color</span>: <span class="code-value" style="--value-color: ${p.value};">${p.value}</span>;
   `
         } else {
-          string = `${string}--${p.property}-color: ${p.value};`
+          string = `${string}<span class="code-property">--${p.property}-color</span>: <span class="code-value" style="--value-color: ${p.value};">${p.value}</span>;`
         }
       }
       string = `${string}`
@@ -145,11 +143,7 @@ export default {
   ${string}
 }
 ${this.colorCSS}`
-      // string = Prism.highlight(string, Prism.languages.css, 'css')
       return `${string}`
-    },
-    cssPrism: function () {
-      return this.codeCSS
     },
     copyCode: function () {
       if (this.active === 'css') {
