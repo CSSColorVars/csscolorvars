@@ -12,7 +12,7 @@
           <v-tab-item value="css">
             <v-card flat>
               <pre class="language-css code-toolbar">
-                <code class="language-css" v-html="codeCSS"></code>
+                <code class="language-css" v-html="codeCSS.html"></code>
               </pre>
             </v-card>
           </v-tab-item>
@@ -92,62 +92,89 @@ export default {
   computed: {
     ...mapState(['palleteColors']),
     colorCSS: function () {
-      let string = ''
+      let html = ''
+      let text = ''
       for (let i = 0; i < this.palleteColors.length; i++) {
         const p = this.palleteColors[i]
         for (let j = 0; j < gradientColors(p).length; j++) {
           let lighten = gradientColors(p)[gradientColors(p).length - j - 1]
           if (gradientColors(p).length - 1 !== j || this.palleteColors.length - 1 !== i) {
-            string = `${string}<span class="code-property">--${p.property}-light-${gradientColors(p).length - j}</span>: <span class="code-value" style="--value-color: ${lighten.color};">${lighten.color}</span>;
+            html = `${html}<span class="code-property">--${p.property}-light-${gradientColors(p).length - j}</span>: <span class="code-value" style="--value-color: ${lighten.color};">${lighten.color}</span>;
+  `
+            text = `${text}--${p.property}-light-${gradientColors(p).length - j}: ${lighten.color};
   `
           } else {
-            string = `${string}<span class="code-property">--${p.property}-light-${gradientColors(p).length - j}</span>: <span class="code-value" style="--value-color: ${lighten.color};">${lighten.color}</span>;`
+            html = `${html}<span class="code-property">--${p.property}-light-${gradientColors(p).length - j}</span>: <span class="code-value" style="--value-color: ${lighten.color};">${lighten.color}</span>;`
+            text = `${text}--${p.property}-light-${gradientColors(p).length - j}: ${lighten.color};`
           }
         }
         if (i === this.palleteColors.length - 1) {
-          string = `${string}
+          html = `${html}
+  `
+          text = `${text}
   `
         }
         if (gradientColors(p).length < 0) {
-          string = `${string}
-  `       
+          html = `${html}
+  `
+          text = `${text}
+  `
         }
         for (let j = 0; j < gradientColors(p, 'darken').length; j++) {
           let darken = gradientColors(p, 'darken')[j]
           if (gradientColors(p, 'darken').length - 1 !== j || this.palleteColors.length - 1 !== i) {
-            string = `${string}<span class="code-property">--${p.property}-dark-${j + 1}</span>: <span class="code-value" style="--value-color: ${darken.color};">${darken.color}</span>;
+            html = `${html}<span class="code-property">--${p.property}-dark-${j + 1}</span>: <span class="code-value" style="--value-color: ${darken.color};">${darken.color}</span>;
+  `
+            text = `${text}--${p.property}-dark-${j + 1}: ${darken.color};
   `
           } else {
-            string = `${string}<span class="code-property">--${p.property}-dark-${j + 1}</span>: <span class="code-value" style="--value-color: ${darken.color};">${darken.color}</span>;`
+            html = `${html}<span class="code-property">--${p.property}-dark-${j + 1}</span>: <span class="code-value" style="--value-color: ${darken.color};">${darken.color}</span>;`
+            text = `${text}--${p.property}-dark-${j + 1}: ${darken.color};`
           }
         }
       }
-      string = `<span class="code-selector">:root</span> {
-  ${string}
+      html = `<span class="code-selector">:root</span> {
+  ${html}
 }`
-      return `${string}`
+      text = `:root {
+  ${text}
+}`
+      return {
+        html,
+        text
+      }
     },
     codeCSS: function () {
-      let string = ''
+      let html = ''
+      let text = ''
       for (let i = 0; i < this.palleteColors.length; i++) {
         const p = this.palleteColors[i]
         if (this.palleteColors.length - 1 !== i) {
-          string = `${string}<span class="code-property">--${p.property}-color</span>: <span class="code-value" style="--value-color: ${p.value};">${p.value}</span>;
+          html = `${html}<span class="code-property">--${p.property}-color</span>: <span class="code-value" style="--value-color: ${p.value};">${p.value}</span>;
+  `
+          text = `${text}--${p.property}-color: ${p.value};
   `
         } else {
-          string = `${string}<span class="code-property">--${p.property}-color</span>: <span class="code-value" style="--value-color: ${p.value};">${p.value}</span>;`
+          html = `${html}<span class="code-property">--${p.property}-color</span>: <span class="code-value" style="--value-color: ${p.value};">${p.value}</span>;`
+          text = `${text}--${p.property}-color: ${p.value};`
         }
       }
-      string = `${string}`
-      string = `<span class="code-selector">:root</span> {
-  ${string}
+      html = `<span class="code-selector">:root</span> {
+  ${html}
 }
-${this.colorCSS}`
-      return `${string}`
+${this.colorCSS.html}`
+      text = `:root {
+  ${text}
+}
+${this.colorCSS.text}`
+      return {
+        html,
+        text
+      }
     },
     copyCode: function () {
       if (this.active === 'css') {
-        return this.codeCSS
+        return this.codeCSS.text
       }
       if (this.active === 'scss') {
         return 'copy SCSS'
