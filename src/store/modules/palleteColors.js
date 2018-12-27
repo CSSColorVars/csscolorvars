@@ -58,7 +58,6 @@ const mutations = {
     if (state.length > 1) {
       if (!state[payload].edit) {
         state.splice(payload, 1)
-        console.log('payload: ' + payload)
       }
     }
   }
