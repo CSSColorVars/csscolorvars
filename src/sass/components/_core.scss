@@ -1,0 +1,161 @@
+// placeholder para ed-container
+%ed-container {
+  display      : flex;
+  flex-wrap    : wrap;
+  max-width    : $max-width;
+  margin-left  : auto;
+  margin-right : auto;
+  width        : 100%;
+}
+
+// placeholder para ed-item
+%ed-item {
+  margin        : 0;
+  padding-left  : $gutter;
+  padding-right : $gutter;
+}
+
+/// mixin para crear un ed-container
+/// Description hace que el elemento sea un contenedor, esto dota al elemento para que tambien sea un flex-container.
+/// @group layouts
+/// @author  Alvaro Felipe
+/// @example scss
+/// .container {
+///   @include edContainer;
+///}
+@mixin edContainer {
+  @extend %ed-container;
+
+  @if $devMode == true {
+    @include devModeContainer();
+  }
+}
+
+/// Hace que un elemento siempre mida el 100% del ancho disponible
+/// @group layouts
+/// @author Alvaro Felipe
+/// @example scss
+/// .full {
+///   @include full;
+/// }
+@mixin full {
+  max-width : 100%;
+}
+
+@mixin edItemWidth($currentBp, $prevBp, $coreBp){
+  // Si el tamaño actual es diferente al previo
+  // asignará el ancho en porcentaje
+  @if $currentBp != $prevBp{
+    @if $currentBp < 1 {
+      @include from($coreBp){
+        width : $currentBp * 100%;
+      }
+    }
+    @else {
+      @include from($coreBp){
+        width : $currentBp * 1%;
+      }
+    }
+  }
+}
+
+
+/// mixin para crear un ed-item
+/// Description
+/// Los argumentos que acepta son las diferentes medidas que tendra el elemento en diferentes resoluciones de pantalla.
+/// Las medidas pueden especificarse como porcentajes ( %  ) o como fracciones (1/3, 3/3 o 3/6, 2/6).
+/// @group layouts
+/// @author  Alvaro Felipe
+/// @param   {number} $s - para resoluciones entre 0px y 640px
+/// @param   {number} $m - para resoluciones entre 640px y 1024px
+/// @param   {number} $l - para resoluciones entre 1024px y 1440px
+/// @param   {number} $xl - para resoluciones desde 1440px en adelante.
+/// @example scss
+///   .container {
+///     @include edContainer;
+///   }
+///
+///   .content {
+///     @include edItem(100, 75, 60);
+///   }
+///   .sidebar {
+///     @include edItem(100, 25, 40);
+///   }
+@mixin edItem($s:100,$m:$s,$l:$m,$xl:$l) {
+  @extend %ed-item;
+
+  @if $devMode == true {
+    @include devModeItem();
+  }
+
+  // calcular el ancho para el primer breakpoint
+  // por defecto es 100% y se convertirá al porcentaje adecuado
+  // según el valor que se le pase
+  @if $s == 100 {
+    width: 100%;
+  } @else if $s < 1 {
+    width : $s * 100%;
+  } @else {
+    width : $s * 1%;
+  }
+
+  // widths for others breakpoints
+  // anchos para los demás breakpoints
+  @include edItemWidth($m,$s,m); //medium
+  @include edItemWidth($l,$m,l); //large
+  @include edItemWidth($xl,$l,xl); //xlarge
+}
+
+// crear un ed-container
+.#{$container} { @include edContainer() }
+
+// crear un ed-item
+.#{$item} {
+  @include edItem();
+
+  // un ed-item a la vez puede ser ed-container
+  // para evitar anidaciones innecesarias
+  &.#{$container}{
+    padding-left : 0;
+    padding-right : 0;
+  }
+}
+
+// Breakpoints
+@mixin coreGrid(){
+  @each $size, $screen-size in $breakpoints{
+    @if $size == s {
+      @for $i from 1 through 20 {
+        .s-#{$i*5},
+        .#{$item}.s-#{$i*5} {
+          width: $i * 5%;
+        }
+      }
+      @each $fraction in $fractions{
+        @for $i from 1 through $fraction{
+          .s-#{$i}-#{$fraction},
+          .#{$item}.s-#{$i}-#{$fraction} {
+            width: (100% / $fraction) * $i;
+          }
+        }
+      }
+    } @else {
+      @media all and (min-width: $screen-size){
+        @for $i from 1 through 20 {
+          .#{$size}-#{$i*5},
+          .#{$item}.#{$size}-#{$i*5}{
+            width: $i * 5%;
+          }
+        }
+        @each $fraction in $fractions {
+          @for $i from 1 through $fraction{
+            .#{$size}-#{$i}-#{$fraction},
+            .#{$item}.#{$size}-#{$i}-#{$fraction} {
+              width: (100% / $fraction) * $i
+            }
+          }
+        }
+      }
+    }
+  }
+}

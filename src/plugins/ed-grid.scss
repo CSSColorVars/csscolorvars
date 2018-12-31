@@ -1,5 +1,5 @@
 //Funciones para convertir px a em y rem
-@import "node_modules/ed-grid/components/functions";
+@import "src/sass/components/functions";
 
 // Variables globales (puede sobreescribirlas antes de importar ED grid)
 // No las sobreescriba aquí, sino desde su proyecto.
@@ -31,19 +31,19 @@
   $fractions : 3 6 !default;
 
 // Importar componentes
-@import "node_modules/ed-grid/components/base";            // estilos base
-@import "node_modules/ed-grid/components/media-queries";   // mixins from(), to(), fromTo()
-@import "node_modules/ed-grid/components/helpers";         // utilidades
-// @import "node_modules/ed-grid/components/dev";             // modo dev
-@import "node_modules/ed-grid/components/core";            // core de EDgrid (containers y items)
-// @import "node_modules/ed-grid/components/grid";            // mixin grid()
-@import "node_modules/ed-grid/components/visibility";      // mixins para visibilidad
-@import "node_modules/ed-grid/components/video";           // video RWD
-// @import "node_modules/ed-grid/components/ed-menu";         // estilos para menus
-@import "node_modules/ed-grid/components/flexbox";         // utilidades con flexbox
-// @import "node_modules/ed-grid/components/offset";          // offsets
-// @import "node_modules/ed-grid/components/buttons";         // mixin button()
-// @import "node_modules/ed-grid/components/css-core";        // componentes que se compilaran por default a css
-@import "node_modules/ed-grid/components/css-helpers";     // ayudas en css (por medio de clases)
-// @import "node_modules/ed-grid/components/grid-v3";         // ayudas en css (por medio de clases)
-@import "node_modules/ed-grid/components/layout";          // l-block y l-section
+@import "src/sass/components/base";            // estilos base
+@import "src/sass/components/media-queries";   // mixins from(), to(), fromTo()
+@import "src/sass/components/helpers";         // utilidades
+// @import "src/sass/components/dev";             // modo dev
+@import "src/sass/components/core";            // core de EDgrid (containers y items)
+// @import "src/sass/components/grid";            // mixin grid()
+@import "src/sass/components/visibility";      // mixins para visibilidad
+@import "src/sass/components/video";           // video RWD
+// @import "src/sass/components/ed-menu";         // estilos para menus
+@import "src/sass/components/flexbox";         // utilidades con flexbox
+// @import "src/sass/components/offset";          // offsets
+// @import "src/sass/components/buttons";         // mixin button()
+// @import "src/sass/components/css-core";        // componentes que se compilaran por default a css
+@import "src/sass/components/css-helpers";     // ayudas en css (por medio de clases)
+// @import "src/sass/components/grid-v3";         // ayudas en css (por medio de clases)
+@import "src/sass/components/layout";          // l-block y l-section
