@@ -1,6 +1,6 @@
 <template>
   <div class="header--value nds-item">
-    <v-text-field :dark="dark"
+    <v-text-field v-if="!state" :dark="dark"
       label="Value"
       :color="dark ? '#FFF' : '#393939'"
       maxlength="7"
@@ -8,7 +8,18 @@
       :value="value"
       @keyup="update"
       @keypress="keypressValue"
-      :error-messages="!state ? 'Enter a hexadecimal color' : ''"
+      error-messages="Enter a hexadecimal color"
+      box
+    >
+    </v-text-field>
+    <v-text-field v-else :dark="dark"
+      label="Value"
+      :color="dark ? '#FFF' : '#393939'"
+      maxlength="7"
+      :placeholder="value"
+      :value="value"
+      @keyup="update"
+      @keypress="keypressValue"
       box
     >
     </v-text-field>
