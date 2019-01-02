@@ -20,7 +20,7 @@
             </v-list-tile-avatar>
 
             <v-list-tile-content>
-              <v-list-tile-title>Colours pallette</v-list-tile-title>
+              <v-list-tile-title>CSS ColorVars</v-list-tile-title>
             </v-list-tile-content>
 
             <v-list-tile-action>

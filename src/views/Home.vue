@@ -6,20 +6,24 @@
     <nds-notification></nds-notification>
     <nds-getcode></nds-getcode>
     <footer class="nds-footer nds-container full">
-      <div class="nds-item l-20 nds-container center">
-        <!-- <div class="nds-item l-100 s-50 l-block">
-          <a href="">Guide</a> .
-          <a href="">API</a>
-        </div> -->
-        <div class="nds-item l-100 s-50 l-block">
+      <div class="nds-item l-20 menu-footer nds-container center">
+        <div class="nds-item l-block darkfrom-l">
+          &nbsp;·&nbsp;
+          <a href="guide" target="_blank">Guide</a>&nbsp;&nbsp;·&nbsp;
+          <a href="#" target="_blank">About</a>
+          <!-- &nbsp;&nbsp;·&nbsp; -->
+          <!-- <a href="#" target="_blank">API</a> -->
+        </div>
+        <div class="nds-item l-block">
           <!-- Place this tag where you want the button to render. -->
           <a class="github-button" href="https://github.com/CSSColorVars/csscolorvars" data-show-count="true" aria-label="Star ntkme/github-buttons on GitHub">Star</a>
         </div>
       </div>
       <div class="nds-item l-80 copyright cross-end">
-        <p class="cross-center">
+        <hr class="to-l">
+        <p class="cross-center main-center">
           create by&nbsp;
-          <a href="https://twitter.com/2062nandes" target="_blank"><b>Fernando Javier Averanga Aruquipa</b></a>
+          <a class="inline" href="https://twitter.com/2062nandes" target="_blank"><b>Fernando Javier Averanga Aruquipa</b></a>
           &nbsp;·&nbsp;
           <a href="https://twitter.com/2062nandes?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @2062nandes</a>
         </p>
@@ -47,8 +51,47 @@ export default {
 </script>
 <style lang="scss">
   @import 'src/sass/mixins.scss';
+  .darkfrom-l{
+    color: rgba(0, 0, 0, 0.54);
+    a{
+      position: relative;
+      color: rgba(0, 0, 0, 0.54);
+      padding-bottom: 3px;
+      &:hover {
+        color: #303030;
+        &::before{
+        left: 0;
+        right: 0;
+        }
+      }
+      &::before {
+        content: "";
+        position: absolute;
+        left: 51%;
+        right: 51%;
+        bottom: 0;
+        background: #303030;
+        height: 3px;
+        transition-property: left, right;
+        transition-duration: 0.3s;
+        transition-timing-function: ease-out;
+      }
+    }
+    @include from(l){
+      color: #c4c4c4;
+      a{
+        color: #c4c4c4;
+        &:hover {
+          color: #FFF;
+        }
+        &::before {
+          background: #FFF;
+        }
+      }
+    }
+  }
   .nds-footer {
-    bottom: 1rem;;
+    bottom: 1rem;
     @include from(l){
       position: fixed;
       left: 0;
@@ -58,7 +101,29 @@ export default {
   .center{
     text-align: center;
   }
+  @include to(l){
+    .menu-footer.nds-item.nds-container{
+      padding-right: 80px;
+    }
+  }
   .copyright{
     padding-left: 1rem;
+    padding-right: 80px;
+    color: rgba(0, 0, 0, 0.54);
+    a{
+      color: rgba(0, 0, 0, 0.54);
+      &:hover{
+        color: #303030;
+      }
+    }
+    p{
+      @include to(l){
+        text-align: center;
+        width: 100%;
+      }
+    }
+    .inline{
+      display: inline-block;
+    }
   }
 </style>
