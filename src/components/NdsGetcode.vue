@@ -227,7 +227,6 @@ pre[class*="language-"] {
   -moz-hyphens: none;
   -ms-hyphens: none;
   hyphens: none;
-
 }
 
 /* Code blocks */
@@ -275,7 +274,7 @@ pre[class*="language-"] {
   position: fixed;
   bottom: 0;
   right: 0;
-  z-index: $z-modal;
+  z-index: $z-fixed;
   @include crossCenter;
 }
 :not(pre) > code[class*="language-"],

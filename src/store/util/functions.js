@@ -16,10 +16,10 @@ const gradientActive = (gradient, p) => {
   return { selectGradient, hashColor }
 }
 const valInvert = (invertVal, invertValOb) => {
-  if (invertValOb.l > 50) {
+  if (invertValOb.l > 35) {
     invertVal = '#f1f1f1'
   } else {
-    invertVal = '#1d1d1d'
+    invertVal = '#3e3e3e'
   }
   return invertVal
 }
@@ -88,10 +88,10 @@ export const invertVal = (p) => {
   value = Color(p.value).hsl()
   invertValOb = value.grayscale().negate().hsl().object()
   value = value.hex()
-  if (invertValOb.l > 50) {
+  if (invertValOb.l > 65) {
     invertVal = '#f1f1f1'
   } else {
-    invertVal = '#1d1d1d'
+    invertVal = '#3e3e3e'
   }
   return invertVal
 }
@@ -102,10 +102,10 @@ export const rgbaInvertVal = (p) => {
   value = Color(p.value).hsl()
   invertValOb = value.grayscale().negate().hsl().object()
   value = value.hex()
-  if (p.rgba.alpha > 0.5) {
+  if (p.rgba.alpha > 0.40) {
     invertVal = valInvert(invertVal, invertValOb)
   } else {
-    invertVal = '#1d1d1d'
+    invertVal = '#3e3e3e'
   }
   return invertVal
 }
