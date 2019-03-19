@@ -32,7 +32,7 @@
       </v-tab-item>
     </v-tabs-items>
   </main>
-  <main v-else class="main-main nds-container nds-item l-80 application theme--light">
+  <main v-else class="main-main nds-container nds-item l-80 application theme--light full">
     <!-- Light Colors -->
     <nds-lighten></nds-lighten>
     <!-- Dark Colors -->

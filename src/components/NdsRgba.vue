@@ -6,21 +6,20 @@
       :value="colorActive.value"
       :amount="colorActive.rgba.alpha"
       :updateAmount="updateAlphat"
-      :minAmount="colorActive.minAmount"
+      :minAmount="colorActive.minAmount*100"
       :maxAmount="colorActive.rgba.max"
-      :maxLength= "colorActive.rgba.alpha < 1 ? '4' : '1' "
+      :maxLength= "colorActive.rgba.alpha*100 < 100 ? '4' : '100' "
       label="Alpha:"
       :step="colorActive.rgba.step"
       :invertvalue="invertvalue"
-    >Rgba colors
+    >Rgba color
     </color-header>
     <div class="nds-item" slot="jump">
       <v-slider class="opacity--slider"
         :value="colorActive.rgba.alpha"
         @input="updateAlpha"
-        max=1
+        max=100
         min=0
-        step="0.01"
         color="transparent"
         label="Rbga"
         thumb-color="#dadada"
@@ -29,28 +28,38 @@
       ></v-slider>
     </div>
     <color-main>
-      --rgb-{{colorActive.property}}
-      <color-card>
-        {{rgbValues.r}}, {{rgbValues.g}}, {{rgbValues.b}}
-      </color-card>
-      <color-card class="card--rgba"
-        :color="'rgba(' + rgbValues.r + ',' + rgbValues.g + ',' + rgbValues.b + ',' + colorActive.rgba.alpha + ')'"
-      >
-        <div :style="'background: rgba(' + rgbValues.r + ',' + rgbValues.g + ',' + rgbValues.b + ',' + colorActive.rgba.alpha + ')'">
-          <v-list-tile-content>
-            <v-list-tile-title class="t4" :style="'color:' + rgbInvertValue + ';'">rgba(var(--rgb-{{colorActive.property}}), {{colorActive.rgba.alpha}})</v-list-tile-title>
-            <v-list-tile-sub-title :style="'color:' + rgbInvertValue + ';'">rgba({{rgbValues.r}}, {{rgbValues.g}}, {{rgbValues.b}}, {{colorActive.rgba.alpha}})</v-list-tile-sub-title>
-          </v-list-tile-content>
-          <v-btn
-            icon ripple
-            v-clipboard:copy="`rgba(var(--rgb-${colorActive.property}), ${colorActive.rgba.alpha})`"
-            v-clipboard:success="updateNotification"
-            v-clipboard:error="updateError"
-          >
-            <v-icon :color="rgbInvertValue">file_copy</v-icon>
-          </v-btn>
+      <div class="nds-item l-block">
+        <p class="center">rgba(var(--{{ colorActive.property }}-RGB), {{ colorActive.rgba.alpha/100 }})</p>
+        <div class="card--valuecolor center"
+          :color="'rgba(' + rgbValues.r + ',' + rgbValues.g + ',' + rgbValues.b + ',' + colorActive.rgba.alpha + ')'"
+          v-clipboard:copy="`rgba(var(--rgb-${colorActive.property}), ${colorActive.rgba.alpha/100})`"
+          v-clipboard:success="updateNotification"
+          v-clipboard:error="updateError"
+          :style="'--rgba-color: rgba(' + rgbValues.r + ',' + rgbValues.g + ',' + rgbValues.b + ',' + colorActive.rgba.alpha/100 + ');'"
+        >
+            <span class="card--textcolor" :style="'color:' + rgbInvertValue + ';'">Copy value</span>
+            <v-btn
+              icon ripple
+              v-clipboard:copy="`rgba(var(--rgb-${colorActive.property}), ${colorActive.rgba.alpha/100})`"
+              v-clipboard:success="updateNotification"
+              v-clipboard:error="updateError"
+            >
+              <v-icon :color="rgbInvertValue">file_copy</v-icon>
+            </v-btn>
         </div>
-      </color-card>
+      </div>
+      <hr>
+        <h2>Static values:</h2>
+      <div class="nds-item nds-container main-center">
+        <div class="nds-item s-25 center"><b>R</b></div>
+        <div class="nds-item s-25 center"><b>G</b></div>
+        <div class="nds-item s-25 center"><b>B</b></div>
+        <div class="nds-item s-25 center"><b>A</b></div>
+        <div class="nds-item s-25 center">{{ rgbValues.r }}</div>
+        <div class="nds-item s-25 center">{{ rgbValues.g }}</div>
+        <div class="nds-item s-25 center">{{ rgbValues.b }}</div>
+        <div class="nds-item s-25 center">{{ colorActive.rgba.alpha/100 }}</div>
+      </div>
     </color-main>
   </color-container>
 </template>
@@ -114,12 +123,30 @@ export default {
       }
     }
   }
-  .card--rgba{
-    &>.card--color{
-      min-width: 200px;
-      background-image: url(../assets/alpha.png);
-      background-size: 11px;
-      background-repeat: repeat;
+  .card--textcolor{
+    position: relative;
+  }
+  .card--valuecolor{
+    position: relative;
+    height: 300px;
+    @include mainCenter;
+    @include crossCenter;
+    background-image: url(../assets/alpha.png);
+    background-repeat: repeat;
+    border-radius: 10px;
+    box-shadow: 1px 1px 4px 0px #adadad;
+    overflow: hidden;
+    transition: .5s transform;
+    &:active{
+      transform: scale(.97);
+    }
+    &::before{
+      content: '';
+      display: flex;
+      position: absolute;
+      width: 100%;
+      height: 300px;
+      background: var(--rgba-color);
       margin-bottom: 0;
     }
     .v-card__title{

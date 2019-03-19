@@ -5,7 +5,7 @@ const state = [
     value: '#1671b9',
     valueState: true,
     minAmount: 0,
-    minJump: 1,
+    minJump: 0,
     lighten: {
       amount: 10,
       jump: 5
@@ -15,9 +15,9 @@ const state = [
       jump: 5
     },
     rgba: {
-      alpha: 0.5,
-      max: 1,
-      step: 0.01
+      alpha: 50,
+      max: 100,
+      step: 1
     },
     edit: true
   }

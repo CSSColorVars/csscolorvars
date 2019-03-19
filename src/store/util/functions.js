@@ -62,25 +62,6 @@ export const gradientColors = (p, gradient = 'lighten') => {
   }
   return gradients
 }
-export const gradientMax = (p, gradient = 'lighten') => {
-  let value
-  let valueOb
-  let i
-  let sg = gradientActive(gradient, p).selectGradient
-  let hashColor = gradientActive(gradient, p).hashColor
-  for (i = 1; value !== hashColor; i++) {
-    value = Color(p.value).hsl()
-    valueOb = value.object()
-    if (gradient === 'darken') {
-      valueOb.l = valueOb.l - (sg.jump * i)
-    } else {
-      valueOb.l = valueOb.l + (sg.jump * i)
-    }
-    value = Color({ h: valueOb.h, s: valueOb.s, l: valueOb.l })
-    value = value.hex()
-  }
-  return i - 2
-}
 export const invertVal = (p) => {
   let value
   let invertVal
@@ -88,7 +69,7 @@ export const invertVal = (p) => {
   value = Color(p.value).hsl()
   invertValOb = value.grayscale().negate().hsl().object()
   value = value.hex()
-  if (invertValOb.l > 65) {
+  if (invertValOb.l > 35) {
     invertVal = '#f1f1f1'
   } else {
     invertVal = '#3e3e3e'
@@ -102,8 +83,36 @@ export const rgbaInvertVal = (p) => {
   value = Color(p.value).hsl()
   invertValOb = value.grayscale().negate().hsl().object()
   value = value.hex()
-  if (p.rgba.alpha > 0.40) {
+  if (p.rgba.alpha > 35) {
     invertVal = valInvert(invertVal, invertValOb)
+  } else {
+    invertVal = '#3e3e3e'
+  }
+  return invertVal
+}
+export const lightenInvertVal = (p) => {
+  let value
+  let invertVal
+  let invertValOb
+  value = Color(p.value).hsl()
+  invertValOb = value.grayscale().negate().hsl().object()
+  value = value.hex()
+  if (invertValOb.l - p.lighten.jump > 35) {
+    invertVal = '#f1f1f1'
+  } else {
+    invertVal = '#3e3e3e'
+  }
+  return invertVal
+}
+export const darkenInvertVal = (p) => {
+  let value
+  let invertVal
+  let invertValOb
+  value = Color(p.value).hsl()
+  invertValOb = value.grayscale().negate().hsl().object()
+  value = value.hex()
+  if (invertValOb.l + p.darken.jump > 35) {
+    invertVal = '#f1f1f1'
   } else {
     invertVal = '#3e3e3e'
   }
@@ -115,26 +124,11 @@ export const rbgObject = (p) => {
   return values
 }
 
+export const hslObject = (p) => {
+  let values
+  values = Color(p.value).hsl().round().array()
+  return values
+}
 /*
  *  Mutations Functions
  */
-export const setAmount = (p, amount, gradient = 'lighten') => {
-  let value
-  let j
-  let sg = gradientActive(gradient, p).selectGradient
-  let hashColor = gradientActive(gradient, p).hashColor
-  for (j = 1; value !== hashColor; j++) {
-    let jump = sg.jump * j
-    value = hslValue(jump, gradient, p)
-    value = value.hex()
-  }
-  if (amount.target.value >= 0) {
-    if (amount.target.value < j - 2) {
-      sg.amount = amount.target.value
-    } else {
-      sg.amount = j - 2
-    }
-  } else {
-    sg.amount = p.minAmount
-  }
-}

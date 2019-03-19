@@ -71,7 +71,7 @@ export default {
   h6, .smaller    { font-size : var(--smaller); }
   // l-block
   .l-block{
-    margin-bottom: .5rem;
+    margin-bottom: 1rem;
   }
   //spacer
   hr{

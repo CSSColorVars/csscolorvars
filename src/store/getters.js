@@ -1,4 +1,4 @@
-import { gradientColors, gradientMax, invertVal, rgbaInvertVal, rbgObject } from './util/functions'
+import { gradientColors, invertVal, rgbaInvertVal, rbgObject, hslObject, lightenInvertVal, darkenInvertVal } from './util/functions'
 
 export const getters = {
   invertvalue: (state) => {
@@ -25,27 +25,36 @@ export const getters = {
       }
     }
   },
-  lightMax: (state) => {
-    for (let s = 0; s < state.palleteColors.length; s++) {
-      let p = state.palleteColors[s]
-      if (p.edit === true) {
-        return gradientMax(p)
-      }
-    }
-  },
-  darkMax: (state) => {
-    for (let s = 0; s < state.palleteColors.length; s++) {
-      let p = state.palleteColors[s]
-      if (p.edit === true) {
-        return gradientMax(p, 'darken')
-      }
-    }
-  },
   rgbValues: (state) => {
     for (let s = 0; s < state.palleteColors.length; s++) {
       let p = state.palleteColors[s]
       if (p.edit === true) {
         return rbgObject(p)
+      }
+    }
+  },
+  hslValues: (state) => {
+    for (let s = 0; s < state.palleteColors.length; s++) {
+      let p = state.palleteColors[s]
+      if (p.edit === true) {
+        console.log(hslObject(p))
+        return hslObject(p)
+      }
+    }
+  },
+  lightenInvertValue: (state) => {
+    for (let s = 0; s < state.palleteColors.length; s++) {
+      let p = state.palleteColors[s]
+      if (p.edit === true) {
+        return lightenInvertVal(p)
+      }
+    }
+  },
+  darkenInvertValue: (state) => {
+    for (let s = 0; s < state.palleteColors.length; s++) {
+      let p = state.palleteColors[s]
+      if (p.edit === true) {
+        return darkenInvertVal(p)
       }
     }
   },

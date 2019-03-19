@@ -5,12 +5,12 @@
         :min="minJump"
         :max="maxJumpForce"
         @input="updateJump"
-        :thumb-color="maxJump < 1 ? 'red' : 'green'"
+        :thumb-color="color"
         thumb-label="always"
         thumb-size="24"
         :label="label"
         always-dirty
-        :color="maxJump < 1 ? 'red' : 'green'"
+        :color="color"
     ></v-slider>
   </div>
 </template>
@@ -33,11 +33,10 @@ export default {
       type: Number,
       required: true
     },
-    maxJump: {
-      required: true
+    color: {
+      type: String
     },
     maxJumpForce: {
-      type: String
     }
   }
 }

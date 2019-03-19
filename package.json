@@ -12,19 +12,19 @@
   },
   "dependencies": {
     "color": "^3.1.0",
-    "vue": "^2.5.21",
-    "vue-clipboard2": "^0.2.1",
+    "vue": "^2.6.9",
+    "vue-clipboard2": "^0.3.0",
     "vue-router": "^3.0.2",
-    "vuetify": "^1.4.0",
-    "vuex": "^3.0.1",
+    "vuetify": "^1.5.6",
+    "vuex": "^3.1.0",
     "vuex-persistedstate": "^2.5.4"
   },
   "devDependencies": {
     "@babel/polyfill": "^7.2.5",
-    "@vue/cli-plugin-babel": "^3.2.2",
-    "@vue/cli-plugin-eslint": "^3.2.2",
-    "@vue/cli-service": "^3.2.2",
-    "@vue/eslint-config-standard": "^3.0.5",
+    "@vue/cli-plugin-babel": "^3.5.1",
+    "@vue/cli-plugin-eslint": "^3.5.1",
+    "@vue/cli-service": "^3.5.1",
+    "@vue/eslint-config-standard": "^4.0.0",
     "babel-plugin-transform-imports": "^1.5.1",
     "node-sass": "^4.11.0",
     "postcss-custom-properties": "^8.0.9",
@@ -32,7 +32,7 @@
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1",
     "vue-cli-plugin-vuetify": "^0.4.6",
-    "vue-template-compiler": "^2.5.21",
-    "vuepress": "^0.14.8"
+    "vue-template-compiler": "^2.6.9",
+    "vuepress": "^0.14.10"
   }
 }

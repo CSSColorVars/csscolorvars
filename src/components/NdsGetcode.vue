@@ -65,7 +65,7 @@
 </template>
 <script>
 import { mapState } from 'vuex'
-import { gradientColors } from '@/store/util/functions'
+// import { gradientColors } from '@/store/util/functions'
 export default {
   name: 'NdsGetcode',
   data () {
@@ -95,47 +95,13 @@ export default {
       let html = ''
       let text = ''
       for (let i = 0; i < this.palleteColors.length; i++) {
-        const p = this.palleteColors[i]
-        for (let j = 0; j < gradientColors(p).length; j++) {
-          let lighten = gradientColors(p)[gradientColors(p).length - j - 1]
-          if (gradientColors(p).length - 1 !== j || this.palleteColors.length - 1 !== i) {
-            html = `${html}<span class="code-property">--${p.property}-light-${gradientColors(p).length - j}</span>: <span class="code-value" style="--value-color: ${lighten.color};">${lighten.color}</span>;
-  `
-            text = `${text}--${p.property}-light-${gradientColors(p).length - j}: ${lighten.color};
-  `
-          } else {
-            html = `${html}<span class="code-property">--${p.property}-light-${gradientColors(p).length - j}</span>: <span class="code-value" style="--value-color: ${lighten.color};">${lighten.color}</span>;`
-            text = `${text}--${p.property}-light-${gradientColors(p).length - j}: ${lighten.color};`
-          }
-        }
         if (i === this.palleteColors.length - 1) {
           html = `${html}
   `
           text = `${text}
   `
         }
-        if (gradientColors(p).length < 0) {
-          html = `${html}
-  `
-          text = `${text}
-  `
-        }
-        for (let j = 0; j < gradientColors(p, 'darken').length; j++) {
-          let darken = gradientColors(p, 'darken')[j]
-          if (gradientColors(p, 'darken').length - 1 !== j || this.palleteColors.length - 1 !== i) {
-            html = `${html}<span class="code-property">--${p.property}-dark-${j + 1}</span>: <span class="code-value" style="--value-color: ${darken.color};">${darken.color}</span>;
-  `
-            text = `${text}--${p.property}-dark-${j + 1}: ${darken.color};
-  `
-          } else {
-            html = `${html}<span class="code-property">--${p.property}-dark-${j + 1}</span>: <span class="code-value" style="--value-color: ${darken.color};">${darken.color}</span>;`
-            text = `${text}--${p.property}-dark-${j + 1}: ${darken.color};`
-          }
-        }
       }
-      html = `<span class="code-selector">:root</span> {
-  ${html}
-}`
       text = `:root {
   ${text}
 }`
@@ -161,12 +127,10 @@ export default {
       }
       html = `<span class="code-selector">:root</span> {
   ${html}
-}
-${this.colorCSS.html}`
+}`
       text = `:root {
   ${text}
-}
-${this.colorCSS.text}`
+}`
       return {
         html,
         text

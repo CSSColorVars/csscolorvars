@@ -1,4 +1,4 @@
-import { setAmount } from './util/functions'
+// import {  } from './util/functions'
 
 export const mutations = {
   updateProperty (state, prop) {
@@ -33,14 +33,6 @@ export const mutations = {
       }
     }
   },
-  updateLightAmount (state, amount) {
-    for (let i = 0; i < state.palleteColors.length; i++) {
-      let p = state.palleteColors[i]
-      if (p.edit === true) {
-        setAmount(p, amount)
-      }
-    }
-  },
   updateLightJump (state, jump) {
     for (let i = 0; i < state.palleteColors.length; i++) {
       let p = state.palleteColors[i]
@@ -49,11 +41,16 @@ export const mutations = {
       }
     }
   },
-  updateDarkAmount (state, amount) {
+  updateLightJumpt (state, lighten) {
     for (let s = 0; s < state.palleteColors.length; s++) {
       let p = state.palleteColors[s]
       if (p.edit === true) {
-        setAmount(p, amount, 'darken')
+        if (lighten.target.value <= 100) {
+          p.lighten.jump = lighten.target.value
+        } else {
+          lighten.target.value = 100
+          p.lighten.jump = 100
+        }
       }
     }
   },
@@ -65,15 +62,28 @@ export const mutations = {
       }
     }
   },
+  updateDarkJumpt (state, darken) {
+    for (let s = 0; s < state.palleteColors.length; s++) {
+      let p = state.palleteColors[s]
+      if (p.edit === true) {
+        if (darken.target.value <= 100) {
+          p.darken.jump = darken.target.value
+        } else {
+          darken.target.value = 100
+          p.darken.jump = 100
+        }
+      }
+    }
+  },
   updateAlphat (state, alpha) {
     for (let s = 0; s < state.palleteColors.length; s++) {
       let p = state.palleteColors[s]
       if (p.edit === true) {
-        if (alpha.target.value <= 1) {
+        if (alpha.target.value <= 100) {
           p.rgba.alpha = alpha.target.value
         } else {
-          alpha.target.value = 1
-          p.rgba.alpha = 1
+          alpha.target.value = 100
+          p.rgba.alpha = 100
         }
       }
     }

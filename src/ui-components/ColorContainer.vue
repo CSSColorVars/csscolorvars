@@ -4,7 +4,6 @@
     <slot name="jump"></slot>
     <hr>
     <slot></slot>
-    <hr>
   </section>
 </template>
 <style lang="scss">
