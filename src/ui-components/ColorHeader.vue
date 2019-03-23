@@ -139,4 +139,7 @@ export default {
   input::-webkit-inner-spin-button {
     opacity: 1;
   }
+  .v-text-field.v-text-field--enclosed > .v-input__control > .v-input__slot{
+    padding: 0;
+  }
 </style>

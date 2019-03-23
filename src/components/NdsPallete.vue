@@ -42,12 +42,11 @@
           :key="item.property"
           avatar
           @dblclick.stop="mini = !mini"
-          @click=""
+          @click="`javascript:void()`"
         >
           <v-list-tile-avatar @click="TOGGLE_COLOR(id)">
-            <v-icon :style="'color:' + invertvalue + ';background-color:'+ item.value +';'" v-text="item.edit ? 'brush' : ''"></v-icon>
+            <v-icon :style="'border: solid #FFF 1px; color:' + invertvalue + ';background-color:'+ item.value +';'" v-text="item.edit ? 'brush' : ''"></v-icon>
           </v-list-tile-avatar>
-
           <v-list-tile-content @click="TOGGLE_COLOR(id)">
             <v-list-tile-title>--{{ item.property }}-color</v-list-tile-title>
           </v-list-tile-content>
@@ -57,6 +56,7 @@
             </v-btn>
           </v-list-tile-action>
         </v-list-tile>
+        <div class="l-block"></div>
         <v-toolbar flat class="transparent">
           <v-list class="pa-0">
             <v-divider></v-divider>
@@ -121,5 +121,8 @@ export default {
   .toolbar--end{
     align-self: flex-end;
     margin-bottom: 5rem;
+  }
+  .v-avatar i{
+    border-radius: solid 1px #FFF !important;
   }
 </style>

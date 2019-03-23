@@ -7,10 +7,10 @@
       :amount="colorActive.rgba.alpha"
       :updateAmount="updateAlphat"
       :minAmount="colorActive.minAmount*100"
-      :maxAmount="colorActive.rgba.max"
+      :maxAmount="colorActive.rgba.max*100"
       :maxLength= "colorActive.rgba.alpha*100 < 100 ? '4' : '100' "
       label="Alpha:"
-      :step="colorActive.rgba.step"
+      :step="colorActive.rgba.step*100"
       :invertvalue="invertvalue"
     >Rgba color
     </color-header>
@@ -32,7 +32,7 @@
         <p class="center">rgba(var(--{{ colorActive.property }}-RGB), {{ colorActive.rgba.alpha/100 }})</p>
         <div class="card--valuecolor center"
           :color="'rgba(' + rgbValues.r + ',' + rgbValues.g + ',' + rgbValues.b + ',' + colorActive.rgba.alpha + ')'"
-          v-clipboard:copy="`rgba(var(--rgb-${colorActive.property}), ${colorActive.rgba.alpha/100})`"
+          v-clipboard:copy="`rgba(var(--${colorActive.property}-RGB), ${colorActive.rgba.alpha/100})`"
           v-clipboard:success="updateNotification"
           v-clipboard:error="updateError"
           :style="'--rgba-color: rgba(' + rgbValues.r + ',' + rgbValues.g + ',' + rgbValues.b + ',' + colorActive.rgba.alpha/100 + ');'"
@@ -40,7 +40,7 @@
             <span class="card--textcolor" :style="'color:' + rgbInvertValue + ';'">Copy value</span>
             <v-btn
               icon ripple
-              v-clipboard:copy="`rgba(var(--rgb-${colorActive.property}), ${colorActive.rgba.alpha/100})`"
+              v-clipboard:copy="`rgba(var(--${colorActive.property}-RGB), ${colorActive.rgba.alpha/100})`"
               v-clipboard:success="updateNotification"
               v-clipboard:error="updateError"
             >
@@ -49,8 +49,11 @@
         </div>
       </div>
       <hr>
-        <h2>Static values:</h2>
+      <h2>Static values:</h2>
       <div class="nds-item nds-container main-center">
+        <!-- <div class="nds-item s-100">
+          rgba({{ rgbValues.r }}, {{ rgbValues.g }}, {{ rgbValues.b }}, {{ colorActive.rgba.alpha/100 }})
+        </div> -->
         <div class="nds-item s-25 center"><b>R</b></div>
         <div class="nds-item s-25 center"><b>G</b></div>
         <div class="nds-item s-25 center"><b>B</b></div>
@@ -64,6 +67,7 @@
   </color-container>
 </template>
 <script>
+import Color from 'color'
 import ColorContainer from '@/ui-components/ColorContainer.vue'
 import ColorHeader from '@/ui-components/ColorHeader.vue'
 import ColorMain from '@/ui-components/ColorMain.vue'
@@ -80,7 +84,11 @@ export default {
     ColorJump
   },
   computed: {
-    ...mapGetters(['colorActive', 'rgbValues', 'rgbaMax', 'invertvalue', 'rgbInvertValue'])
+    ...mapGetters(['colorActive', 'rgbValues', 'rgbaMax', 'invertvalue', 'rgbInvertValue']),
+    hslaValue: function () {
+      let nds = Color('rgba(' + this.rgbValues.r + ',' + this.rgbValues.g + ',' + this.rgbValues.b + ',' + this.colorActive.rgba.alpha / 100 + ')').hsl().round()
+      return nds
+    }
   },
   methods: {
     ...mapMutations(['updateAlpha', 'updateAlphat', 'closeNotification', 'updateNotification', 'updateError'])
@@ -139,6 +147,9 @@ export default {
     transition: .5s transform;
     &:active{
       transform: scale(.97);
+    }
+    &:hover{
+      cursor: pointer;
     }
     &::before{
       content: '';

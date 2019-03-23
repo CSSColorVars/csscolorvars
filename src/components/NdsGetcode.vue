@@ -4,7 +4,6 @@
         <v-tabs v-model="active">
           <v-tabs-slider color="yellow" :style="dialog2 ? activeTab() : '' "></v-tabs-slider>
           <v-tab ripple href="#css">CSS</v-tab>
-          <v-tab ripple href="#scss">SCSS</v-tab>
           <v-tab ripple href="#json">JSON</v-tab>
           <v-tab ripple href="#snippets">SNIPPETS</v-tab>
         </v-tabs>
@@ -14,14 +13,6 @@
               <pre class="language-css code-toolbar">
                 <code class="language-css" v-html="codeCSS.html"></code>
               </pre>
-            </v-card>
-          </v-tab-item>
-          <v-tab-item value="scss">
-            <v-card flat>
-              <pre class="language-scss code-toolbar">
-                <code class="language-scss" v-html="code">
-                </code>
-                </pre>
             </v-card>
           </v-tab-item>
           <v-tab-item value="json">
@@ -65,7 +56,7 @@
 </template>
 <script>
 import { mapState } from 'vuex'
-// import { gradientColors } from '@/store/util/functions'
+import { hslObject, rbgObject } from '@/store/util/functions'
 export default {
   name: 'NdsGetcode',
   data () {
@@ -75,7 +66,7 @@ export default {
       right: true,
       dialog2: false,
       active: 'css',
-      code: `jeje`,
+      code: `Developing`,
       btnCode: true
     }
   },
@@ -91,25 +82,6 @@ export default {
   },
   computed: {
     ...mapState(['palleteColors']),
-    colorCSS: function () {
-      let html = ''
-      let text = ''
-      for (let i = 0; i < this.palleteColors.length; i++) {
-        if (i === this.palleteColors.length - 1) {
-          html = `${html}
-  `
-          text = `${text}
-  `
-        }
-      }
-      text = `:root {
-  ${text}
-}`
-      return {
-        html,
-        text
-      }
-    },
     codeCSS: function () {
       let html = ''
       let text = ''
@@ -117,17 +89,26 @@ export default {
         const p = this.palleteColors[i]
         if (this.palleteColors.length - 1 !== i) {
           html = `${html}<span class="code-property">--${p.property}-color</span>: <span class="code-value" style="--value-color: ${p.value};">${p.value}</span>;
+  <span class="code-property">--${p.property}-HS</span>: <span class="code-val">${hslObject(p)[0]}, ${hslObject(p)[1]}%</span>;
+  <span class="code-property">--${p.property}-RGB</span>: <span class="code-val">${rbgObject(p).r}, ${rbgObject(p).g}, ${rbgObject(p).b}</span>;
   `
           text = `${text}--${p.property}-color: ${p.value};
+  --${p.property}-HS: ${hslObject(p)[0]}, ${hslObject(p)[1]}%;
+  --${p.property}-RGB: ${rbgObject(p).r}, ${rbgObject(p).g}, ${rbgObject(p).b};
   `
         } else {
-          html = `${html}<span class="code-property">--${p.property}-color</span>: <span class="code-value" style="--value-color: ${p.value};">${p.value}</span>;`
-          text = `${text}--${p.property}-color: ${p.value};`
+          html = `${html}<span class="code-property">--${p.property}-color</span>: <span class="code-value" style="--value-color: ${p.value};">${p.value}</span>;
+  <span class="code-property">--${p.property}-HS</span>: <span class="code-val">${hslObject(p)[0]}, ${hslObject(p)[1]}%</span>;
+  <span class="code-property">--${p.property}-RGB</span>: <span class="code-val">${rbgObject(p).r}, ${rbgObject(p).g}, ${rbgObject(p).b}</span>;`
+          text = `${text}--${p.property}-color: ${p.value};
+  --${p.property}-HS: ${hslObject(p)[0]}, ${hslObject(p)[1]}%;
+  --${p.property}-RGB: ${rbgObject(p).r}, ${rbgObject(p).g}, ${rbgObject(p).b};`
         }
       }
       html = `<span class="code-selector">:root</span> {
   ${html}
-}`
+}
+`
       text = `:root {
   ${text}
 }`
@@ -139,9 +120,6 @@ export default {
     copyCode: function () {
       if (this.active === 'css') {
         return this.codeCSS.text
-      }
-      if (this.active === 'scss') {
-        return 'copy SCSS'
       }
       if (this.active === 'json') {
         return 'copy JSON'
@@ -160,10 +138,10 @@ export default {
       }
     },
     onCopy: function (e) {
-      alert('You just copied: ' + e.text)
+      console.log('You just copied: ' + e.text)
     },
     onError: function (e) {
-      alert('Failed to copy code')
+      console.log('Failed to copy code')
     }
   }
 }
@@ -273,6 +251,9 @@ code:after, kbd:after, code:before, kbd:before {
 }
 .code-property{
   color: #66d9ef;
+}
+.code-val{
+  color: #fd971f;
 }
 .code-value{
   color: #fd971f;

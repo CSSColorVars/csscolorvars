@@ -37,7 +37,6 @@ export const getters = {
     for (let s = 0; s < state.palleteColors.length; s++) {
       let p = state.palleteColors[s]
       if (p.edit === true) {
-        console.log(hslObject(p))
         return hslObject(p)
       }
     }
