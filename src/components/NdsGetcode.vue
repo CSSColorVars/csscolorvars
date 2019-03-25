@@ -3,7 +3,7 @@
       <v-dialog dark v-model="dialog2" max-width="600px">
         <v-tabs v-model="active">
           <v-tabs-slider color="yellow" :style="dialog2 ? activeTab() : '' "></v-tabs-slider>
-          <v-tab ripple href="#css">CSS</v-tab>
+          <v-tab ripple href="#css">{{ styleSheet.selectStyle }}</v-tab>
           <v-tab ripple href="#json">JSON</v-tab>
           <v-tab ripple href="#snippets">SNIPPETS</v-tab>
         </v-tabs>
@@ -56,7 +56,7 @@
 </template>
 <script>
 import { mapState } from 'vuex'
-import { hslObject, rbgObject } from '@/store/util/functions'
+import { hslObject } from '@/store/util/functions'
 export default {
   name: 'NdsGetcode',
   data () {
@@ -81,7 +81,7 @@ export default {
     mediaQuery(largeBp)
   },
   computed: {
-    ...mapState(['palleteColors']),
+    ...mapState(['palleteColors', 'styleSheet']),
     codeCSS: function () {
       let html = ''
       let text = ''
@@ -90,19 +90,19 @@ export default {
         if (this.palleteColors.length - 1 !== i) {
           html = `${html}<span class="code-property">--${p.property}-color</span>: <span class="code-value" style="--value-color: ${p.value};">${p.value}</span>;
   <span class="code-property">--${p.property}-HS</span>: <span class="code-val">${hslObject(p)[0]}, ${hslObject(p)[1]}%</span>;
-  <span class="code-property">--${p.property}-RGB</span>: <span class="code-val">${rbgObject(p).r}, ${rbgObject(p).g}, ${rbgObject(p).b}</span>;
+  <span class="code-property">--${p.property}-HSL</span>: <span class="code-val">${hslObject(p)[0]}, ${hslObject(p)[1]}%, ${hslObject(p)[2]}%</span>;
   `
           text = `${text}--${p.property}-color: ${p.value};
   --${p.property}-HS: ${hslObject(p)[0]}, ${hslObject(p)[1]}%;
-  --${p.property}-RGB: ${rbgObject(p).r}, ${rbgObject(p).g}, ${rbgObject(p).b};
+  --${p.property}-HSL: ${hslObject(p)[0]}, ${hslObject(p)[1]}%, ${hslObject(p)[2]}%;
   `
         } else {
           html = `${html}<span class="code-property">--${p.property}-color</span>: <span class="code-value" style="--value-color: ${p.value};">${p.value}</span>;
   <span class="code-property">--${p.property}-HS</span>: <span class="code-val">${hslObject(p)[0]}, ${hslObject(p)[1]}%</span>;
-  <span class="code-property">--${p.property}-RGB</span>: <span class="code-val">${rbgObject(p).r}, ${rbgObject(p).g}, ${rbgObject(p).b}</span>;`
+  <span class="code-property">--${p.property}-HSL</span>: <span class="code-val">${hslObject(p)[0]}, ${hslObject(p)[1]}%, ${hslObject(p)[2]}%</span>;`
           text = `${text}--${p.property}-color: ${p.value};
   --${p.property}-HS: ${hslObject(p)[0]}, ${hslObject(p)[1]}%;
-  --${p.property}-RGB: ${rbgObject(p).r}, ${rbgObject(p).g}, ${rbgObject(p).b};`
+  --${p.property}-HSL: ${hslObject(p)[0]}, ${hslObject(p)[1]}%, ${hslObject(p)[2]}%;`
         }
       }
       html = `<span class="code-selector">:root</span> {

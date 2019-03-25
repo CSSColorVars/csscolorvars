@@ -50,7 +50,7 @@ export default {
     return {
       tab: null,
       items: [
-        'Lighten', 'Darken', 'Rgba'
+        'Lighten', 'Darken', 'Hsla'
       ],
       mainTab: null
     }

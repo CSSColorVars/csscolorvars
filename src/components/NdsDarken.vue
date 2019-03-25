@@ -24,16 +24,15 @@
     ></color-jump>
     <color-main>
       <div class="nds-item l-block">
-        <p v-if="colorActive.darken.jump > 0" class="center">hsl(var(--{{ colorActive.property }}-HS), {{ darkenL }}%)</p>
-        <p v-else-if="colorActive.darken.jump == 0" class="center">var(--{{ colorActive.property }}-color)</p>
+        <p class="center">{{ darkValue }}</p>
         <div class="card--valuecolor center"
           color=""
           v-clipboard:copy="darkValue"
           v-clipboard:success="updateNotification"
           v-clipboard:error="updateError"
-          :style="`--rgba-color: hsl(${hslValues[0]},${hslValues[1]}%,${darkenL}%)`"
+          :style="`--hsla-color: hsl(${hslValues[0]},${hslValues[1]}%,${darkenL}%)`"
         >
-            <span class="card--textcolor" :style="`color:${darkenInvertValue};`">Copy value</span>
+            <span class="card--textcolor" :style="`color:${darkenInvertValue};`">Copy value {{ styleSheet.selectStyle }}</span>
             <v-btn
               icon ripple
               v-clipboard:copy="darkValue"
@@ -66,7 +65,7 @@ import ColorHeader from '@/ui-components/ColorHeader.vue'
 import ColorMain from '@/ui-components/ColorMain.vue'
 import ColorCard from '@/ui-components/ColorCard.vue'
 import ColorJump from '@/ui-components/ColorJump.vue'
-import { mapGetters, mapMutations } from 'vuex'
+import { mapState, mapGetters, mapMutations } from 'vuex'
 export default {
   name: 'NdsDarken',
   components: {
@@ -77,6 +76,7 @@ export default {
     ColorJump
   },
   computed: {
+    ...mapState(['styleSheet']),
     ...mapGetters(['colorActive', 'darken', 'invertvalue', 'hslValues', 'darkenInvertValue']),
     darkenL: function () {
       let darkenL = this.hslValues[2] - this.colorActive.darken.jump
@@ -88,8 +88,20 @@ export default {
     },
     darkValue: function () {
       let darkValue = `hsl(var(--${this.colorActive.property}-HS), ${this.darkenL}%)`
+      let styleSheet = this.styleSheet.selectStyle
+      // if (this.colorActive.darken.jump > 0) {
+      //   return darkValue
+      // } else {
+      //   return `var(--${this.colorActive.property}-color)`
+      // }
       if (this.colorActive.darken.jump > 0) {
-        return darkValue
+        if (styleSheet === 'CSS') {
+          return darkValue
+        } else if (styleSheet === 'SCSS') {
+          return `#{'${darkValue}'}`
+        } else {
+          return darkValue
+        }
       } else {
         return `var(--${this.colorActive.property}-color)`
       }

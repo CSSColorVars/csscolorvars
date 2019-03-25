@@ -1,5 +1,5 @@
 <template>
-  <v-snackbar :value="notify" bottom="bottom" left="left" multi-line="multi-line" :timeout= "timeout">
+  <v-snackbar :value="notify" bottom="bottom" multi-line="multi-line" :timeout= "timeout">
     {{message}}
     <v-btn color="pink" flat @click="closeNotification()">CLOSE</v-btn>
   </v-snackbar>

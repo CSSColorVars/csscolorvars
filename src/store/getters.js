@@ -1,4 +1,4 @@
-import { gradientColors, invertVal, rgbaInvertVal, rbgObject, hslObject, lightenInvertVal, darkenInvertVal } from './util/functions'
+import { gradientColors, invertVal, rgbaInvertVal, hslObject, lightenInvertVal, darkenInvertVal } from './util/functions'
 
 export const getters = {
   invertvalue: (state) => {
@@ -29,7 +29,7 @@ export const getters = {
     for (let s = 0; s < state.palleteColors.length; s++) {
       let p = state.palleteColors[s]
       if (p.edit === true) {
-        return rbgObject(p)
+        return hslObject(p)
       }
     }
   },

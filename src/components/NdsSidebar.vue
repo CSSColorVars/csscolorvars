@@ -1,7 +1,16 @@
 <template>
   <header class="nds-container nds-item l-20 header-sidebar application theme--dark">
-    <div class="nds-item l-85 m-30 s-60 cross-center">
-      <img :src="require('../assets/cssColorVars.png')" alt="">
+    <div class="nds-item l-85 m-30 s-60 cross-end l-block">
+      <img :src="require('../assets/cssColorVars.png')" alt="CSS Color Vars">
+    </div>
+    <div class="nds-item l-65 m-25 s-55 cross-end">
+      <v-select
+        dark
+        v-model="select"
+        @change="UPDATE_STYLESHEET(select)"
+        :items="items"
+        label="Style sheet:"
+      ></v-select>
     </div>
     <div class="header nds-container nds-item l-100 m-70 s-100">
       <div class="header--color nds-item l-100 m-50 s-35">
@@ -25,24 +34,40 @@
   </header>
 </template>
 <script>
-import { mapMutations, mapGetters } from 'vuex'
+import { mapState, mapMutations, mapGetters } from 'vuex'
 import Color from 'color'
 import ColorProperty from '@/ui-components/ColorProperty.vue'
 import ColorValue from '@/ui-components/ColorValue.vue'
 export default {
   name: 'NdsSidebar',
+  data () {
+    return {
+      select: 'CSS',
+      items: [
+        'CSS',
+        'SCSS'
+        // 'SASS',
+        // 'STYLUS',
+        // 'LESS'
+      ]
+    }
+  },
+  mounted: function () {
+    this.select = this.styleSheet.selectStyle
+  },
   components: {
     ColorProperty,
     ColorValue
   },
   computed: {
+    ...mapState(['styleSheet']),
     ...mapGetters(['colorActive']),
     standardValue: function () {
       return Color(this.colorActive.value).hex()
     }
   },
   methods: {
-    ...mapMutations(['updateProperty', 'updateValue'])
+    ...mapMutations(['UPDATE_STYLESHEET', 'updateProperty', 'updateValue'])
   }
 }
 </script>

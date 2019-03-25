@@ -24,16 +24,15 @@
     ></color-jump>
     <color-main>
       <div class="nds-item l-block">
-        <p v-if="colorActive.lighten.jump > 0" class="center">hsl(var(--{{ colorActive.property }}-HS), {{ lightenL }}%)</p>
-        <p v-else-if="colorActive.lighten.jump == 0" class="center">var(--{{ colorActive.property }}-color)</p>
+        <p class="center">{{ lightenValue }}</p>
         <div class="card--valuecolor center"
           color=""
           v-clipboard:copy="lightenValue"
           v-clipboard:success="updateNotification"
           v-clipboard:error="updateError"
-          :style="`--rgba-color: hsl(${hslValues[0]},${hslValues[1]}%,${lightenL}%)`"
+          :style="`--hsla-color: hsl(${hslValues[0]},${hslValues[1]}%,${lightenL}%)`"
         >
-            <span class="card--textcolor" :style="`color:${lightenInvertValue};`">Copy value</span>
+            <span class="card--textcolor" :style="`color:${lightenInvertValue};`">Copy value {{ styleSheet.selectStyle }}</span>
             <v-btn
               icon ripple
               v-clipboard:copy="lightenValue"
@@ -66,7 +65,7 @@ import ColorHeader from '@/ui-components/ColorHeader.vue'
 import ColorMain from '@/ui-components/ColorMain.vue'
 import ColorCard from '@/ui-components/ColorCard.vue'
 import ColorJump from '@/ui-components/ColorJump.vue'
-import { mapGetters, mapMutations } from 'vuex'
+import { mapState, mapGetters, mapMutations } from 'vuex'
 export default {
   name: 'NdsLighten',
   components: {
@@ -77,6 +76,7 @@ export default {
     ColorJump
   },
   computed: {
+    ...mapState(['styleSheet']),
     ...mapGetters(['colorActive', 'lighten', 'invertvalue', 'hslValues', 'lightenInvertValue']),
     lightenL: function () {
       let lightenL = this.hslValues[2] + this.colorActive.lighten.jump
@@ -88,8 +88,15 @@ export default {
     },
     lightenValue: function () {
       let lightValue = `hsl(var(--${this.colorActive.property}-HS), ${this.lightenL}%)`
+      let styleSheet = this.styleSheet.selectStyle
       if (this.colorActive.lighten.jump > 0) {
-        return lightValue
+        if (styleSheet === 'CSS') {
+          return lightValue
+        } else if (styleSheet === 'SCSS') {
+          return `#{'${lightValue}'}`
+        } else {
+          return lightValue
+        }
       } else {
         return `var(--${this.colorActive.property}-color)`
       }

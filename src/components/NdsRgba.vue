@@ -12,7 +12,7 @@
       label="Alpha:"
       :step="colorActive.rgba.step*100"
       :invertvalue="invertvalue"
-    >Rgba color
+    >Hsla color
     </color-header>
     <div class="nds-item" slot="jump">
       <v-slider class="opacity--slider"
@@ -21,7 +21,7 @@
         max=100
         min=0
         color="transparent"
-        label="Rbga"
+        label="Hsla"
         thumb-color="#dadada"
         :track-color="colorActive.value"
         always-dirty
@@ -29,18 +29,17 @@
     </div>
     <color-main>
       <div class="nds-item l-block">
-        <p class="center">rgba(var(--{{ colorActive.property }}-RGB), {{ colorActive.rgba.alpha/100 }})</p>
+        <p class="center">{{ hslaValue }}</p>
         <div class="card--valuecolor center"
-          :color="'rgba(' + rgbValues.r + ',' + rgbValues.g + ',' + rgbValues.b + ',' + colorActive.rgba.alpha + ')'"
-          v-clipboard:copy="`rgba(var(--${colorActive.property}-RGB), ${colorActive.rgba.alpha/100})`"
+          v-clipboard:copy="hslaValue"
           v-clipboard:success="updateNotification"
           v-clipboard:error="updateError"
-          :style="'--rgba-color: rgba(' + rgbValues.r + ',' + rgbValues.g + ',' + rgbValues.b + ',' + colorActive.rgba.alpha/100 + ');'"
+          :style="'--hsla-color: hsla(' + rgbValues[0] + ',' + rgbValues[1] + '%, ' + rgbValues[2] + '%, ' + colorActive.rgba.alpha + '%);'"
         >
-            <span class="card--textcolor" :style="'color:' + rgbInvertValue + ';'">Copy value</span>
+            <span class="card--textcolor" :style="'color:' + rgbInvertValue + ';'">Copy value {{ styleSheet.selectStyle }}</span>
             <v-btn
               icon ripple
-              v-clipboard:copy="`rgba(var(--${colorActive.property}-RGB), ${colorActive.rgba.alpha/100})`"
+              v-clipboard:copy="hslaValue"
               v-clipboard:success="updateNotification"
               v-clipboard:error="updateError"
             >
@@ -51,29 +50,25 @@
       <hr>
       <h2>Static values:</h2>
       <div class="nds-item nds-container main-center">
-        <!-- <div class="nds-item s-100">
-          rgba({{ rgbValues.r }}, {{ rgbValues.g }}, {{ rgbValues.b }}, {{ colorActive.rgba.alpha/100 }})
-        </div> -->
-        <div class="nds-item s-25 center"><b>R</b></div>
-        <div class="nds-item s-25 center"><b>G</b></div>
-        <div class="nds-item s-25 center"><b>B</b></div>
+        <div class="nds-item s-25 center"><b>H</b></div>
+        <div class="nds-item s-25 center"><b>S</b></div>
+        <div class="nds-item s-25 center"><b>L</b></div>
         <div class="nds-item s-25 center"><b>A</b></div>
-        <div class="nds-item s-25 center">{{ rgbValues.r }}</div>
-        <div class="nds-item s-25 center">{{ rgbValues.g }}</div>
-        <div class="nds-item s-25 center">{{ rgbValues.b }}</div>
-        <div class="nds-item s-25 center">{{ colorActive.rgba.alpha/100 }}</div>
+        <div class="nds-item s-25 center">{{ rgbValues[0] }}</div>
+        <div class="nds-item s-25 center">{{ rgbValues[1] }}%</div>
+        <div class="nds-item s-25 center">{{ rgbValues[2] }}%</div>
+        <div class="nds-item s-25 center">{{ colorActive.rgba.alpha }}%</div>
       </div>
     </color-main>
   </color-container>
 </template>
 <script>
-import Color from 'color'
 import ColorContainer from '@/ui-components/ColorContainer.vue'
 import ColorHeader from '@/ui-components/ColorHeader.vue'
 import ColorMain from '@/ui-components/ColorMain.vue'
 import ColorCard from '@/ui-components/ColorCard.vue'
 import ColorJump from '@/ui-components/ColorJump.vue'
-import { mapGetters, mapMutations } from 'vuex'
+import { mapState, mapGetters, mapMutations } from 'vuex'
 export default {
   name: 'NdsRgba',
   components: {
@@ -84,10 +79,24 @@ export default {
     ColorJump
   },
   computed: {
+    ...mapState(['styleSheet']),
     ...mapGetters(['colorActive', 'rgbValues', 'rgbaMax', 'invertvalue', 'rgbInvertValue']),
     hslaValue: function () {
-      let nds = Color('rgba(' + this.rgbValues.r + ',' + this.rgbValues.g + ',' + this.rgbValues.b + ',' + this.colorActive.rgba.alpha / 100 + ')').hsl().round()
-      return nds
+      let hslaVal = `hsla(var(--${this.colorActive.property}-HSL), ${this.colorActive.rgba.alpha}%)`
+      let styleSheet = this.styleSheet.selectStyle
+      if (this.colorActive.rgba.alpha !== 100 && this.colorActive.rgba.alpha !== 0) {
+        if (styleSheet === 'CSS') {
+          return hslaVal
+        } else if (styleSheet === 'SCSS') {
+          return `#{'${hslaVal}'}`
+        } else {
+          return hslaVal
+        }
+      } else if (this.colorActive.rgba.alpha >= 100) {
+        return `var(--${this.colorActive.property}-color)`
+      } else if (this.colorActive.rgba.alpha <= 0) {
+        return `transparent`
+      }
     }
   },
   methods: {
@@ -133,6 +142,7 @@ export default {
   }
   .card--textcolor{
     position: relative;
+    width: 100%;
   }
   .card--valuecolor{
     position: relative;
@@ -157,7 +167,7 @@ export default {
       position: absolute;
       width: 100%;
       height: 300px;
-      background: var(--rgba-color);
+      background: var(--hsla-color);
       margin-bottom: 0;
     }
     .v-card__title{

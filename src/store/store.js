@@ -6,6 +6,7 @@ import { mutations } from './mutations'
 import { getters } from './getters'
 import { palleteColors } from './modules/palleteColors'
 import { notifyCopy } from './modules/notifyCopy'
+import { styleSheet } from './modules/styleSheet'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -14,12 +15,14 @@ export default new Vuex.Store({
   mutations,
   modules: {
     palleteColors,
-    notifyCopy
+    notifyCopy,
+    styleSheet
   },
   plugins: [createPersistedState({
     key: 'color-store',
     paths: [
-      'palleteColors'
+      'palleteColors',
+      'styleSheet'
     ]
   })]
 })
