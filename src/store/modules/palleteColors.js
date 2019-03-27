@@ -2,22 +2,17 @@ const state = [
   {
     property: 'primary',
     propertyState: true,
-    value: '#1671b9',
+    value: '#663399', // In honor with Rebecca Meyer
     valueState: true,
-    minAmount: 0,
     minJump: 0,
     lighten: {
-      amount: 10,
-      jump: 5
+      jump: 10
     },
     darken: {
-      amount: 10,
-      jump: 5
+      jump: 10
     },
     rgba: {
-      alpha: 50,
-      max: 100,
-      step: 1
+      alpha: 50
     },
     edit: true
   }

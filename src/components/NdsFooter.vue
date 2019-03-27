@@ -13,9 +13,7 @@
     <div class="nds-item l-80 copyright cross-end">
       <hr class="to-l">
       <p class="cross-center main-center">
-        create by&nbsp;
-        <a class="inline" href="https://twitter.com/2062nandes" target="_blank"><b>Fernando Javier Averanga Aruquipa</b></a>
-        &nbsp;·&nbsp;
+        create by&nbsp;·&nbsp;
         <a href="https://twitter.com/2062nandes?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @2062nandes</a>
       </p>
     </div>

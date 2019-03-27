@@ -6,11 +6,10 @@
       :value="colorActive.value"
       :amount="colorActive.rgba.alpha"
       :updateAmount="updateAlphat"
-      :minAmount="colorActive.minAmount*100"
-      :maxAmount="colorActive.rgba.max*100"
-      :maxLength= "colorActive.rgba.alpha*100 < 100 ? '4' : '100' "
+      :minAmount=0
+      :maxAmount=100
+      :maxLength= "colorActive.rgba.alpha < 100 ? '4' : '100' "
       label="Alpha:"
-      :step="colorActive.rgba.step*100"
       :invertvalue="invertvalue"
     >Hsla color
     </color-header>

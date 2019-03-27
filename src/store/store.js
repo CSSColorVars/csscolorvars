@@ -22,7 +22,8 @@ export default new Vuex.Store({
     key: 'color-store',
     paths: [
       'palleteColors',
-      'styleSheet'
+      'styleSheet',
+      'errorMesagge'
     ]
   })]
 })

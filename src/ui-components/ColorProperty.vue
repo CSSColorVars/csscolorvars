@@ -7,7 +7,7 @@
     :value="property"
     @input="update"
     @keypress="keypressProperty"
-    :messages="!state ? 'Enter a letter in the first character' : ''"
+    :error-messages="!state ? errorMesagge : ''"
     box
     suffix="-color"
   >
@@ -20,7 +20,7 @@
     value=""
     @input="update"
     @keypress="keypressProperty"
-    :messages="!state ? 'Enter a letter in the first character' : ''"
+    :error-messages="!state ? errorMesagge : ''"
     box
     suffix="-color"
   >
@@ -44,6 +44,9 @@ export default {
     dark: {
       default: false,
       type: Boolean
+    },
+    errorMesagge: {
+      default: 'Enter a letter in the first character'
     }
   },
   methods: {

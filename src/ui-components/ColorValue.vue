@@ -34,7 +34,6 @@ export default {
   name: 'ColorValue',
   props: {
     value: {
-      type: String,
       required: true
     },
     update: {

@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="dialog" max-width="300px">
+  <v-dialog persistent v-model="dialog" max-width="300px">
     <v-list-tile class="v-list__tile--link" avatar slot="activator">
       <v-list-tile-avatar
         avatar
@@ -22,18 +22,21 @@
         <color-property
           :property="ndsColor.property"
           :update="updateProperty"
-          state="true"
+          :state="ndsColor.propertyState"
+          :errorMesagge = "errorMesagge"
         ></color-property>
         <color-value
           :value="ndsColor.value"
           :update="updateValue"
-          state="true"
+          :state="ndsColor.valueState"
         ></color-value>
       </form>
       </v-card-text>
       <v-card-actions>
-        <v-btn color="blue darken-1" flat @click.native="dialog = false">Close</v-btn>
-        <v-btn color="blue darken-1" flat @click="ndsColor.propertyState ? (ADD_COLOR(ndsColor), dialog = false, ndsColor.property = '', ndsColor.propertyState = false) : ''">Save</v-btn>
+        <v-btn color="blue darken-1" flat
+          @click.native="closeButton">Cancel</v-btn>
+        <v-btn color="blue darken-1" flat
+          @click="saveButton">Save</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -50,25 +53,14 @@ export default {
       ndsColor: {
         edit: false,
         property: '',
-        propertyState: false,
-        value: '#1671b9',
+        propertyState: true,
+        value: '#663399', // In honor with Rebecca Meyer
         valueState: true,
-        minAmount: 0,
-        minJump: 1,
-        lighten: {
-          amount: 10,
-          jump: 5
-        },
-        darken: {
-          amount: 10,
-          jump: 5
-        },
-        rgba: {
-          alpha: 0.5,
-          max: 1,
-          step: 0.01
-        }
-      }
+        lighten: { jump: 0 },
+        darken: { jump: 0 },
+        rgba: { alpha: 50 }
+      },
+      errorMesagge: ''
     }
   },
   components: {
@@ -80,19 +72,23 @@ export default {
   },
   methods: {
     ...mapMutations(['ADD_COLOR']),
-    updateProperty (prop) {
+    updateProperty: function (prop) {
       const propValidate = /^[a-zA-ZñÑ]|^[a-zA-ZñÑ][a-zA-ZñÑ_-]+$/
       for (let i = 0; i < this.palleteColors.length; i++) {
-        // bug corregir
-        if (propValidate.test(prop) && this.palleteColors[i].property !== prop) {
+        if (prop !== '' && propValidate.test(prop) && this.palleteColors[i].property !== prop) {
           this.ndsColor.property = prop
           this.ndsColor.propertyState = true
+        } else if (this.palleteColors[i].property === prop) {
+          this.ndsColor.propertyState = false
+          this.errorMesagge = 'Duplicate property, type another name'
+          i = this.palleteColors.length
         } else {
           this.ndsColor.propertyState = false
+          this.errorMesagge = 'Enter a letter in the first character'
         }
       }
     },
-    updateValue (hex) {
+    updateValue: function (hex) {
       const hexValidate = /^#+([0-9A-Fa-f]{6}|[0-9A-Fa-f]{3})$/
       if (hexValidate.test(hex.target.value)) {
         this.ndsColor.value = hex.target.value
@@ -103,6 +99,31 @@ export default {
       if (hex.target.value === '') {
         this.ndsColor.valueState = true
       }
+    },
+    saveButton: function () {
+      if (this.ndsColor.value !== '' && this.ndsColor.property !== '' && this.ndsColor.propertyState && this.ndsColor.valueState) {
+        this.ADD_COLOR(this.ndsColor)
+        this.dialog = false
+        this.ndsColor.property = ''
+        this.ndsColor.value = '#663399' // In honor with Rebecca Meyer
+        this.ndsColor.propertyState = true
+        this.ndsColor.valueState = true
+      } else if (this.ndsColor.property === '') {
+        this.ndsColor.propertyState = true
+        setTimeout(this.stateProp, 150)
+      } else if (this.ndsColor.value === '' || !this.ndsColor.valueState) {
+        this.ndsColor.valueState = false
+      }
+    },
+    stateProp: function () {
+      this.ndsColor.propertyState = false
+      this.errorMesagge = 'Please enter the name of the property'
+    },
+    closeButton: function () {
+      this.dialog = false
+      this.ndsColor.property = ''
+      this.ndsColor.propertyState = true
+      this.ndsColor.valueState = true
     }
   }
 }

@@ -22,6 +22,7 @@
           :property="colorActive.property"
           :update="updateProperty"
           :state="colorActive.propertyState"
+          :errorMesagge = "errorMesagge"
         ></color-property>
         <color-value
           dark
@@ -60,7 +61,7 @@ export default {
     ColorValue
   },
   computed: {
-    ...mapState(['styleSheet']),
+    ...mapState(['errorMesagge', 'styleSheet']),
     ...mapGetters(['colorActive']),
     standardValue: function () {
       return Color(this.colorActive.value).hex()
