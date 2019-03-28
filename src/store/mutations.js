@@ -1,14 +1,17 @@
 export const mutations = {
   updateProperty (state, prop) {
     const propValidate = /^[a-zA-ZñÑ]|^[a-zA-ZñÑ][a-zA-ZñÑ_-]+$/
-    // let cont = 0
+    let cont = 0
+    let p
+    let propActive
     for (let i = 0; i < state.palleteColors.length; i++) {
-      let p = state.palleteColors[i]
+      p = state.palleteColors[i]
       if (p.edit === true) {
         console.log('prop:' + prop)
         console.log('state:' + p.property)
         if (prop !== '' && propValidate.test(prop) && p.property !== prop) {
           p.property = prop
+          propActive = i
           p.propertyState = true
         } else if (prop === '') {
           p.property = ''
@@ -19,14 +22,18 @@ export const mutations = {
           state.errorMesagge = 'Enter a letter in the first character'
         }
       }
-      // if (p.property === prop) {
-      //   cont = cont + 1
-      //   if (cont > 1) {
-      //     p.propertyState = false
-      //     state.errorMesagge = 'Duplicate property, type another name'
-      //     i = this.palleteColors.length
-      //   }
-      // }
+      if (p.property === prop && propActive !== i) {
+        cont = cont + 1
+      }
+    }
+    if (cont < 1) {
+      for (let i = 0; i < state.palleteColors.length; i++) {
+        p = state.palleteColors[i]
+        p.propertyState = true
+      }
+    } else {
+      p = state.palleteColors[propActive]
+      p.propertyState = false
     }
   },
   updateValue (state, hex) {

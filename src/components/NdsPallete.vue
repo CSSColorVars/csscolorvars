@@ -39,7 +39,7 @@
         <v-divider></v-divider>
         <v-list-tile
           v-for="(item, id) in palleteColors"
-          :key="item.property"
+          :key="item.property + id"
           avatar
           @dblclick.stop="mini = !mini"
           @click="`javascript:void()`"
