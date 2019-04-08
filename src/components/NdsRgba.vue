@@ -47,7 +47,7 @@
         </div>
       </div>
       <hr>
-      <h2>Static values:</h2>
+      <h2 class="nds-item">Static values:</h2>
       <div class="nds-item nds-container main-center">
         <div class="nds-item s-25 center"><b>H</b></div>
         <div class="nds-item s-25 center"><b>S</b></div>

@@ -7,7 +7,7 @@
         @input="updateJump"
         :thumb-color="color"
         thumb-label="always"
-        thumb-size="24"
+        thumb-size="30"
         :label="label"
         always-dirty
         :color="color"
@@ -43,12 +43,32 @@ export default {
 </script>
 <style lang="scss">
   @import 'src/sass/mixins.scss';
+  .v-input--slider .v-input__control .v-messages {
+    display: none;
+  }
   .v-slider__thumb {
-    width: 15px;
-    height: 15px;
-    left: -7.3px;
+    width: 30px;
+    height: 30px;
+    left: -15px;
+  }
+  .v-slider{
+    height: 70px;
+  }
+  .v-slider input {
+    height: 100%;
+  }
+  .v-input input {
+    max-height: 70px;
   }
   .v-slider__thumb-label {
-    bottom: -6px;
+    bottom: -3px;
+  }
+  .v-input__slot {
+    margin-bottom: 0;
+  }
+  .v-slider {
+    .v-slider__track__container, .v-slider__track, .v-slider__track-fill {
+      height: 4px;
+    }
   }
 </style>

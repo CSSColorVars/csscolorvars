@@ -135,6 +135,7 @@ export default {
       const style = slideColor.getAttribute('style')
       if (style === 'left: 0px; width: 0px;') {
         slideColor.style.width = '50px'
+        this.active = 'css'
       }
     },
     onCopy: function (e) {
