@@ -1,6 +1,8 @@
 {
   "name": "css-colorvars",
-  "version": "0.1.0",
+  "version": "1.0.0",
+  "description": "CSSColorVars (interactive code generation tool), which defines a color palette with CSS variables, improves efficiency in front-end web development.",
+  "author": "Fernando Averanga <nandes.ingsistemas@gmail.com>",
   "license": "MIT",
   "private": true,
   "scripts": {
@@ -12,27 +14,27 @@
   },
   "dependencies": {
     "color": "^3.1.0",
-    "vue": "^2.6.9",
+    "vue": "^2.6.10",
     "vue-clipboard2": "^0.3.0",
-    "vue-router": "^3.0.2",
-    "vuetify": "^1.5.6",
+    "vue-router": "^3.0.3",
+    "vuetify": "^1.5.11",
     "vuex": "^3.1.0",
     "vuex-persistedstate": "^2.5.4"
   },
   "devDependencies": {
-    "@babel/polyfill": "^7.2.5",
-    "@vue/cli-plugin-babel": "^3.5.1",
+    "@babel/polyfill": "^7.4.3",
+    "@vue/cli-plugin-babel": "^3.5.5",
     "@vue/cli-plugin-eslint": "^3.5.1",
-    "@vue/cli-service": "^3.5.1",
+    "@vue/cli-service": "^3.5.3",
     "@vue/eslint-config-standard": "^4.0.0",
     "babel-plugin-transform-imports": "^1.5.1",
     "node-sass": "^4.11.0",
-    "postcss-custom-properties": "^8.0.9",
+    "postcss-custom-properties": "^8.0.10",
     "sass-loader": "^7.0.1",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1",
     "vue-cli-plugin-vuetify": "^0.4.6",
-    "vue-template-compiler": "^2.6.9",
+    "vue-template-compiler": "^2.6.10",
     "vuepress": "^0.14.10"
   }
 }
