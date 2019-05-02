@@ -11,7 +11,7 @@
       :maxAmount=100
       :maxLength=100
       :invertvalue="invertvalue"
-    >Dark color
+    >Darkness
     </color-header>
     <color-jump
       label="Darken"
@@ -44,18 +44,6 @@
         </div>
       </div>
       <hr>
-        <h2 class="nds-item">Static values:</h2>
-      <div class="nds-item nds-container main-center">
-        <div class="nds-item s-1-3 center"><b>H</b></div>
-        <div class="nds-item s-1-3 center"><b>S</b></div>
-        <div class="nds-item s-1-3 center"><b>L</b></div>
-        <div class="nds-item s-1-3 center">{{ hslValues[0] }}</div>
-        <div class="nds-item s-1-3 center">{{ hslValues[1] }}%</div>
-        <div class="nds-item s-1-3 center">
-          <span v-if="darkenL >= 0">{{ darkenL }}%</span>
-          <span v-else>0%</span>
-        </div>
-      </div>
     </color-main>
   </color-container>
 </template>

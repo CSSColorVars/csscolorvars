@@ -86,4 +86,8 @@ export default {
       text-decoration: none;
     }
   }
+  .theme--light.application {
+    background: #fafafa;
+    color: #525151;
+  }
 </style>

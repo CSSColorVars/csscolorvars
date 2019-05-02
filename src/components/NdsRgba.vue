@@ -11,7 +11,7 @@
       :maxLength= "colorActive.rgba.alpha < 100 ? '4' : '100' "
       label="Alpha:"
       :invertvalue="invertvalue"
-    >Hsla color
+    >Transparency
     </color-header>
     <div class="nds-item" slot="jump">
       <v-slider class="opacity--slider"
@@ -47,17 +47,6 @@
         </div>
       </div>
       <hr>
-      <h2 class="nds-item">Static values:</h2>
-      <div class="nds-item nds-container main-center">
-        <div class="nds-item s-25 center"><b>H</b></div>
-        <div class="nds-item s-25 center"><b>S</b></div>
-        <div class="nds-item s-25 center"><b>L</b></div>
-        <div class="nds-item s-25 center"><b>A</b></div>
-        <div class="nds-item s-25 center">{{ rgbValues[0] }}</div>
-        <div class="nds-item s-25 center">{{ rgbValues[1] }}%</div>
-        <div class="nds-item s-25 center">{{ rgbValues[2] }}%</div>
-        <div class="nds-item s-25 center">{{ colorActive.rgba.alpha }}%</div>
-      </div>
     </color-main>
   </color-container>
 </template>

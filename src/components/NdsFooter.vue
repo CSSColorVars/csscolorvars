@@ -3,11 +3,11 @@
     <div class="nds-item l-20 menu-footer nds-container center">
       <div class="nds-item l-block darkfrom-l">
         <!-- ·&nbsp; -->
-        <a href="guide" target="_blank">Guide</a>
+        <a href="https://paper.dropbox.com/doc/Build-color-CSS-variables-with-CSS-ColorVars-C4RJSkmMJu2RKZo7BZmzS" target="_blank">Guide</a>
         &nbsp;·&nbsp;&nbsp;
         <a href="https://github.com/CSSColorVars" target="_blank">Github</a>
         &nbsp;·&nbsp;&nbsp;
-        <a href="#" target="_blank">Examples</a>
+        <a href="#" target="_blank">About</a>
       </div>
     </div>
     <div class="nds-item l-80 copyright cross-end">

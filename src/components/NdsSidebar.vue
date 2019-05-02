@@ -9,7 +9,7 @@
         v-model="select"
         @change="UPDATE_STYLESHEET(select)"
         :items="items"
-        label="Style sheet:"
+        label="Syntax:"
       ></v-select>
     </div>
     <div class="header nds-container nds-item l-100 m-70 s-100">

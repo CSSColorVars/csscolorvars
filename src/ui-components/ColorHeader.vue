@@ -1,17 +1,17 @@
 <template>
   <header class="nds-item">
     <div class="gradients__header nds-container main-center">
-      <div class="gradients__icon">
+      <!-- <div class="gradients__icon">
         <div class="gradients__extended" :style="'background:'+ value + '; color:' + invertvalue + ';'">
           <i class="material-icons">zoom_out_map</i>
         </div>
-      </div>
+      </div> -->
+      <h3 class="title--header">
+        <slot></slot>
+      </h3>
       <div class="gradients__item">
-        <h2 class="main-center">
-          <slot></slot>
-        </h2>
         <div class="gradients__amount">
-          <label v-text="label"></label>
+          <!-- <label v-text="label"></label> -->
           <v-text-field
             color="green"
             class="mt-0"
@@ -84,12 +84,26 @@ export default {
 </script>
 <style lang="scss">
   @import 'src/sass/mixins.scss';
+    .title--header{
+      position: absolute;
+      top: -1rem;
+      left: 0;
+      background: #fafafa;
+      padding: 0 .5rem;
+    }
   .gradients{
+    &__header{
+      position: relative;
+      margin-bottom: 1rem;
+    }
     &__item{
-      width: 165px;
-      @include from(l){
-        width: 140px;
-      }
+      position: absolute;
+      top: -1rem;
+      right: 0;
+      width: 70px;
+      background: #fafafa;
+      padding: 0 .25rem;
+      border-radius: 10px;
     }
     &__icon{
       width: 55px;
