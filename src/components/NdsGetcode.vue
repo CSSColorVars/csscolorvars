@@ -33,9 +33,7 @@
             </v-tab-item>
         </v-tabs-items>
           <div class="getcode--footer v-tabs__bar theme--dark main-center" style="width:100%;max-width:600px;">
-            <v-btn v-clipboard:copy="copyCode"
-              v-clipboard:success="onCopy"
-              v-clipboard:error="onError"
+            <v-btn @click="doCopy"
               light>Copy code <v-icon right>file_copy</v-icon></v-btn>
             <v-btn light @click.native="dialog2=false">Close <v-icon right>close</v-icon></v-btn>
           </div>
@@ -121,6 +119,9 @@ export default {
       if (this.active === 'css') {
         return this.codeCSS.text
       }
+      if (this.active === 'scss') {
+        return this.codeCSS.text
+      }
       if (this.active === 'json') {
         return 'copy JSON'
       }
@@ -138,11 +139,15 @@ export default {
         this.active = 'css'
       }
     },
-    onCopy: function (e) {
-      console.log('You just copied: ' + e.text)
-    },
-    onError: function (e) {
-      console.log('Failed to copy code')
+    doCopy: function () {
+      this.$copyText(this.copyCode).then(function (e) {
+        // alert('Copied')
+        console.log(e.text)
+      }, function (e) {
+        alert('Can not copy')
+        console.log(e)
+      })
+      navigator.clipboard.writeText(this.copyCode)
     }
   }
 }
