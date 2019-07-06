@@ -1,34 +1,35 @@
 <template>
   <!-- Rgba Colors -->
   <color-container>
-    <color-header
-      slot="header"
-      :value="colorActive.value"
-      :amount="colorActive.rgba.alpha"
-      :updateAmount="updateAlphat"
-      :minAmount=0
-      :maxAmount=100
-      :maxLength= "colorActive.rgba.alpha < 100 ? '4' : '100' "
-      label="Alpha:"
-      :invertvalue="invertvalue"
-    >Transparency
-    </color-header>
-    <div class="nds-item" slot="jump">
-      <v-slider class="opacity--slider"
-        :value="colorActive.rgba.alpha"
-        @input="updateAlpha"
-        max=100
-        min=0
-        color="transparent"
-        label="Hsla"
-        thumb-color="#dadada"
-        :track-color="colorActive.value"
-        always-dirty
-      ></v-slider>
-    </div>
-    <color-main>
-      <div class="nds-item l-block">
-        <p class="center">{{ hslaValue }}</p>
+    <article class="card--article">
+      <color-header
+        slot="header"
+        :value="colorActive.value"
+        :amount="colorActive.rgba.alpha"
+        :updateAmount="updateAlphat"
+        :minAmount=0
+        :maxAmount=100
+        :maxLength= "colorActive.rgba.alpha < 100 ? '4' : '100' "
+        label="Alpha:"
+        :invertvalue="invertvalue"
+      >Transparency
+      </color-header>
+      <div class="nds-item" slot="jump">
+        <v-slider class="opacity--slider"
+          :value="colorActive.rgba.alpha"
+          @input="updateAlpha"
+          max=100
+          min=0
+          color="transparent"
+          label="Hsla"
+          thumb-color="#dadada"
+          :track-color="colorActive.value"
+          always-dirty
+        ></v-slider>
+      </div>
+      <p class="center">{{ hslaValue }}</p>
+      <p class="center text-hsl">{{ 'hsla(' + rgbValues[0] + ', ' + rgbValues[1] + '%, ' + rgbValues[2] + '%, ' + colorActive.rgba.alpha + '%);' }}</p>
+    </article>
         <div class="card--valuecolor center"
           v-clipboard:copy="hslaValue"
           v-clipboard:success="updateNotification"
@@ -45,9 +46,6 @@
               <v-icon :color="rgbInvertValue">file_copy</v-icon>
             </v-btn>
         </div>
-      </div>
-      <hr>
-    </color-main>
   </color-container>
 </template>
 <script>
@@ -135,6 +133,19 @@ export default {
   .card--valuecolor{
     position: relative;
     height: 300px;
+    // @include from(m) {
+    //   width: 50vw;
+    //   height: 50vw;
+    // }
+    width: calc(100% - 2rem);
+    margin: auto;
+    margin-bottom: 1rem;
+    @include from(l) {
+      width: 15vw;
+      height: 15vw;
+      margin-bottom: 0;
+      max-height: 220px;
+    }
     @include mainCenter;
     @include crossCenter;
     background-image: url(../assets/alpha.png);
@@ -154,7 +165,7 @@ export default {
       display: flex;
       position: absolute;
       width: 100%;
-      height: 300px;
+      height: 100%;
       background: var(--hsla-color);
       margin-bottom: 0;
     }
@@ -165,5 +176,18 @@ export default {
         width: 100%;
       }
     }
+  }
+  .card--article {
+    width: 100%;
+    @include from (l) {
+      width: calc(100% - 15vw);
+    }
+    p{
+      font-size: calc(var(--title3) / 1.1);
+    }
+  }
+  p.text-hsl{
+    font-size: calc(var(--title3) / 1.45);
+    opacity: .65;
   }
 </style>

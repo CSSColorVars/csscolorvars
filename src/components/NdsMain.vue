@@ -17,17 +17,17 @@
     </v-tabs>
     <v-tabs-items v-model="tab" class="nds-container">
       <v-tab-item>
-        <div class="nds-item m-70 to-center">
+        <div class="nds-item to-center">
           <nds-lighten></nds-lighten>
         </div>
       </v-tab-item>
       <v-tab-item>
-        <div class="nds-item m-70 to-center">
+        <div class="nds-item to-center">
           <nds-darken></nds-darken>
         </div>
       </v-tab-item>
       <v-tab-item>
-        <div class="nds-item m-70 to-center">
+        <div class="nds-item to-center">
           <nds-rgba></nds-rgba>
         </div>
       </v-tab-item>
@@ -132,13 +132,17 @@ export default {
   @import 'src/sass/mixins.scss';
   .nds-item.main-main{
     align-content: flex-start;
-    // min-width: 600px;
     padding-right: 80px;
+    @include from (m) {
+      padding-right: 300px;
+    }
     @include from (l) {
       max-height: 100vh;
-      padding-right: calc(80px + 1rem);
+      padding-right: calc(var(--aside-width) + 1rem);
       padding-left: 1rem;
-      padding-top: 1.5rem;
+      padding-top: 1rem;
+      height: calc(100vh - 3.5rem);
+      overflow: auto;
     }
   }
   .v-tabs.nds-item{

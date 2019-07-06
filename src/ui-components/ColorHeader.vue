@@ -11,7 +11,6 @@
       </h3>
       <div class="gradients__item">
         <div class="gradients__amount">
-          <!-- <label v-text="label"></label> -->
           <v-text-field
             color="green"
             class="mt-0"
@@ -86,7 +85,7 @@ export default {
   @import 'src/sass/mixins.scss';
     .title--header{
       position: absolute;
-      top: -1rem;
+      top: -1.5rem;
       left: 0;
       background: #fafafa;
       padding: 0 .5rem;
@@ -98,12 +97,12 @@ export default {
     }
     &__item{
       position: absolute;
-      top: -1rem;
       right: 0;
       width: 70px;
       background: #fafafa;
       padding: 0 .25rem;
       border-radius: 10px;
+      top: 2.5rem;
     }
     &__icon{
       width: 55px;

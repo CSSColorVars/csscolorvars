@@ -69,7 +69,7 @@ export default {
     }
   },
   created () {
-    const largeBp = matchMedia('(min-width: 1024px)')
+    const largeBp = matchMedia('(min-width: 660px)')
     const mediaQuery = mql => {
       mql.matches
         ? this.btnCode = false
@@ -216,7 +216,7 @@ pre[class*="language-"] {
   border-radius: 10px 0 0 10px;
   height: 70px;
   width: 80px;
-  @include from(l) {
+  @include from(m) {
     width: 300px;
   }
   position: fixed;

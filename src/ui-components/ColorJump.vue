@@ -46,6 +46,9 @@ export default {
   .v-input--slider .v-input__control .v-messages {
     display: none;
   }
+  .v-input--slider {
+    width: calc(100% - 5.6rem);
+  }
   .v-slider__thumb {
     width: 30px;
     height: 30px;

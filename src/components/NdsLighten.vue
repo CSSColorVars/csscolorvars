@@ -1,30 +1,31 @@
 <template>
   <!-- Light Colors -->
   <color-container>
-    <color-header
-      slot="header"
-      label="Lighten"
-      :value="colorActive.value"
-      :amount="colorActive.lighten.jump"
-      :updateAmount="updateLightJumpt"
-      :minAmount=0
-      :maxAmount=100
-      :maxLength=100
-      :invertvalue="invertvalue"
-    >Lightness
-    </color-header>
-    <color-jump
-      label="Lighten"
-      slot="jump"
-      :jump="colorActive.lighten.jump"
-      :updateJump="updateLightJump"
-      :minJump=0
-      :color="lightenL < 100 ? 'green':'red'"
-      :maxJumpForce=100
-    ></color-jump>
-    <color-main>
-      <div class="nds-item l-block">
-        <p class="center">{{ lightenValue }}</p>
+    <article class="card--article">
+      <color-header
+        slot="header"
+        label="Lighten"
+        :value="colorActive.value"
+        :amount="colorActive.lighten.jump"
+        :updateAmount="updateLightJumpt"
+        :minAmount=0
+        :maxAmount=100
+        :maxLength=100
+        :invertvalue="invertvalue"
+      >Lightness
+      </color-header>
+      <color-jump
+        label="Lighten"
+        slot="jump"
+        :jump="colorActive.lighten.jump"
+        :updateJump="updateLightJump"
+        :minJump=0
+        :color="lightenL < 100 ? 'green':'red'"
+        :maxJumpForce=100
+      ></color-jump>
+      <p class="center">{{ lightenValue }}</p>
+      <p class="center text-hsl">{{ `hsl(${hslValues[0]}, ${hslValues[1]}%, ${lightenL}%)` }}</p>
+    </article>
         <div class="card--valuecolor center"
           color=""
           v-clipboard:copy="lightenValue"
@@ -42,9 +43,6 @@
               <v-icon :color="`${lightenInvertValue}`">file_copy</v-icon>
             </v-btn>
         </div>
-      </div>
-      <hr>
-    </color-main>
   </color-container>
 </template>
 <script>

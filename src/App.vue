@@ -40,6 +40,10 @@ export default {
       --title2  : #{fontSize(title3)};
       --title3  : #{fontSize(normal)};
     }
+    --aside-width: 80px;
+    @include from (m) {
+      --aside-width: 300px;
+    }
   }
 
   body {

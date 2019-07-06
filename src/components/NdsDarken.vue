@@ -1,30 +1,31 @@
 <template>
   <!-- Dark Colors -->
   <color-container>
-    <color-header
-      slot="header"
-      label="Darken"
-      :value="colorActive.value"
-      :amount="colorActive.darken.jump"
-      :updateAmount="updateDarkJumpt"
-      :minAmount=0
-      :maxAmount=100
-      :maxLength=100
-      :invertvalue="invertvalue"
-    >Darkness
-    </color-header>
-    <color-jump
-      label="Darken"
-      slot="jump"
-      :jump="colorActive.darken.jump"
-      :updateJump="updateDarkJump"
-      :minJump=0
-      :color="darkenL > 0 ? 'green':'red'"
-      :maxJumpForce=100
-    ></color-jump>
-    <color-main>
-      <div class="nds-item l-block">
-        <p class="center">{{ darkValue }}</p>
+    <article class="card--article">
+      <color-header
+        slot="header"
+        label="Darken"
+        :value="colorActive.value"
+        :amount="colorActive.darken.jump"
+        :updateAmount="updateDarkJumpt"
+        :minAmount=0
+        :maxAmount=100
+        :maxLength=100
+        :invertvalue="invertvalue"
+      >Darkness
+      </color-header>
+      <color-jump
+        label="Darken"
+        slot="jump"
+        :jump="colorActive.darken.jump"
+        :updateJump="updateDarkJump"
+        :minJump=0
+        :color="darkenL > 0 ? 'green':'red'"
+        :maxJumpForce=100
+      ></color-jump>
+      <p class="center">{{ darkValue }}</p>
+      <p class="center text-hsl">{{ `hsl(${hslValues[0]}, ${hslValues[1]}%, ${darkenL}%)` }}</p>
+    </article>
         <div class="card--valuecolor center"
           color=""
           v-clipboard:copy="darkValue"
@@ -42,9 +43,6 @@
               <v-icon :color="`${darkenInvertValue}`">file_copy</v-icon>
             </v-btn>
         </div>
-      </div>
-      <hr>
-    </color-main>
   </color-container>
 </template>
 <script>
