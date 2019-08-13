@@ -1,7 +1,7 @@
 {
   "name": "css-colorvars",
   "version": "1.0.0",
-  "description": "CSSColorVars (interactive code generation tool), which defines a color palette with CSS variables, improves efficiency in front-end web development.",
+  "description": "CSSColorVars (interactive code generation tool), which defines colors with CSS variables, improves the simplicity of the variables and the performance on a website.",
   "author": "Fernando Averanga <nandes.ingsistemas@gmail.com>",
   "license": "MIT",
   "private": true,
