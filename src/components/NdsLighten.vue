@@ -25,6 +25,7 @@
       ></color-jump>
       <p class="center">{{ lightenValue }}</p>
       <p class="center text-hsl">{{ `hsl(${hslValues[0]}, ${hslValues[1]}%, ${lightenL}%)` }}</p>
+      <p class="center text-hsl">{{ hexLightColor }}</p>
     </article>
         <div class="card--valuecolor center"
           color=""
@@ -46,24 +47,11 @@
   </color-container>
 </template>
 <script>
-import ColorContainer from '@/ui-components/ColorContainer.vue'
-import ColorHeader from '@/ui-components/ColorHeader.vue'
-import ColorMain from '@/ui-components/ColorMain.vue'
-import ColorCard from '@/ui-components/ColorCard.vue'
-import ColorJump from '@/ui-components/ColorJump.vue'
-import { mapState, mapGetters, mapMutations } from 'vuex'
+import { mixinLight, mixinComponents } from '@/mixins/mixinLightDark'
 export default {
   name: 'NdsLighten',
-  components: {
-    ColorContainer,
-    ColorHeader,
-    ColorMain,
-    ColorCard,
-    ColorJump
-  },
+  mixins: [mixinLight, mixinComponents],
   computed: {
-    ...mapState(['styleSheet']),
-    ...mapGetters(['colorActive', 'lighten', 'invertvalue', 'hslValues', 'lightenInvertValue']),
     lightenL: function () {
       let lightenL = this.hslValues[2] + this.colorActive.lighten.jump
       if (lightenL < 100) {
@@ -87,9 +75,6 @@ export default {
         return `var(--${this.colorActive.property}-color)`
       }
     }
-  },
-  methods: {
-    ...mapMutations(['updateLightJumpt', 'updateLightJump', 'updateNotification', 'updateError'])
   }
 }
 </script>

@@ -96,9 +96,19 @@ export default {
   data () {
     return {
       drawer: true,
-      mini: true,
+      mini: false,
       right: null
     }
+  },
+  created () {
+    const largeBp = matchMedia('(min-width: 660px)')
+    const mediaQuery = mql => {
+      mql.matches
+        ? this.mini = false
+        : this.mini = true
+    }
+    largeBp.addListener(mediaQuery)
+    mediaQuery(largeBp)
   },
   computed: {
     ...mapState(['palleteColors']),

@@ -25,6 +25,7 @@
       ></color-jump>
       <p class="center">{{ darkValue }}</p>
       <p class="center text-hsl">{{ `hsl(${hslValues[0]}, ${hslValues[1]}%, ${darkenL}%)` }}</p>
+      <p class="center text-hsl">{{ hexDarkColor }}</p>
     </article>
         <div class="card--valuecolor center"
           color=""
@@ -46,24 +47,11 @@
   </color-container>
 </template>
 <script>
-import ColorContainer from '@/ui-components/ColorContainer.vue'
-import ColorHeader from '@/ui-components/ColorHeader.vue'
-import ColorMain from '@/ui-components/ColorMain.vue'
-import ColorCard from '@/ui-components/ColorCard.vue'
-import ColorJump from '@/ui-components/ColorJump.vue'
-import { mapState, mapGetters, mapMutations } from 'vuex'
+import { mixinDark, mixinComponents } from '@/mixins/mixinLightDark'
 export default {
   name: 'NdsDarken',
-  components: {
-    ColorContainer,
-    ColorHeader,
-    ColorMain,
-    ColorCard,
-    ColorJump
-  },
+  mixins: [mixinDark, mixinComponents],
   computed: {
-    ...mapState(['styleSheet']),
-    ...mapGetters(['colorActive', 'darken', 'invertvalue', 'hslValues', 'darkenInvertValue']),
     darkenL: function () {
       let darkenL = this.hslValues[2] - this.colorActive.darken.jump
       if (darkenL > 0) {
@@ -75,11 +63,6 @@ export default {
     darkValue: function () {
       let darkValue = `hsl(var(--${this.colorActive.property}-HS), ${this.darkenL}%)`
       let styleSheet = this.styleSheet.selectStyle
-      // if (this.colorActive.darken.jump > 0) {
-      //   return darkValue
-      // } else {
-      //   return `var(--${this.colorActive.property}-color)`
-      // }
       if (this.colorActive.darken.jump > 0) {
         if (styleSheet === 'CSS') {
           return darkValue
@@ -92,9 +75,6 @@ export default {
         return `var(--${this.colorActive.property}-color)`
       }
     }
-  },
-  methods: {
-    ...mapMutations(['updateDarkJumpt', 'updateDarkJump', 'closeNotification', 'updateNotification', 'updateError'])
   }
 }
 </script>
