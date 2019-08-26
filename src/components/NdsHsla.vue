@@ -1,5 +1,5 @@
 <template>
-  <!-- Rgba Colors -->
+  <!-- Hsla Colors -->
   <color-container>
     <article class="card--article">
       <color-header
@@ -56,7 +56,7 @@ import ColorCard from '@/ui-components/ColorCard.vue'
 import ColorJump from '@/ui-components/ColorJump.vue'
 import { mapState, mapGetters, mapMutations } from 'vuex'
 export default {
-  name: 'NdsRgba',
+  name: 'NdsHsla',
   components: {
     ColorContainer,
     ColorHeader,
@@ -133,17 +133,12 @@ export default {
   .card--valuecolor{
     position: relative;
     height: 300px;
-    // @include from(m) {
-    //   width: 50vw;
-    //   height: 50vw;
-    // }
     width: calc(100% - 2rem);
     margin: auto;
     margin-bottom: 1rem;
     @include from(l) {
       width: 15vw;
       height: 15vw;
-      margin-bottom: 0;
       max-height: 220px;
     }
     @include mainCenter;

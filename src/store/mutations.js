@@ -87,9 +87,9 @@ export const mutations = {
         const hexValidate = /^#+([0-9A-Fa-f]{6}|[0-9A-Fa-f]{3})$/
         if (hexValidate.test(hex.target.value)) {
           p.value = hex.target.value
-          p.lighten.jump = 0
-          p.darken.jump = 0
-          p.rgba.alpha = 50
+          // p.lighten.jump = 0
+          // p.darken.jump = 0
+          // p.rgba.alpha = 50
           p.valueState = true
         } else {
           p.valueState = false
