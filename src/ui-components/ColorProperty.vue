@@ -10,6 +10,7 @@
     :error-messages="!state ? errorMesagge : ''"
     box
     suffix="-color"
+    @keyup.enter="pressEnter"
   >
   </v-text-field>
   <v-text-field :dark="dark"
@@ -44,6 +45,10 @@ export default {
     dark: {
       default: false,
       type: Boolean
+    },
+    pressEnter: {
+      default: function () {},
+      type: Function
     },
     errorMesagge: {
       default: 'Enter a letter in the first character'

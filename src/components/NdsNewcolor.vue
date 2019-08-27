@@ -24,11 +24,13 @@
           :update="updateProperty"
           :state="ndsColor.propertyState"
           :errorMesagge = "errorMesagge"
+          :pressEnter="saveButton"
         ></color-property>
         <color-value
           :value="ndsColor.value"
           :update="updateValue"
           :state="ndsColor.valueState"
+          :pressEnter="saveButton"
         ></color-value>
       </form>
       </v-card-text>
@@ -72,6 +74,9 @@ export default {
   },
   methods: {
     ...mapMutations(['ADD_COLOR']),
+    enterProp: function () {
+      console.log('carajo')
+    },
     updateProperty: function (prop) {
       const propValidate = /^[a-zA-ZñÑ]|^[a-zA-ZñÑ][a-zA-ZñÑ_-]+$/
       for (let i = 0; i < this.palleteColors.length; i++) {

@@ -21,6 +21,7 @@
       @keyup="update"
       @keypress="keypressValue"
       box
+      @keyup.enter="pressEnter"
     >
     </v-text-field>
     <figure class="figure--color">
@@ -45,6 +46,10 @@ export default {
     dark: {
       default: false,
       type: Boolean
+    },
+    pressEnter: {
+      default: function () {},
+      type: Function
     }
   },
   computed: {
