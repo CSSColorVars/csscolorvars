@@ -37,25 +37,28 @@
 
       <v-list class="pt-0" dense>
         <v-divider></v-divider>
-        <v-list-tile
-          v-for="(item, id) in palleteColors"
-          :key="item.property + id"
-          avatar
-          @dblclick.stop="mini = !mini"
-          @click="`javascript:void()`"
-        >
-          <v-list-tile-avatar @click="TOGGLE_COLOR(id)">
-            <v-icon :style="'border: solid #FFF 1px; color:' + invertvalue + ';background-color:'+ item.value +';'" v-text="item.edit ? 'brush' : ''"></v-icon>
-          </v-list-tile-avatar>
-          <v-list-tile-content @click="TOGGLE_COLOR(id)">
-            <v-list-tile-title>--{{ item.property }}-color</v-list-tile-title>
-          </v-list-tile-content>
-          <v-list-tile-action @click="DELETE_COLOR(id)">
-            <v-btn v-if="!item.edit" icon ripple>
-              <v-icon color="grey lighten-1">delete</v-icon>
-            </v-btn>
-          </v-list-tile-action>
-        </v-list-tile>
+        <draggable v-model="palleteColors" v-bind="{group:{pull:true,put:true},animation: 150}">
+          <v-list-tile
+            class="item"
+            v-for="(item, id) in palleteColors"
+            :key="item.property + id"
+            avatar
+            @dblclick.stop="mini = !mini"
+            @click="`javascript:void()`"
+          >
+            <v-list-tile-avatar @click="TOGGLE_COLOR(id)">
+              <v-icon :style="'border: solid #FFF 1px; color:' + invertvalue + ';background-color:'+ item.value +';'" v-text="item.edit ? 'brush' : ''"></v-icon>
+            </v-list-tile-avatar>
+            <v-list-tile-content @click="TOGGLE_COLOR(id)">
+              <v-list-tile-title>--{{ item.property }}-color</v-list-tile-title>
+            </v-list-tile-content>
+            <v-list-tile-action @click="DELETE_COLOR(id)">
+              <v-btn v-if="!item.edit" icon ripple>
+                <v-icon color="grey lighten-1">delete</v-icon>
+              </v-btn>
+            </v-list-tile-action>
+          </v-list-tile>
+        </draggable>
         <div class="l-block"></div>
         <v-toolbar flat class="transparent">
           <v-list class="pa-0">
@@ -86,18 +89,22 @@
   </v-navigation-drawer>
 </template>
 <script>
+import draggable from 'vuedraggable'
 import NdsNewcolor from '@/components/NdsNewcolor.vue'
-import { mapState, mapMutations, mapGetters } from 'vuex'
+import { mapMutations, mapGetters } from 'vuex'
 export default {
   name: 'NdsPallete',
   components: {
+    draggable,
     NdsNewcolor
   },
   data () {
     return {
       drawer: true,
       mini: false,
-      right: null
+      right: null,
+      enabled: true,
+      dragging: false
     }
   },
   created () {
@@ -111,8 +118,15 @@ export default {
     mediaQuery(largeBp)
   },
   computed: {
-    ...mapState(['palleteColors']),
-    ...mapGetters(['invertvalue'])
+    ...mapGetters(['invertvalue']),
+    palleteColors: {
+      get () {
+        return this.$store.state.palleteColors
+      },
+      set (newValue) {
+        this.$store.commit('UPDATE_PALLETE', newValue)
+      }
+    }
   },
   methods: {
     ...mapMutations(['ADD_COLOR', 'DELETE_COLOR', 'TOGGLE_COLOR']),

@@ -10,14 +10,6 @@ import VueClipboard from 'vue-clipboard2'
 Vue.config.productionTip = false
 Vue.use(VueClipboard)
 
-Vue.directive('focus', {
-  // When the bound element is inserted into the DOM...
-  inserted: function (el) {
-    // Focus the element
-    el.focus()
-  }
-})
-
 new Vue({
   router,
   store,

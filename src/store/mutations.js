@@ -1,4 +1,7 @@
 export const mutations = {
+  UPDATE_PALLETE (state, newValue) {
+    state.palleteColors = newValue
+  },
   updateProperty (state, prop) {
     const propValidate = /^[a-zA-ZñÑ]|^[a-zA-ZñÑ][a-zA-ZñÑ_-]+$/
     let cont = 0
