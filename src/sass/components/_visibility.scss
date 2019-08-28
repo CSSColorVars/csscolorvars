@@ -1,6 +1,5 @@
 /// Muestra un elemento a partir del breakpoint especificado
 /// @group   visibility
-/// @author  Alvaro Felipe
 /// @param   {number} $bp - breakpoint a partir del cual mostrar el elemento
 /// @example scss
 ///   .sidebar {
@@ -14,7 +13,6 @@
 
 /// Muestra un elemento por debajo del breakpoint especificado.
 /// @group   visibility
-/// @author  Alvaro Felipe
 /// @param   {number} $bp - breakpoint.
 /// @example scss
 ///   .sidebar {
@@ -28,7 +26,6 @@
 
 /// Oculta un elemento a partir del breakpoint especificado
 /// @group   visibility
-/// @author  Alvaro Felipe
 /// @param   {number} $bp - breakpoint a partir del cual ocultar el elemento
 /// @example scss
 ///   .sidebar {
@@ -42,7 +39,6 @@
 
 /// Oculta un elemento por debajo del breakpoint especificado.
 /// @group   visibility
-/// @author  Alvaro Felipe
 /// @param   {number} $bp - breakpoint
 /// @example scss
 ///   .sidebar {

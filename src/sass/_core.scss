@@ -1,11 +1,11 @@
-/// mixin para crear un ed-container
+/// mixin para crear un nds-container
 /// Description hace que el elemento sea un contenedor, esto dota al elemento para que tambien sea un flex-container.
 /// @group layouts
 /// @example scss
 /// .container {
-///   @include edContainer;
+///   @include ndsContainer;
 ///}
-@mixin edContainer {
+@mixin ndsContainer {
   display      : flex;
   flex-wrap    : wrap;
   max-width    : $max-width;
@@ -29,7 +29,7 @@
   max-width : 100%;
 }
 
-@mixin edItemWidth($currentBp, $prevBp, $coreBp){
+@mixin ndsItemWidth($currentBp, $prevBp, $coreBp){
   // Si el tamaño actual es diferente al previo
   // asignará el ancho en porcentaje
   @if $currentBp != $prevBp{
@@ -47,7 +47,7 @@
 }
 
 
-/// mixin para crear un ed-item
+/// mixin para crear un nds-item
 /// Description
 /// Los argumentos que acepta son las diferentes medidas que tendra el elemento en diferentes resoluciones de pantalla.
 /// Las medidas pueden especificarse como porcentajes ( %  ) o como fracciones (1/3, 3/3 o 3/6, 2/6).
@@ -58,16 +58,16 @@
 /// @param   {number} $xl - para resoluciones desde 1440px en adelante.
 /// @example scss
 ///   .container {
-///     @include edContainer;
+///     @include ndsContainer;
 ///   }
 ///
 ///   .content {
-///     @include edItem(100, 75, 60);
+///     @include ndsItem(100, 75, 60);
 ///   }
 ///   .sidebar {
-///     @include edItem(100, 25, 40);
+///     @include ndsItem(100, 25, 40);
 ///   }
-@mixin edItem($s:100,$m:$s,$l:$m,$xl:$l) {
+@mixin ndsItem($s:100,$m:$s,$l:$m,$xl:$l) {
   margin        : 0;
   padding-left  : $gutter;
   padding-right : $gutter;
@@ -89,9 +89,9 @@
 
   // widths for others breakpoints
   // anchos para los demás breakpoints
-  @include edItemWidth($m,$s,m); //medium
-  @include edItemWidth($l,$m,l); //large
-  @include edItemWidth($xl,$l,xl); //xlarge
+  @include ndsItemWidth($m,$s,m); //medium
+  @include ndsItemWidth($l,$m,l); //large
+  @include ndsItemWidth($xl,$l,xl); //xlarge
 }
 
 // Breakpoints

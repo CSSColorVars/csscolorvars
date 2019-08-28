@@ -44,8 +44,6 @@ $z-modal   : 1000;
 // Importar componentes
 @import "src/sass/components/media-queries";   // mixins from(), to(), fromTo()
 @import "src/sass/components/helpers";         // utilidades
-@import "src/sass/core";                                   // core de EDgrid (containers y items)
-// @import "src/sass/components/grid";            // mixin grid()
+@import "src/sass/core";
 @import "src/sass/components/visibility";      // mixins para visibilidad
 @import "src/sass/components/flexbox";         // utilidades con flexbox
-@import "src/sass/components/buttons";         // mixin button()

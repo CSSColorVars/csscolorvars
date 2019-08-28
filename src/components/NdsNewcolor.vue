@@ -20,6 +20,7 @@
       <v-card-text>
         <form class="header--form nds-container">
         <color-property
+          v-if="dialog"
           :property="ndsColor.property"
           :update="updateProperty"
           :state="ndsColor.propertyState"
@@ -74,9 +75,6 @@ export default {
   },
   methods: {
     ...mapMutations(['ADD_COLOR']),
-    enterProp: function () {
-      console.log('carajo')
-    },
     updateProperty: function (prop) {
       const propValidate = /^[a-zA-ZñÑ]|^[a-zA-ZñÑ][a-zA-ZñÑ_-]+$/
       for (let i = 0; i < this.palleteColors.length; i++) {

@@ -24,6 +24,7 @@
     :error-messages="!state ? errorMesagge : ''"
     box
     suffix="-color"
+    @keyup.enter="pressEnter"
   >
   </v-text-field>
 </div>

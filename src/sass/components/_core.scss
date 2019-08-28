@@ -1,5 +1,5 @@
-// placeholder para ed-container
-%ed-container {
+// placeholder para nds-container
+%nds-container {
   display      : flex;
   flex-wrap    : wrap;
   max-width    : $max-width;
@@ -8,23 +8,22 @@
   width        : 100%;
 }
 
-// placeholder para ed-item
-%ed-item {
+// placeholder para nds-item
+%nds-item {
   margin        : 0;
   padding-left  : $gutter;
   padding-right : $gutter;
 }
 
-/// mixin para crear un ed-container
+/// mixin para crear un nds-container
 /// Description hace que el elemento sea un contenedor, esto dota al elemento para que tambien sea un flex-container.
 /// @group layouts
-/// @author  Alvaro Felipe
 /// @example scss
 /// .container {
-///   @include edContainer;
+///   @include ndsContainer;
 ///}
-@mixin edContainer {
-  @extend %ed-container;
+@mixin ndsContainer {
+  @extend %nds-container;
 
   @if $devMode == true {
     @include devModeContainer();
@@ -42,7 +41,7 @@
   max-width : 100%;
 }
 
-@mixin edItemWidth($currentBp, $prevBp, $coreBp){
+@mixin ndsItemWidth($currentBp, $prevBp, $coreBp){
   // Si el tamaño actual es diferente al previo
   // asignará el ancho en porcentaje
   @if $currentBp != $prevBp{
@@ -60,29 +59,28 @@
 }
 
 
-/// mixin para crear un ed-item
+/// mixin para crear un nds-item
 /// Description
 /// Los argumentos que acepta son las diferentes medidas que tendra el elemento en diferentes resoluciones de pantalla.
 /// Las medidas pueden especificarse como porcentajes ( %  ) o como fracciones (1/3, 3/3 o 3/6, 2/6).
 /// @group layouts
-/// @author  Alvaro Felipe
 /// @param   {number} $s - para resoluciones entre 0px y 640px
 /// @param   {number} $m - para resoluciones entre 640px y 1024px
 /// @param   {number} $l - para resoluciones entre 1024px y 1440px
 /// @param   {number} $xl - para resoluciones desde 1440px en adelante.
 /// @example scss
 ///   .container {
-///     @include edContainer;
+///     @include ndsContainer;
 ///   }
 ///
 ///   .content {
-///     @include edItem(100, 75, 60);
+///     @include ndsItem(100, 75, 60);
 ///   }
 ///   .sidebar {
-///     @include edItem(100, 25, 40);
+///     @include ndsItem(100, 25, 40);
 ///   }
-@mixin edItem($s:100,$m:$s,$l:$m,$xl:$l) {
-  @extend %ed-item;
+@mixin ndsItem($s:100,$m:$s,$l:$m,$xl:$l) {
+  @extend %nds-item;
 
   @if $devMode == true {
     @include devModeItem();
@@ -101,19 +99,19 @@
 
   // widths for others breakpoints
   // anchos para los demás breakpoints
-  @include edItemWidth($m,$s,m); //medium
-  @include edItemWidth($l,$m,l); //large
-  @include edItemWidth($xl,$l,xl); //xlarge
+  @include ndsItemWidth($m,$s,m); //medium
+  @include ndsItemWidth($l,$m,l); //large
+  @include ndsItemWidth($xl,$l,xl); //xlarge
 }
 
-// crear un ed-container
-.#{$container} { @include edContainer() }
+// crear un nds-container
+.#{$container} { @include ndsContainer() }
 
-// crear un ed-item
+// crear un nds-item
 .#{$item} {
-  @include edItem();
+  @include ndsItem();
 
-  // un ed-item a la vez puede ser ed-container
+  // un nds-item a la vez puede ser nds-container
   // para evitar anidaciones innecesarias
   &.#{$container}{
     padding-left : 0;

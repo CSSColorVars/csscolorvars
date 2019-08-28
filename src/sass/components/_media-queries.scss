@@ -1,6 +1,5 @@
 /// Devuelve true si el breakpoint es parte del core
 /// @group mq
-/// @author  Alvaro Felipe
 /// @param   {number} $bp - breakpoint
 /// @example scss
 ///    .elemento {
@@ -19,7 +18,6 @@
 
 /// Devuelve true si el breakpint es válido (em, rem, px)
 /// @group   mq
-/// @author  Alvaro Felipe
 /// @param   {number} $bp - breakpoint a verificar.
 @function isValidBreakpoint($bp){
   @if type-of($bp) == number and (unit($bp) == 'px' or unit($bp) == 'em' or unit($bp) == 'rem') {
@@ -31,7 +29,6 @@
 
 /// Obtiene un breakpoint del core
 /// @group   mq
-/// @author  Alvaro Felipe
 /// @param   {number} $bp - breakpoint a obtener.
 @function getBp($bp){
   @return map-get($breakpoints,$bp)
@@ -39,7 +36,6 @@
 
 /// Convierte un valor en em o rem a px
 /// @group   mq
-/// @author  Alvaro Felipe
 /// @param   {number} $value - var a convertir a pixeles.
 @function toPx($value){
   @if type-of($value) == number {
@@ -59,7 +55,6 @@
 
 /// From (mayor que $bp)
 /// @group   mq
-/// @author  Alvaro Felipe
 /// @param   {number} $from - breakpoint
 /// @example scss
 ///     .elemento {
@@ -92,7 +87,6 @@
 
 /// To (es menor que $to)
 /// @group   mq
-/// @author  Alvaro Felipe
 /// @param   {number} $to - breakpoint
 /// @example scss
 ///     .elemento {
@@ -122,7 +116,6 @@
 
 /// fromTo la regla se ejecuta entre ambos breakpoints.
 /// @group   mq
-/// @author  Alvaro Felipe
 /// @param   {number} $from - breakpoint desde que medida se iniciara la regla.
 /// @param   {number} $to - breakpoint hasta que medida se ejecutara la regla.
 /// @example scss
