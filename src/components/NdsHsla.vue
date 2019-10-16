@@ -132,8 +132,8 @@ export default {
   }
   .card--valuecolor{
     position: relative;
-    height: 300px;
-    width: calc(100% - 2rem);
+    height: 180px;
+    // width: calc(100% - 2rem);
     margin: auto;
     margin-bottom: 1rem;
     @include from(l) {

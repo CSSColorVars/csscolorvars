@@ -5,7 +5,7 @@
         <!-- ·&nbsp; -->
         <a href="https://paper.dropbox.com/doc/Build-color-CSS-variables-with-CSS-ColorVars-C4RJSkmMJu2RKZo7BZmzS" target="_blank">Guide</a>
         &nbsp;·&nbsp;&nbsp;
-        <a href="https://github.com/CSSColorVars" target="_blank">Github</a>
+        <a href="https://github.com/CSSColorVars/csscolorvars" target="_blank">Github</a>
         &nbsp;·&nbsp;&nbsp;
         <a href="#" target="_blank">About</a>
       </div>
