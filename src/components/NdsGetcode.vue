@@ -4,8 +4,8 @@
         <v-tabs v-model="active">
           <v-tabs-slider color="yellow" :style="dialog2 ? activeTab() : '' "></v-tabs-slider>
           <v-tab ripple href="#css">{{ styleSheet.selectStyle }}</v-tab>
+          <v-tab ripple href="#tailwind" style="text-transform: initial;">TailwindCSS</v-tab>
           <v-tab ripple href="#json">JSON</v-tab>
-          <v-tab ripple href="#snippets">SNIPPETS</v-tab>
         </v-tabs>
         <v-tabs-items v-model="active">
           <v-tab-item value="css">
@@ -15,6 +15,14 @@
               </pre>
             </v-card>
           </v-tab-item>
+          <v-tab-item value="tailwind">
+              <v-card flat>
+                <pre class="language-scss code-toolbar">
+                  <code class="language-scss" v-html="codeTailwind.html">
+                  </code>
+                  </pre>
+              </v-card>
+            </v-tab-item>
           <v-tab-item value="json">
             <v-card flat>
               <pre class="language-scss code-toolbar">
@@ -23,14 +31,6 @@
                 </pre>
             </v-card>
           </v-tab-item>
-          <v-tab-item value="snippets">
-              <v-card flat>
-                <pre class="language-scss code-toolbar">
-                  <code class="language-scss" v-html="code">
-                  </code>
-                  </pre>
-              </v-card>
-            </v-tab-item>
         </v-tabs-items>
           <div class="getcode--footer v-tabs__bar theme--dark main-center" style="width:100%;max-width:600px;">
             <v-btn @click="doCopy"
@@ -64,7 +64,6 @@ export default {
       right: true,
       dialog2: false,
       active: 'css',
-      code: `Developing`,
       btnCode: true
     }
   },
@@ -103,11 +102,13 @@ export default {
   --${p.property}-HSL: ${hslObject(p)[0]}, ${hslObject(p)[1]}%, ${hslObject(p)[2]}%;`
         }
       }
-      html = `<span class="code-selector">:root</span> {
+      html = `<span class="code-comment">/* In your ${this.styleSheet.selectStyle} */</span>
+<span class="code-selector">:root</span> {
   ${html}
 }
 `
-      text = `:root {
+      text = `/* In your ${this.styleSheet.selectStyle} */
+:root {
   ${text}
 }`
       return {
@@ -125,8 +126,52 @@ export default {
       if (this.active === 'json') {
         return 'copy JSON'
       }
-      if (this.active === 'snippets') {
-        return 'copy SNIPPETS'
+      if (this.active === 'tailwind') {
+        return this.codeTailwind.text
+      }
+    },
+    codeTailwind: function () {
+      let html = `<span class="code-comment">// tailwind.conf.js</span>
+<span>module.exports</span> <span class="code-property">=</span> <span>{</span>
+  <span>theme: {</span>
+    <span>colors: {</span>`
+      let text = `// tailwind.conf.js
+module.exports = {
+  theme: {
+    colors: {`
+
+      for (let i = 0; i < this.palleteColors.length; i++) {
+        const p = this.palleteColors[i]
+        html = `${html}
+      <span>${p.property}: {</span>
+        <span>base:</span> <span class="code-value" style="--value-color: ${p.value};">'var(--${p.property}-color)'</span>,`
+        text = `${text}
+      ${p.property}: {
+        base: 'var(--${p.property}-color)',`
+        for (let j = 1; j <= 9; j++) {
+          html = `${html}
+        <span>${j}00</span>: <span class="code-value" style="--value-color: hsl(${hslObject(p)[0]}, ${hslObject(p)[1]}%, ${10 - j}0%);">'hsl(var(--${p.property}-HS), ${10 - j}0%)'</span>,`
+          text = `${text}
+        ${j}00: 'hsl(var(--${p.property}-HS), ${10 - j}0%)',`
+        }
+        html = `${html}
+      },`
+        text = `${text}
+      },`
+      }
+      html = `${html}
+    }
+  }
+}
+`
+      text = `${text}
+    }
+  }
+}
+`
+      return {
+        html,
+        text
       }
     }
   },
@@ -252,6 +297,9 @@ code:after, kbd:after, code:before, kbd:before {
   padding-top: .5rem;
 }
 
+.code-comment {
+  color: #6d6d6d;
+}
 .code-selector{
   color: #e6db74;
 }
@@ -272,5 +320,9 @@ code:after, kbd:after, code:before, kbd:before {
     margin-right: .2rem;
     border: solid 1px white;
   }
+}
+.v-tabs__item--active{
+  background: linear-gradient(#4a4a4a 30px, transparent);
+
 }
 </style>
