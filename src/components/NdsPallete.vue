@@ -14,7 +14,7 @@
     <div class="toolbar--top">
       <v-toolbar flat class="transparent">
         <v-list class="pa-0">
-          <v-list-tile avatar @click.stop="mini = !mini">
+          <v-list-tile class="hide-from-m" avatar @click.stop="mini = !mini">
             <v-list-tile-avatar>
               <v-icon>palette</v-icon>
             </v-list-tile-avatar>
@@ -31,6 +31,15 @@
                 <v-icon>chevron_left</v-icon>
               </v-btn>
             </v-list-tile-action>
+          </v-list-tile>
+          <v-list-tile class="show-from-m" avatar>
+            <v-list-tile-avatar>
+              <v-icon>palette</v-icon>
+            </v-list-tile-avatar>
+
+            <v-list-tile-content>
+              <v-list-tile-title>CSS ColorVars</v-list-tile-title>
+            </v-list-tile-content>
           </v-list-tile>
         </v-list>
       </v-toolbar>
@@ -139,6 +148,12 @@ export default {
 </script>
 <style lang="scss">
   @import 'src/sass/mixins.scss';
+  .show-from-m {
+    @include showFrom(m)
+  }
+  .hide-from-m {
+    @include hideFrom(m)
+  }
   .toolbar--top, .toolbar--end{
     width: 100%;
   }
