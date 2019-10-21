@@ -3,22 +3,22 @@
       <v-dialog dark v-model="dialog2" max-width="600px">
         <v-tabs v-model="active">
           <v-tabs-slider color="yellow" :style="dialog2 ? activeTab() : '' "></v-tabs-slider>
-          <v-tab ripple href="#css">{{ styleSheet.selectStyle }}</v-tab>
-          <v-tab ripple href="#tailwind" style="text-transform: initial;">TailwindCSS</v-tab>
-          <v-tab ripple href="#json">JSON</v-tab>
+          <v-tab class="t4" ripple href="#css">{{ styleSheet.selectStyle }}</v-tab>
+          <v-tab class="t4" ripple href="#tailwind" style="text-transform: initial;">TailwindCSS</v-tab>
+          <v-tab class="t4" ripple href="#json">JSON</v-tab>
         </v-tabs>
         <v-tabs-items v-model="active">
           <v-tab-item value="css">
-            <v-card flat>
+            <v-card flat class="nds-container main-end">
               <pre class="language-css code-toolbar">
-                <code class="language-css" v-html="codeCSS.html"></code>
+                <code class="language-css t4" v-html="codeCSS.html"></code>
               </pre>
             </v-card>
           </v-tab-item>
           <v-tab-item value="tailwind">
               <v-card flat>
                 <pre class="language-scss code-toolbar">
-                  <code class="language-scss" v-html="codeTailwind.html">
+                  <code class="language-scss t4" v-html="codeTailwind.html">
                   </code>
                   </pre>
               </v-card>
@@ -26,7 +26,7 @@
           <v-tab-item value="json">
             <v-card flat>
               <pre class="language-scss code-toolbar">
-                <code class="language-scss" v-html="palleteColors">
+                <code class="language-scss t4" v-html="palleteColors">
                 </code>
                 </pre>
             </v-card>
@@ -64,7 +64,9 @@ export default {
       right: true,
       dialog2: false,
       active: 'css',
-      btnCode: true
+      btnCode: true,
+      selectActive: 'All',
+      select: [ 'All', 'Luminosity', 'Transparency' ]
     }
   },
   created () {
@@ -324,5 +326,13 @@ code:after, kbd:after, code:before, kbd:before {
 .v-tabs__item--active{
   background: linear-gradient(#4a4a4a 30px, transparent);
 
+}
+
+// Select code ComboBox
+.select--code{
+  @include from(m){
+    position: absolute;
+    padding-top: 1rem;
+  }
 }
 </style>
