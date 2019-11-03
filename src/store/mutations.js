@@ -1,4 +1,21 @@
 export const mutations = {
+  ADAPTIVE_PALLETE: (state) => {
+    const largeBp = matchMedia('(min-width: 660px)')
+    const mediaQuery = mql => {
+      mql.matches
+        ? state.palleteMini = false
+        : state.palleteMini = true
+    }
+    largeBp.addListener(mediaQuery)
+    mediaQuery(largeBp)
+  },
+  MINI_PALLETE: (state) => {
+    if (state.palleteMini) {
+      state.palleteMini = false
+    } else {
+      state.palleteMini = true
+    }
+  },
   UPDATE_PALLETE (state, newValue) {
     state.palleteColors = newValue
   },

@@ -1,5 +1,5 @@
 <template>
-  <div class="float--getcode cross-center nds-item">
+  <div class="float--getcode cross-center nds-item" :style="{width: miniWidth}">
       <v-dialog dark v-model="dialog2" max-width="600px">
         <v-tabs v-model="active">
           <v-tabs-slider color="yellow" :style="dialog2 ? activeTab() : '' "></v-tabs-slider>
@@ -38,7 +38,7 @@
             <v-btn light @click.native="dialog2=false">Close <v-icon right>close</v-icon></v-btn>
           </div>
       </v-dialog>
-    <v-btn v-if="!btnCode"
+    <v-btn v-if="!btnCode || !palleteMini"
       block
       large
       class="btn--getcode active"
@@ -47,7 +47,7 @@
       GET CODE
       <v-icon right>code</v-icon>
     </v-btn>
-    <v-btn v-else fab @click="dialog2 = true" class="button--getcode">
+    <v-btn v-else block fab @click="dialog2 = true" class="button--getcode">
       <v-icon>code</v-icon>
     </v-btn>
     </div>
@@ -80,7 +80,10 @@ export default {
     mediaQuery(largeBp)
   },
   computed: {
-    ...mapState(['palleteColors', 'styleSheet']),
+    ...mapState(['palleteColors', 'styleSheet', 'palleteMini']),
+    miniWidth: function () {
+      if (this.palleteMini) { return '80px' } else { return '300px' }
+    },
     codeCSS: function () {
       let html = ''
       let text = ''
@@ -254,7 +257,7 @@ pre[class*="language-"] {
 }
 .button--getcode{
   background: linear-gradient(#d6d6d6,#fff,#d6d6d6) !important;
-  margin: 0;
+  // margin: 0;
   border: double 3px #363636;
 }
 .float--getcode {
