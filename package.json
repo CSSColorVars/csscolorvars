@@ -29,7 +29,7 @@
     "@vue/cli-service": "^3.5.3",
     "@vue/eslint-config-standard": "^4.0.0",
     "babel-plugin-transform-imports": "^1.5.1",
-    "node-sass": "^4.11.0",
+    "node-sass": "^4.13.1",
     "postcss-custom-properties": "^8.0.10",
     "sass-loader": "^7.0.1",
     "stylus": "^0.54.5",
