@@ -24,18 +24,18 @@
   },
   "devDependencies": {
     "@babel/polyfill": "^7.4.3",
-    "@vue/cli-plugin-babel": "^3.5.5",
-    "@vue/cli-plugin-eslint": "^3.5.1",
-    "@vue/cli-service": "^3.5.3",
+    "@vue/cli-plugin-babel": "^5.0.8",
+    "@vue/cli-plugin-eslint": "^5.0.8",
+    "@vue/cli-service": "^5.0.8",
     "@vue/eslint-config-standard": "^4.0.0",
     "babel-plugin-transform-imports": "^1.5.1",
     "node-sass": "^4.11.0",
     "postcss-custom-properties": "^8.0.10",
-    "sass-loader": "^7.0.1",
+    "sass-loader": "^13.2.0",
     "stylus": "^0.54.5",
-    "stylus-loader": "^3.0.1",
+    "stylus-loader": "^7.1.0",
     "vue-cli-plugin-vuetify": "^0.4.6",
     "vue-template-compiler": "^2.6.10",
-    "vuepress": "^0.14.10"
+    "vuepress": "^1.9.7"
   }
 }
